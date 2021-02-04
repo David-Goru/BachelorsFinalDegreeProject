@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8876807316823010331}
   - component: {fileID: 4598240663111721797}
   - component: {fileID: 4162412259442449138}
-  - component: {fileID: 4250929646638994476}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -82,20 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4250929646638994476
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5763285365921590105}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7207582916297278404
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,6 +90,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 465665912330594629}
+  - component: {fileID: 4631880213517836787}
+  - component: {fileID: 2146348107563607564}
   m_Layer: 0
   m_Name: Main character
   m_TagString: Untagged
@@ -127,3 +114,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4631880213517836787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207582916297278404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a62cb4025ab00349ab388f16fcfb008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  walkSpeed: 2
+  crouchSpeed: 1
+  runSpeed: 4
+  defaultCenter: 1
+  crouchingCenter: 0.5
+  defaultHeight: 2
+  crouchingHeight: 1
+  currentState: 0
+  characterCollider: {fileID: 0}
+--- !u!136 &2146348107563607564
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207582916297278404}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.6
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
