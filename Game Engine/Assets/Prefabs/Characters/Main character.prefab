@@ -91,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 465665912330594629}
   - component: {fileID: 4631880213517836787}
+  - component: {fileID: 6022732348574597017}
   - component: {fileID: 2146348107563607564}
   m_Layer: 0
   m_Name: Main character
@@ -136,6 +137,19 @@ MonoBehaviour:
   crouchingHeight: 1
   currentState: 0
   characterCollider: {fileID: 0}
+  characterAnimations: {fileID: 0}
+--- !u!114 &6022732348574597017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207582916297278404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3768a79c0491f094d8c18a2986c6e3c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &2146348107563607564
 CapsuleCollider:
   m_ObjectHideFlags: 0
