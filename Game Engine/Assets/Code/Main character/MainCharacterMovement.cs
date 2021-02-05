@@ -27,13 +27,14 @@ public class MainCharacterMovement : MonoBehaviour
     [SerializeField] private MainCharacterState currentState;
     [SerializeField] private CapsuleCollider characterCollider = null;
     [SerializeField] private MainCharacterAnimations characterAnimations = null;
+    [SerializeField] private GameObject characterModel = null;
 
     void Start()
     {
         speed = walkSpeed;
-        currentState = MainCharacterState.IDLE;
         characterCollider = GetComponent<CapsuleCollider>();
         characterAnimations = GetComponent<MainCharacterAnimations>();
+        setAnimation(MainCharacterState.IDLE);
     }
 
     void FixedUpdate()
@@ -49,6 +50,7 @@ public class MainCharacterMovement : MonoBehaviour
         if (xMovement == 0 && zMovement == 0)
         {
             if (currentState != MainCharacterState.IDLE && currentState != MainCharacterState.CROUCH) stopMoving();
+            else if (currentState == MainCharacterState.WALKINGCROUCHED) setAnimation(MainCharacterState.CROUCH);
             return;
         }
 
@@ -58,6 +60,7 @@ public class MainCharacterMovement : MonoBehaviour
         else if (currentState == MainCharacterState.CROUCH) setAnimation(MainCharacterState.WALKINGCROUCHED);
 
         transform.Translate(new Vector3(xMovement, 0, zMovement) * speed * Time.deltaTime);
+        characterModel.transform.LookAt(new Vector3(transform.position.x + xMovement, transform.position.y, transform.position.z + zMovement));
     }
 
     void walk()

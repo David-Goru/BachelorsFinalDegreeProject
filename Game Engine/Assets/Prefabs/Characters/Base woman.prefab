@@ -1311,8 +1311,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8196412152205783028}
   - component: {fileID: 8517775913531088400}
-  - component: {fileID: 8517775913531088406}
-  - component: {fileID: 8517775913531088405}
   m_Layer: 0
   m_Name: Base woman
   m_TagString: Untagged
@@ -1327,15 +1325,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8859796258837755214}
-  m_LocalRotation: {x: -0, y: 0.049682327, z: -0, w: 0.9987651}
-  m_LocalPosition: {x: -0.0041012764, y: -0.00000047683716, z: 1.0140557}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 507245315207336931}
   - {fileID: 6666011766377130798}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 5.696, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8517775913531088400
 Animator:
   serializedVersion: 3
@@ -1355,41 +1353,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8517775913531088406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8859796258837755214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3768a79c0491f094d8c18a2986c6e3c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8517775913531088405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8859796258837755214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a62cb4025ab00349ab388f16fcfb008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  walkSpeed: 2
-  crouchSpeed: 1
-  runSpeed: 4
-  defaultCenter: 1
-  crouchingCenter: 0.5
-  defaultHeight: 2
-  crouchingHeight: 1
-  currentState: 0
-  characterCollider: {fileID: 0}
-  characterAnimations: {fileID: 0}
 --- !u!1 &8865216704373785605
 GameObject:
   m_ObjectHideFlags: 0
