@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using UnityEngine;
+using Cinemachine;
 
 public class MainCharacterMovement : MonoBehaviour
 {
@@ -23,17 +22,19 @@ public class MainCharacterMovement : MonoBehaviour
     [SerializeField] private float defaultHeight = 0f;
     [SerializeField] private float crouchingHeight = 0f;
 
-    [Header("Debug")]
-    [SerializeField] private MainCharacterState currentState;
+    [Header("References")]
+    [SerializeField] private CinemachineFreeLook characterCameraComponent;
     [SerializeField] private CapsuleCollider characterCollider = null;
     [SerializeField] private MainCharacterAnimations characterAnimations = null;
     [SerializeField] private GameObject characterModel = null;
+    [SerializeField] private Transform viewPoint = null;
+
+    [Header("Debug")]
+    [SerializeField] private MainCharacterState currentState;
 
     void Start()
     {
         speed = walkSpeed;
-        characterCollider = GetComponent<CapsuleCollider>();
-        characterAnimations = GetComponent<MainCharacterAnimations>();
         setAnimation(MainCharacterState.IDLE);
     }
 
@@ -59,8 +60,11 @@ public class MainCharacterMovement : MonoBehaviour
         else if (currentState == MainCharacterState.IDLE) walk();
         else if (currentState == MainCharacterState.CROUCH) setAnimation(MainCharacterState.WALKINGCROUCHED);
 
+        transform.eulerAngles = new Vector3(0, characterCameraComponent.m_XAxis.Value, 0);
         transform.Translate(new Vector3(xMovement, 0, zMovement) * speed * Time.deltaTime);
-        characterModel.transform.LookAt(new Vector3(transform.position.x + xMovement, transform.position.y, transform.position.z + zMovement));
+        viewPoint.position = transform.position;
+        viewPoint.Translate(new Vector3(xMovement, 0, zMovement) * speed * 10 * Time.deltaTime);
+        characterModel.transform.LookAt(viewPoint);
     }
 
     void walk()
