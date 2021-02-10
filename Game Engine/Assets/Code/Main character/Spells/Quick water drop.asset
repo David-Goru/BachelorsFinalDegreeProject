@@ -12,4 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e3d6501c4818564aa68a0dac8d01c38, type: 3}
   m_Name: Quick water drop
   m_EditorClassIdentifier: 
-  inputSequence: []
+  inputSequence:
+  - buttonName: SpellFirstClick
+    animationName: 
+    requiresTime: 1
+    timeAmount: 0.5
+    conditions: []
+    actions: []
+  - buttonName: SpellSecondClick
+    animationName: 
+    requiresTime: 0
+    timeAmount: 0
+    conditions:
+    - {fileID: 11400000, guid: cf3ed99d40a5f674abe46adef9f0c6fa, type: 2}
+    actions:
+    - {fileID: 11400000, guid: 4214cfdf5a2b71e4c9fb8eb878fd63a8, type: 2}

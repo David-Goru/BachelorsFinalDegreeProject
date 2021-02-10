@@ -32,13 +32,13 @@ public class MainCharacterMovement : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private MainCharacterState currentState;
 
-    void Start()
+    private void Start()
     {
         speed = walkSpeed;
         setAnimation(MainCharacterState.IDLE);
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (currentState == MainCharacterState.BLOCKED) return;
 
@@ -67,18 +67,18 @@ public class MainCharacterMovement : MonoBehaviour
         characterModel.transform.LookAt(viewPoint);
     }
 
-    void walk()
+    private void walk()
     {
         speed = walkSpeed;
         setAnimation(MainCharacterState.WALKING);
     }
 
-    void stopMoving()
+    private void stopMoving()
     {
         setAnimation(currentState == MainCharacterState.WALKINGCROUCHED ? MainCharacterState.CROUCH : MainCharacterState.IDLE);
     }
 
-    void crouch()
+    private void crouch()
     {
         speed = crouchSpeed;
         setAnimation(currentState == MainCharacterState.IDLE ? MainCharacterState.CROUCH : MainCharacterState.WALKINGCROUCHED);
@@ -87,7 +87,7 @@ public class MainCharacterMovement : MonoBehaviour
         characterCollider.height = crouchingHeight;
     }
 
-    void stopCrouching()
+    private void stopCrouching()
     {
         if (Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y + defaultHeight + 0.05f, transform.position.z), characterCollider.radius)) return;
 
@@ -98,19 +98,19 @@ public class MainCharacterMovement : MonoBehaviour
         characterCollider.height = defaultHeight;
     }
 
-    void run()
+    private void run()
     {
         speed = runSpeed;
         setAnimation(MainCharacterState.RUNNING);
     }
 
-    void stopRunning()
+    private void stopRunning()
     {
         speed = walkSpeed;
         setAnimation(MainCharacterState.WALKING);
     }
 
-    void setAnimation(MainCharacterState newState)
+    private void setAnimation(MainCharacterState newState)
     {
         currentState = newState;
         characterAnimations.SetAnimation(Enum.TryParse(newState.ToString(), out MainCharacterAnimation anim) ? anim : MainCharacterAnimation.IDLE);

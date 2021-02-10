@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 4631880213517836787}
   - component: {fileID: 6022732348574597017}
   - component: {fileID: 4347619716028286229}
+  - component: {fileID: 2510023554637463281}
   - component: {fileID: 2146348107563607564}
   - component: {fileID: 1577262153}
   m_Layer: 0
@@ -88,11 +89,11 @@ MonoBehaviour:
   defaultHeight: 2
   crouchingHeight: 1.2
   characterCameraComponent: {fileID: 0}
-  currentState: 0
   characterCollider: {fileID: 2146348107563607564}
   characterAnimations: {fileID: 6022732348574597017}
   characterModel: {fileID: 5142323304139034815}
   viewPoint: {fileID: 990481585}
+  currentState: 0
 --- !u!114 &6022732348574597017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +122,24 @@ MonoBehaviour:
   rotationSpeed: 350
   zoomSpeed: 10
   characterCameraComponent: {fileID: 0}
+--- !u!114 &2510023554637463281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207582916297278404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b145b06bb546054db1a823b64905999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spells:
+  - {fileID: 11400000, guid: 5ab479e1e86bbd94d95aa692bb9514d5, type: 2}
+  inputParse: {fileID: 11400000, guid: fc30f136eaf5cef44b86da31d550e995, type: 2}
+  possibleSpells: []
+  currentStep: 0
+  currentStepTime: 0
 --- !u!136 &2146348107563607564
 CapsuleCollider:
   m_ObjectHideFlags: 0

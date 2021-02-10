@@ -12,17 +12,17 @@ public class MainCharacterCamera : MonoBehaviour
     [Header("References")]
     [SerializeField] private CinemachineFreeLook characterCameraComponent;
 
-    void OnEnable()
+    private void OnEnable()
     {
         characterCameraComponent.m_XAxis.m_MaxSpeed = rotationSpeed;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         characterCameraComponent.m_XAxis.m_MaxSpeed = 0;
     }
 
-    void Update()
+    private void Update()
     {
         // Zoom
         if (Input.mouseScrollDelta.y != 0) characterCameraComponent.m_YAxis.m_MaxSpeed = zoomSpeed;
