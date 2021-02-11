@@ -89,7 +89,7 @@ public class MainCharacterMovement : MonoBehaviour
 
     private void stopCrouching()
     {
-        if (Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y + defaultHeight + 0.05f, transform.position.z), characterCollider.radius)) return;
+        if (Physics.CheckSphere(new Vector3(transform.position.x, crouchingCenter + crouchingHeight / 2 + characterCollider.radius + 0.05f, transform.position.z), characterCollider.radius)) return;
 
         speed = walkSpeed;
         setAnimation(currentState == MainCharacterState.CROUCH ? MainCharacterState.WALKING : MainCharacterState.IDLE);
