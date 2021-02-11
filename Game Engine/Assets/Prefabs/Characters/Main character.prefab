@@ -225,6 +225,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base woman
       objectReference: {fileID: 0}
+    - target: {fileID: 8859796258837755214, guid: 3e5158b651915a14eac6832772b374f2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e5158b651915a14eac6832772b374f2, type: 3}
 --- !u!1 &5142323304139034815 stripped
