@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerInputParse", menuName = "PlayerInputParse", order = 0)]
 public class PlayerInputParse : ScriptableObject
 {
-    [SerializeField] List<InputReference> inputReferences;
+    [SerializeField] private List<InputReference> inputReferences;
 
     public string ParseInput(string buttonName)
     {

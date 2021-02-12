@@ -40,7 +40,7 @@ public class MainCharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (currentState == MainCharacterState.BLOCKED) return;
+        if (characterAnimations.IsRunningSpells()) return;
 
         float xMovement = Input.GetAxis("Horizontal");
         float zMovement = Input.GetAxis("Vertical");
@@ -123,6 +123,5 @@ public enum MainCharacterState
     WALKING,
     RUNNING,
     CROUCH,
-    WALKINGCROUCHED,
-    BLOCKED
+    WALKINGCROUCHED
 }

@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputSequence:
   - buttonName: SpellFirstClick
-    animationName: 
+    animationID: 1
     requiresTime: 1
     timeAmount: 0.5
     conditions: []
     actions: []
   - buttonName: SpellSecondClick
-    animationName: 
+    animationID: 2
     requiresTime: 0
     timeAmount: 0
     conditions:

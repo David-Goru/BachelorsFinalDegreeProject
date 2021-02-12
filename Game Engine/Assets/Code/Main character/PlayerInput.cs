@@ -5,14 +5,14 @@ using UnityEngine;
 public class PlayerInput
 {
     [SerializeField] private string buttonName;
-    [SerializeField] private string animationName;
+    [SerializeField] private int animationID;
     [SerializeField] private bool requiresTime;
     [SerializeField] private float timeAmount;
     [SerializeField] private List<ICondition> conditions;
     [SerializeField] private List<IAction> actions;
 
     public string ButtonName { get => buttonName; set => buttonName = value; }
-    public string AnimationName { get => animationName; set => animationName = value; }
+    public int AnimationID { get => animationID; set => animationID = value; }
     public bool RequiresTime { get => requiresTime; set => requiresTime = value; }
     public float TimeAmount { get => timeAmount; set => timeAmount = value; }
     public List<ICondition> Conditions { get => conditions; set => conditions = value; }

@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class MainCharacterAnimations : MonoBehaviour
 {
-    [SerializeField] Animator animator;
-    bool onNormalIdle = false;
-    float idleTime = 0f;
+    [SerializeField] private Animator animator;
+    private bool onNormalIdle = false;
+    private float idleTime = 0f;
 
     void Update()
     {
-        if (onNormalIdle)
+        if (!IsRunningSpells() && onNormalIdle)
         {
             idleTime += Time.deltaTime;
             animator.SetFloat("IdleTime", idleTime);
         }
+        else idleTime = 0;
     }
 
     public void SetAnimation(MainCharacterAnimation animation)
@@ -27,7 +28,6 @@ public class MainCharacterAnimations : MonoBehaviour
                 animator.SetBool("Walking", false);
                 animator.SetBool("Running", false);
                 animator.SetBool("Crouching", false);
-                idleTime = 0f;
                 onNormalIdle = true;
                 break;
             case MainCharacterAnimation.WALKING:
@@ -63,6 +63,12 @@ public class MainCharacterAnimations : MonoBehaviour
                 onNormalIdle = false;
                 break;
         }
+    }
+
+    public bool IsRunningSpells()
+    {
+        if (animator.GetInteger("SpellAnimID") != 0) return true;
+        return false;
     }
 }
 

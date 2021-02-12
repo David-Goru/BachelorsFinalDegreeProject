@@ -6,6 +6,7 @@ public class MainCharacterSpells : MonoBehaviour
 {
     [SerializeField] private List<Spell> spells;
     [SerializeField] private PlayerInputParse inputParse;
+    [SerializeField] private Animator animator;
 
     [Header("Debug")]
     [SerializeField] private List<Spell> possibleSpells;
@@ -26,17 +27,23 @@ public class MainCharacterSpells : MonoBehaviour
             resetSpells();
             return;
         }
-                
+
         if (possibleSpells.Count == 0)
         {
             foreach (Spell spell in spells)
             {
                 PlayerInput firstInput = spell.GetInputAtStep(0);
                 if (Input.GetButtonDown(inputParse.ParseInput(firstInput.ButtonName)))
-                {
-                    if (firstInput.MeetsAllConditions()) possibleSpells.Add(spell);
+                {                    
+                    if (firstInput.MeetsAllConditions())
+                    {
+                        possibleSpells.Add(spell);                        
+                        startSpell(firstInput.AnimationID);
+                    }
                 }
             }
+
+            if (possibleSpells.Count == 0) resetSpells();
         }
         else
         {
@@ -62,7 +69,7 @@ public class MainCharacterSpells : MonoBehaviour
                             {
                                 currentInput.DoAllActions();
                                 newPossibleSpells.Add(spell);
-                                nextStep();
+                                nextStep(nextInput.AnimationID);
                                 return;
                             }
                             else if (Input.GetButton(inputParse.ParseInput(currentInput.ButtonName)))
@@ -91,7 +98,7 @@ public class MainCharacterSpells : MonoBehaviour
                         {
                             currentInput.DoAllActions();
                             newPossibleSpells.Add(spell);
-                            nextStep();
+                            nextStep(nextInput.AnimationID);
                             return;
                         }
                     }
@@ -103,14 +110,25 @@ public class MainCharacterSpells : MonoBehaviour
 
     private void resetSpells()
     {
+        if (currentStep == 0 && currentStepTime == 0) return;
         currentStep = 0;
         currentStepTime = 0;
         possibleSpells.Clear();
+        animator.SetInteger("SpellAnimID", 0);
+        animator.SetTrigger("StopSpells");
     }
 
-    private void nextStep()
+    private void startSpell(int animationID)
+    {
+        animator.SetTrigger("StartSpells");
+        animator.SetInteger("SpellAnimID", animationID);
+        animator.SetFloat("IdleTime", 0);
+    }
+
+    private void nextStep(int animationID)
     {
         currentStep++;
         currentStepTime = 0;
+        animator.SetInteger("SpellAnimID", animationID);
     }
 }
