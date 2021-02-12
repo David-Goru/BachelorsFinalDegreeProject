@@ -17,3 +17,5 @@ MonoBehaviour:
     InputInEngine: Right click
   - ButtonName: SpellSecondClick
     InputInEngine: Left click
+  - ButtonName: Crouch
+    InputInEngine: Crouch

@@ -101,6 +101,10 @@ public class MainCharacterSpells : MonoBehaviour
                             nextStep(nextInput.AnimationID);
                             return;
                         }
+                        else if (Input.GetButton(inputParse.ParseInput(currentInput.ButtonName)))
+                        {
+                            newPossibleSpells.Add(spell);
+                        }
                     }
                 }
             }
