@@ -59,7 +59,7 @@ public class MainCharacterSpells : MonoBehaviour
                         if ((currentStep + 1) == spell.StepsAmount)
                         {
                             currentInput.DoAllActions();
-                            resetSpells();
+                            finishSpell();
                             return;
                         }
                         else
@@ -88,7 +88,7 @@ public class MainCharacterSpells : MonoBehaviour
                     if ((currentStep + 1) == spell.StepsAmount)
                     {
                         currentInput.DoAllActions();
-                        resetSpells();
+                        finishSpell();
                         return;
                     }
                     else
@@ -123,6 +123,14 @@ public class MainCharacterSpells : MonoBehaviour
         animator.SetTrigger("StartSpells");
         animator.SetInteger("SpellAnimID", animationID);
         animator.SetFloat("IdleTime", 0);
+    }
+
+    private void finishSpell()
+    {
+        currentStep = 0;
+        currentStepTime = 0;
+        possibleSpells.Clear();
+        animator.SetInteger("SpellAnimID", 0);
     }
 
     private void nextStep(int animationID)
