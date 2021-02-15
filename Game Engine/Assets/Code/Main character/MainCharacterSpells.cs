@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class MainCharacterSpells : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private List<Spell> spells;
-    [SerializeField] private PlayerInputParse inputParse;
     [SerializeField] private Animator animator;
 
     [Header("Debug")]
-    [SerializeField] private List<Spell> possibleSpells;
+    [SerializeField] private List<Spell> runningSpells;
     [SerializeField] private int currentStep = 0;
     [SerializeField] private float currentStepTime = 0.0f;
 
     private void Start()
     {
-        possibleSpells = new List<Spell>();
+        runningSpells = new List<Spell>();
         currentStep = 0;
         currentStepTime = 0.0f;
     }
@@ -28,119 +28,125 @@ public class MainCharacterSpells : MonoBehaviour
             return;
         }
 
-        if (possibleSpells.Count == 0)
+        if (runningSpells.Count == 0)
         {
+            resetSpells();
             foreach (Spell spell in spells)
             {
-                PlayerInput firstInput = spell.GetInputAtStep(0);
-                if (Input.GetButtonDown(inputParse.ParseInput(firstInput.ButtonName)))
-                {                    
-                    if (firstInput.MeetsAllConditions())
+                checkIfCanStart(spell);
+            }
+            return;
+        }
+
+        // Step time
+        currentStepTime += Time.deltaTime;
+
+        // Spells lists
+        List<Spell> oldRunningSpells = runningSpells;
+        runningSpells = new List<Spell>();
+
+        foreach (Spell spell in oldRunningSpells)
+        {
+            PlayerInput currentInput = spell.GetInputAtStep(currentStep);
+            if (currentInput.RequiresTime)
+            {
+                if (currentInput.TimeAmount > currentStepTime)
+                {
+                    if (Input.GetButton(currentInput.ButtonName) && currentInput.MeetsAllConditions())
                     {
-                        possibleSpells.Add(spell);                        
-                        startSpell(firstInput.AnimationID);
+                        runningSpells.Add(spell);
                     }
+                    continue;
                 }
             }
 
-            if (possibleSpells.Count == 0) resetSpells();
-        }
-        else
-        {
-            List<Spell> newPossibleSpells = new List<Spell>();
-            currentStepTime += Time.deltaTime;
-            foreach (Spell spell in possibleSpells)
+            PlayerInput nextInput = spell.GetInputAtStep(currentStep + 1);
+            if (nextInput == null)
             {
-                PlayerInput currentInput = spell.GetInputAtStep(currentStep);
-                if (currentInput.RequiresTime)
-                {
-                    if (currentInput.TimeAmount <= currentStepTime)
-                    {
-                        if ((currentStep + 1) == spell.StepsAmount)
-                        {
-                            currentInput.DoAllActions();
-                            finishSpell();
-                            return;
-                        }
-                        else
-                        {
-                            PlayerInput nextInput = spell.GetInputAtStep(currentStep + 1);
-                            if (Input.GetButtonDown(inputParse.ParseInput(nextInput.ButtonName)) && nextInput.MeetsAllConditions())
-                            {
-                                currentInput.DoAllActions();
-                                newPossibleSpells.Add(spell);
-                                nextStep(nextInput.AnimationID);
-                                return;
-                            }
-                            else if (Input.GetButton(inputParse.ParseInput(currentInput.ButtonName)))
-                            {
-                                newPossibleSpells.Add(spell);
-                            }
-                        }
-                    }
-                    else if (currentInput.TimeAmount > currentStepTime && Input.GetButton(inputParse.ParseInput(currentInput.ButtonName)))
-                    {
-                        newPossibleSpells.Add(spell);
-                    }
-                }
-                else
-                {
-                    if ((currentStep + 1) == spell.StepsAmount)
-                    {
-                        currentInput.DoAllActions();
-                        finishSpell();
-                        return;
-                    }
-                    else
-                    {
-                        PlayerInput nextInput = spell.GetInputAtStep(currentStep + 1);
-                        if (Input.GetButtonDown(inputParse.ParseInput(nextInput.ButtonName)) && nextInput.MeetsAllConditions())
-                        {
-                            currentInput.DoAllActions();
-                            newPossibleSpells.Add(spell);
-                            nextStep(nextInput.AnimationID);
-                            return;
-                        }
-                        else if (Input.GetButton(inputParse.ParseInput(currentInput.ButtonName)))
-                        {
-                            newPossibleSpells.Add(spell);
-                        }
-                    }
-                }
+                finishSpell(spell);
+                return;
             }
-            possibleSpells = newPossibleSpells;
+            else if (Input.GetButtonDown(nextInput.ButtonName) && nextInput.MeetsAllConditions())
+            {
+                nextStep(spell);
+            }
+            else if (currentInput.MeetsAllConditions())
+            {
+                runningSpells.Add(spell);
+            }
+        }
+    }
+
+    private void checkIfCanStart(Spell spell)
+    {
+        PlayerInput firstInput = spell.GetInputAtStep(0);
+        if (Input.GetButtonDown(firstInput.ButtonName))
+        {
+            if (firstInput.MeetsAllConditions())
+            {
+                runningSpells.Add(spell);
+
+                // Start animation
+                animator.SetTrigger("StartSpells");
+                animator.SetInteger("SpellAnimID", firstInput.AnimationID);
+                animator.SetFloat("IdleTime", 0);
+            }
         }
     }
 
     private void resetSpells()
     {
         if (currentStep == 0 && currentStepTime == 0) return;
+
+        // Steps
         currentStep = 0;
         currentStepTime = 0;
-        possibleSpells.Clear();
+
+        // Animations
         animator.SetInteger("SpellAnimID", 0);
         animator.SetTrigger("StopSpells");
+
+        // Spells list
+        runningSpells.Clear();
     }
 
-    private void startSpell(int animationID)
+    private void finishSpell(Spell spell)
     {
-        animator.SetTrigger("StartSpells");
-        animator.SetInteger("SpellAnimID", animationID);
-        animator.SetFloat("IdleTime", 0);
-    }
+        spell.GetInputAtStep(currentStep).DoAllActions();
 
-    private void finishSpell()
-    {
+        // Steps
         currentStep = 0;
         currentStepTime = 0;
-        possibleSpells.Clear();
+
+        // Animations
         animator.SetInteger("SpellAnimID", 0);
+
+        // Spells list
+        runningSpells.Clear();
     }
 
-    private void nextStep(int animationID)
+    private void nextStep(Spell spell)
     {
+        spell.GetInputAtStep(currentStep).DoAllActions();
+
+        // Steps
         currentStep++;
         currentStepTime = 0;
-        animator.SetInteger("SpellAnimID", animationID);
+
+        // Animations
+        animator.SetInteger("SpellAnimID", spell.GetInputAtStep(currentStep).AnimationID);
+
+        // Check running spells and see if they can go to the next step
+        foreach (Spell s in runningSpells.ToArray())
+        {
+            PlayerInput nextInput = s.GetInputAtStep(currentStep);
+            if (!Input.GetButtonDown(nextInput.ButtonName) || !nextInput.MeetsAllConditions())
+            {
+                runningSpells.Remove(s);
+            }
+        }
+
+        // Spells list
+        runningSpells.Add(spell);
     }
 }

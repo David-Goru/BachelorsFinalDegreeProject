@@ -7,10 +7,9 @@ public class Spell : ScriptableObject
 {
     [SerializeField] private List<PlayerInput> inputSequence;
 
-    public int StepsAmount { get => inputSequence.Count; }
-
     public PlayerInput GetInputAtStep(int step)
     {
+        if (step >= inputSequence.Count) return null;
         return inputSequence[step];
     }
 }

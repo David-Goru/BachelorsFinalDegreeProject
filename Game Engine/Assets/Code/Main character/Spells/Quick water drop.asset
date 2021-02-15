@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Quick water drop
   m_EditorClassIdentifier: 
   inputSequence:
-  - buttonName: SpellFirstClick
+  - buttonName: Right click
     animationID: 1
     requiresTime: 1
-    timeAmount: 0.5
+    timeAmount: 0.2
     conditions: []
     actions: []
-  - buttonName: SpellSecondClick
+  - buttonName: Left click
     animationID: 2
     requiresTime: 0
     timeAmount: 0

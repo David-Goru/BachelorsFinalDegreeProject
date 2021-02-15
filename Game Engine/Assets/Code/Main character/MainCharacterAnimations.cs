@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class MainCharacterAnimations : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private Animator animator;
-    private bool onNormalIdle = false;
-    private float idleTime = 0f;
 
-    void Update()
+    [Header("Debug")]
+    [SerializeField] private MainCharacterAnimation currentAnimation;
+    [SerializeField] private float idleTime = 0f;
+
+    private void Start()
     {
-        if (!IsRunningSpells() && onNormalIdle)
+        currentAnimation = MainCharacterAnimation.IDLE;
+    }
+
+    private void Update()
+    {
+        if (!IsRunningSpells() && currentAnimation == MainCharacterAnimation.IDLE)
         {
             idleTime += Time.deltaTime;
             animator.SetFloat("IdleTime", idleTime);
@@ -20,6 +28,7 @@ public class MainCharacterAnimations : MonoBehaviour
 
     public void SetAnimation(MainCharacterAnimation animation)
     {
+        currentAnimation = animation;
         switch (animation)
         {
             case MainCharacterAnimation.IDLE:
@@ -28,7 +37,6 @@ public class MainCharacterAnimations : MonoBehaviour
                 animator.SetBool("Walking", false);
                 animator.SetBool("Running", false);
                 animator.SetBool("Crouching", false);
-                onNormalIdle = true;
                 break;
             case MainCharacterAnimation.WALKING:
                 animator.SetBool("Idle", false);
@@ -36,7 +44,6 @@ public class MainCharacterAnimations : MonoBehaviour
                 animator.SetBool("Walking", true);
                 animator.SetBool("Running", false);
                 animator.SetBool("Crouching", false);
-                onNormalIdle = false;
                 break;
             case MainCharacterAnimation.RUNNING:
                 animator.SetBool("Idle", false);
@@ -44,7 +51,6 @@ public class MainCharacterAnimations : MonoBehaviour
                 animator.SetBool("Walking", false);
                 animator.SetBool("Running", true);
                 animator.SetBool("Crouching", false);
-                onNormalIdle = false;
                 break;
             case MainCharacterAnimation.CROUCH:
                 animator.SetBool("Idle", true);
@@ -52,7 +58,6 @@ public class MainCharacterAnimations : MonoBehaviour
                 animator.SetBool("Walking", false);
                 animator.SetBool("Running", false);
                 animator.SetBool("Crouching", true);
-                onNormalIdle = false;
                 break;
             case MainCharacterAnimation.WALKINGCROUCHED:
                 animator.SetBool("Idle", false);
@@ -60,7 +65,6 @@ public class MainCharacterAnimations : MonoBehaviour
                 animator.SetBool("Walking", true);
                 animator.SetBool("Running", false);
                 animator.SetBool("Crouching", true);
-                onNormalIdle = false;
                 break;
         }
     }
@@ -75,7 +79,6 @@ public class MainCharacterAnimations : MonoBehaviour
 public enum MainCharacterAnimation
 {
     IDLE,
-    LONGIDLE,
     WALKING,
     RUNNING,
     CROUCH,

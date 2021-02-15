@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Floral flame
   m_EditorClassIdentifier: 
   inputSequence:
-  - buttonName: SpellFirstClick
+  - buttonName: Right click
     animationID: 1
     requiresTime: 1
-    timeAmount: 0.5
+    timeAmount: 0.2
     conditions: []
     actions: []
   - buttonName: Crouch
@@ -25,21 +25,25 @@ MonoBehaviour:
     timeAmount: 0
     conditions: []
     actions: []
-  - buttonName: SpellSecondClick
+  - buttonName: Left click
     animationID: 4
     requiresTime: 0
     timeAmount: 0
-    conditions: []
+    conditions:
+    - {fileID: 11400000, guid: 90c18fd607a94ae49867f392b3bdfef9, type: 2}
     actions: []
-  - buttonName: SpellSecondClick
+  - buttonName: Left click
     animationID: 5
     requiresTime: 0
     timeAmount: 0
-    conditions: []
+    conditions:
+    - {fileID: 11400000, guid: 90c18fd607a94ae49867f392b3bdfef9, type: 2}
     actions: []
-  - buttonName: SpellSecondClick
+  - buttonName: Left click
     animationID: 6
     requiresTime: 0
     timeAmount: 0
-    conditions: []
-    actions: []
+    conditions:
+    - {fileID: 11400000, guid: 90c18fd607a94ae49867f392b3bdfef9, type: 2}
+    actions:
+    - {fileID: 11400000, guid: 07fbf135ee2ec9744aa12ffa9a776009, type: 2}
