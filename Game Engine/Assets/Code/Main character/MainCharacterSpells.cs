@@ -12,6 +12,9 @@ public class MainCharacterSpells : MonoBehaviour
     [SerializeField] private List<Spell> runningSpells;
     [SerializeField] private int currentStep = 0;
     [SerializeField] private float currentStepTime = 0.0f;
+    [SerializeField] private bool isRunningSpells = false;
+
+    [HideInInspector] public bool IsRunningSpells { get => isRunningSpells; set => isRunningSpells = value; }
 
     private void Start()
     {
@@ -85,6 +88,7 @@ public class MainCharacterSpells : MonoBehaviour
             if (firstInput.MeetsAllConditions())
             {
                 runningSpells.Add(spell);
+                isRunningSpells = true;
 
                 // Start animation
                 animator.SetTrigger("StartSpells");
@@ -108,6 +112,9 @@ public class MainCharacterSpells : MonoBehaviour
 
         // Spells list
         runningSpells.Clear();
+
+        // Update state
+        StartCoroutine(unsetRunningSpells());
     }
 
     private void finishSpell(Spell spell)
@@ -123,6 +130,9 @@ public class MainCharacterSpells : MonoBehaviour
 
         // Spells list
         runningSpells.Clear();
+
+        // Update state
+        StartCoroutine(unsetRunningSpells());
     }
 
     private void nextStep(Spell spell)
@@ -148,5 +158,20 @@ public class MainCharacterSpells : MonoBehaviour
 
         // Spells list
         runningSpells.Add(spell);
+    }
+
+    IEnumerator unsetRunningSpells()
+    {
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Quick water drop 1") == false);
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Quick water drop 2") == false);
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Floral flame 1") == false);
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Floral flame 2") == false);
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Floral flame 3") == false);
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Floral flame 4") == false);
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Floral flame 5") == false);
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Lethal orb 1") == false);
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Lethal orb 2") == false);
+
+        isRunningSpells = false;
     }
 }

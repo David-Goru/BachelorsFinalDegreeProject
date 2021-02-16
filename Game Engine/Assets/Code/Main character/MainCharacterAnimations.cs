@@ -6,6 +6,7 @@ public class MainCharacterAnimations : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Animator animator;
+    [SerializeField] private MainCharacterSpells mainCharacterSpells;
 
     [Header("Debug")]
     [SerializeField] private MainCharacterAnimation currentAnimation;
@@ -71,8 +72,7 @@ public class MainCharacterAnimations : MonoBehaviour
 
     public bool IsRunningSpells()
     {
-        if (animator.GetInteger("SpellAnimID") != 0) return true;
-        return false;
+        return mainCharacterSpells.IsRunningSpells;
     }
 }
 
