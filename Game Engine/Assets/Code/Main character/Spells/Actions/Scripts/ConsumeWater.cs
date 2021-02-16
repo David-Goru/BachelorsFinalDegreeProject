@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ConsumeWater", menuName = "Spells/Actions/ConsumeWater", order = 0)]
