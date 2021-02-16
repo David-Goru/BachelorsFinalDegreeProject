@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
-  m_Shader: {fileID: -6465566751694194690, guid: 7dd8ffa296602194caa8b602bd096da8, type: 3}
+  m_Name: Magic water
+  m_Shader: {fileID: -6465566751694194690, guid: 94b3a7b2b9c50084292ad9ce5eddc5e4, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -32,13 +32,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_02ffffc354c949afb5bbb93ec0f49dd5: 10
+    - Vector1_02ffffc354c949afb5bbb93ec0f49dd5: 5
     - Vector1_06742c9e6f024f568253f76d9d634625: 0.7
     - Vector1_0d7b150f0a7a4d9a8a43593c5e0c0b44: 5
     - Vector1_abb841c3a11546728cd6ebfc5c91833e: 0.1
     - Vector1_ec176967c752445497e646797f91bfa7: 1
     m_Colors:
-    - Color_286c6bab234f4deb86891dfeb4a20c88: {r: 0.157872, g: 0.5429426, b: 0.858, a: 0}
-    - Color_afa22bdcf1a34ce8ab0380c447e5ac26: {r: 0.1662857, g: 0.2078572, b: 0.291, a: 0}
-    - Color_f9fd033872974677b603fb29e474bbd8: {r: 0.126976, g: 0.3192539, b: 0.539, a: 1}
+    - Color_286c6bab234f4deb86891dfeb4a20c88: {r: 0.4103774, g: 0.6875002, b: 1, a: 0}
+    - Color_afa22bdcf1a34ce8ab0380c447e5ac26: {r: 1, g: 1, b: 1, a: 0}
+    - Color_f9fd033872974677b603fb29e474bbd8: {r: 0.190944, g: 0.6180657, b: 0.816, a: 0.5372549}
   m_BuildTextureStacks: []
