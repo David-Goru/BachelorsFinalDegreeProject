@@ -7,20 +7,24 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fire
-  m_Shader: {fileID: -6465566751694194690, guid: 81bfb51fb17e2ee469468366e17d3ebe, type: 3}
+  m_Name: Shader Graphs_Fire
+  m_Shader: {fileID: -6465566751694194690, guid: 5ab7d5a74f44a7640821b3abd7a40e35, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_4bb664204850440997165f4f1527b43f:
-        m_Texture: {fileID: 2800000, guid: 50a7a8d6562f10d4897018773a03fae3, type: 3}
+    - Texture2D_59b28e82c7394377b1f7f8f530e810f5:
+        m_Texture: {fileID: 2800000, guid: fd0496f8824e6064283a6b8f4dcdc276, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_c832624847034c80a706391def4b7a30:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -36,13 +40,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_2b5f11fc01ff4d1c83a3f3dbe726ba47: 2
-    - Vector1_4e87b01c920643dd836d1596a333426d: 0.7
-    - Vector1_6dad2e26122e4e55a700e228dd4ca7c7: 0.1
-    - Vector1_873b8c209cff473d97caf7018a2d8609: 5
+    - Vector1_15742c12472c4789be8388ef813b821b: 0.8
     m_Colors:
-    - Color_d06f494360ca416099b43f745ce23b90: {r: 86.32878, g: 18.76309, b: 8.587681, a: 0}
-    - Color_d06f494360ca416099b43f745ce23b90_1: {r: 92.42202, g: 12.7548, b: 10.02692, a: 0}
-    - Vector2_8f9c47f8bf4248f0923c733e59fda7f1: {r: -0.1, g: -1, b: 0, a: 0}
-    - Vector2_dc6dfe8a743244cbb9a4ca8967a9f294: {r: 0, g: -0.7, b: 0, a: 0}
+    - Color_1c74365aad6147ceb05d3a795691ead2: {r: 0.8301887, g: 0.3167322, b: 0.05012455, a: 0}
+    - Vector2_e50630c308ff47f2876677c9e1eeae47: {r: 0, g: -0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
