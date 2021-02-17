@@ -110,6 +110,12 @@ public class MainCharacterSpells : MonoBehaviour
         animator.SetInteger("SpellAnimID", 0);
         animator.SetTrigger("StopSpells");
 
+        // Remove any possible projectile spawned
+        foreach (Spell s in spells)
+        {
+            s.Projectile.Stop();
+        }
+
         // Spells list
         runningSpells.Clear();
 
@@ -119,7 +125,11 @@ public class MainCharacterSpells : MonoBehaviour
 
     private void finishSpell(Spell spell)
     {
-        spell.GetInputAtStep(currentStep).DoAllActions();
+        PlayerInput currentInput = spell.GetInputAtStep(currentStep);
+        currentInput.DoAllActions();
+
+        if (currentInput.SpawnProjectile) spell.Projectile.Spawn(transform);
+        if (currentInput.DetonateProjectile) spell.Projectile.Detonate();
 
         // Steps
         currentStep = 0;
@@ -137,14 +147,19 @@ public class MainCharacterSpells : MonoBehaviour
 
     private void nextStep(Spell spell)
     {
-        spell.GetInputAtStep(currentStep).DoAllActions();
+        PlayerInput currentInput = spell.GetInputAtStep(currentStep);
+        currentInput.DoAllActions();
+
+        if (currentInput.SpawnProjectile) spell.Projectile.Spawn(transform);
+        if (currentInput.DetonateProjectile) spell.Projectile.Detonate();
 
         // Steps
         currentStep++;
         currentStepTime = 0;
+        currentInput = spell.GetInputAtStep(currentStep);
 
         // Animations
-        animator.SetInteger("SpellAnimID", spell.GetInputAtStep(currentStep).AnimationID);
+        animator.SetInteger("SpellAnimID", currentInput.AnimationID);
 
         // Check running spells and see if they can go to the next step
         foreach (Spell s in runningSpells.ToArray())
@@ -160,7 +175,7 @@ public class MainCharacterSpells : MonoBehaviour
         runningSpells.Add(spell);
     }
 
-    IEnumerator unsetRunningSpells()
+    private IEnumerator unsetRunningSpells()
     {
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Quick water drop 1") == false);
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Quick water drop 2") == false);

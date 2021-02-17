@@ -12,17 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e3d6501c4818564aa68a0dac8d01c38, type: 3}
   m_Name: Quick water drop
   m_EditorClassIdentifier: 
+  projectile: {fileID: 11400000, guid: 8385002ba3c7f134ab08c8d96115beab, type: 2}
   inputSequence:
   - buttonName: Right click
     animationID: 1
     requiresTime: 1
     timeAmount: 0.2
+    spawnProjectile: 0
+    detonateProjectile: 0
     conditions: []
     actions: []
   - buttonName: Left click
     animationID: 2
     requiresTime: 0
     timeAmount: 0
+    spawnProjectile: 1
+    detonateProjectile: 1
     conditions:
     - {fileID: 11400000, guid: cf3ed99d40a5f674abe46adef9f0c6fa, type: 2}
     actions:

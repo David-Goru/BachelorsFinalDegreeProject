@@ -12,23 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e3d6501c4818564aa68a0dac8d01c38, type: 3}
   m_Name: Floral flame
   m_EditorClassIdentifier: 
+  projectile: {fileID: 11400000, guid: 2f1702f2aba196b4c81ec36ac266bd87, type: 2}
   inputSequence:
   - buttonName: Right click
     animationID: 1
     requiresTime: 1
     timeAmount: 0.2
+    spawnProjectile: 0
+    detonateProjectile: 0
     conditions: []
     actions: []
   - buttonName: Crouch
     animationID: 3
     requiresTime: 0
     timeAmount: 0
+    spawnProjectile: 0
+    detonateProjectile: 0
     conditions: []
     actions: []
   - buttonName: Left click
     animationID: 4
     requiresTime: 0
     timeAmount: 0
+    spawnProjectile: 1
+    detonateProjectile: 0
     conditions:
     - {fileID: 11400000, guid: 90c18fd607a94ae49867f392b3bdfef9, type: 2}
     actions: []
@@ -36,6 +43,8 @@ MonoBehaviour:
     animationID: 5
     requiresTime: 0
     timeAmount: 0
+    spawnProjectile: 0
+    detonateProjectile: 0
     conditions:
     - {fileID: 11400000, guid: 90c18fd607a94ae49867f392b3bdfef9, type: 2}
     actions: []
@@ -43,6 +52,8 @@ MonoBehaviour:
     animationID: 6
     requiresTime: 0
     timeAmount: 0
+    spawnProjectile: 0
+    detonateProjectile: 1
     conditions:
     - {fileID: 11400000, guid: 90c18fd607a94ae49867f392b3bdfef9, type: 2}
     actions:
