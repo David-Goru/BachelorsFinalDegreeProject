@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shader Graphs_Fire soil
+  m_Shader: {fileID: -6465566751694194690, guid: 0073d47f84e8c6649a19550c152bc452, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_59b28e82c7394377b1f7f8f530e810f5:
+        m_Texture: {fileID: 2800000, guid: 72d45c322cffa0b4abd7497fce6c9f73, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_15742c12472c4789be8388ef813b821b: 0.8
+    - Vector1_80f7b7416d2c4c9f8aed690bd9d0300a: 8
+    m_Colors:
+    - Color_1c74365aad6147ceb05d3a795691ead2: {r: 47.18214, g: 0.8314034, b: 0.4157017, a: 0}
+    - Vector2_e50630c308ff47f2876677c9e1eeae47: {r: -0.2, g: -0.5, b: 0, a: 0}
+  m_BuildTextureStacks: []
