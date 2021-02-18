@@ -1,8 +1,17 @@
 fileFormatVersion: 2
-guid: 2978101e9d09fc942a232d4dc896bf59
+guid: 1bb3421054aeb304cb0d9dfecf5f9f7c
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 4781951162920444690
+    second: Armature|ArmatureAction
+  - first:
+      74: -1422011007694221501
+    second: Armature|ArmatureAction.001
+  - first:
+      74: 4503573188241379944
+    second: Armature|Floral Flame 2
   externalObjects: {}
   materials:
     materialImportMode: 2
