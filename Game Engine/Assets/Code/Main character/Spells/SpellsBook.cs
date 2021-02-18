@@ -33,6 +33,7 @@ public class SpellsBook : MonoBehaviour
 
     public void OpenSpellsBook()
     {
+        Time.timeScale = 0;
         setPage(0);
         open = true;
         bookUI.SetActive(true);
@@ -40,6 +41,7 @@ public class SpellsBook : MonoBehaviour
 
     public void CloseSpellsBook()
     {
+        Time.timeScale = 1;
         bookUI.SetActive(false);
         open = false;
     }
