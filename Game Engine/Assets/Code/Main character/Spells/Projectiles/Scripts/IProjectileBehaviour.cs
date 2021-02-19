@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class IProjectileBehaviour : MonoBehaviour
 {
+    public virtual void NextState() { }
     public virtual void Detonate() { }
     public virtual void Stop() { }
 }

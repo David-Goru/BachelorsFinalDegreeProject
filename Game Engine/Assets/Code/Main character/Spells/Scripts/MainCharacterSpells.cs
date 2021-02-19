@@ -25,7 +25,7 @@ public class MainCharacterSpells : MonoBehaviour
 
     private void Update()
     {
-        if (!Input.anyKey)
+        if (!Input.anyKey || Input.GetButton("Crouch") && !isRunningSpells)
         {
             resetSpells();
             return;
@@ -119,6 +119,8 @@ public class MainCharacterSpells : MonoBehaviour
         // Spells list
         runningSpells.Clear();
 
+        Debug.Log("?");
+
         // Update state
         StartCoroutine(unsetRunningSpells());
     }
@@ -129,6 +131,7 @@ public class MainCharacterSpells : MonoBehaviour
         currentInput.DoAllActions();
 
         if (currentInput.SpawnProjectile) spell.Projectile.Spawn(transform);
+        if (currentInput.NextProjectileState) spell.Projectile.NextState();
         if (currentInput.DetonateProjectile) spell.Projectile.Detonate();
 
         // Steps
@@ -151,6 +154,7 @@ public class MainCharacterSpells : MonoBehaviour
         currentInput.DoAllActions();
 
         if (currentInput.SpawnProjectile) spell.Projectile.Spawn(transform);
+        if (currentInput.NextProjectileState) spell.Projectile.NextState();
         if (currentInput.DetonateProjectile) spell.Projectile.Detonate();
 
         // Steps

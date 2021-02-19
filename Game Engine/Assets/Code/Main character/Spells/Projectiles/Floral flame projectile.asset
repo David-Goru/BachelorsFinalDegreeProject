@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwardOffset: 0
   rightOffset: 0
-  projectilePrefab: {fileID: 1275773253977452850, guid: 34efc046edc8cbe46a846dbaf49d332e, type: 3}
+  projectilePrefab: {fileID: 3290331114870985241, guid: 940e969a125c110498cb1db348904d54, type: 3}
   currentProjectile: {fileID: 0}

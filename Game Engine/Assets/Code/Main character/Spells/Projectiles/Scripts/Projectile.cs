@@ -22,6 +22,17 @@ public class Projectile : ScriptableObject
         currentProjectile = MonoBehaviour.Instantiate<GameObject>(projectilePrefab, spawnPoint.position + spawnPoint.forward * forwardOffset + spawnPoint.right * rightOffset, spawnPoint.rotation).GetComponent<IProjectileBehaviour>();
     }
 
+    public void NextState()
+    {
+        if (currentProjectile == null)
+        {
+            Debug.Log("Projectile not spawned yet");
+            return;
+        }
+
+        currentProjectile.NextState();
+    }
+
     public void Detonate()
     {
         if (currentProjectile == null)
