@@ -7,6 +7,20 @@ public class LethalOrbProjectileBehaviour : IProjectileBehaviour
     [Header("Current values")]
     [SerializeField] private float projectileDamage = 0.0f;
 
+    [Header("References")]
+    [SerializeField] private GameObject model;
+    [SerializeField] private GameObject explosionParticles;
+
+    public override void StartProjectile()
+    {
+        StartCoroutine(startProjectile());
+    }
+    private IEnumerator startProjectile()
+    {
+        yield return new WaitForSeconds(0.35f);
+        model.SetActive(true);
+    }
+
     public override void Stop()
     {
         Destroy(gameObject);
@@ -19,7 +33,8 @@ public class LethalOrbProjectileBehaviour : IProjectileBehaviour
 
     private IEnumerator startDetonation()
     {
-        yield return new WaitForSeconds(0.5f);
+        explosionParticles.SetActive(true);
+        yield return new WaitForSeconds(0.25f);
         endDetonation();
     }
 

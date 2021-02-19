@@ -94,6 +94,9 @@ public class MainCharacterSpells : MonoBehaviour
                 animator.SetTrigger("StartSpells");
                 animator.SetInteger("SpellAnimID", firstInput.AnimationID);
                 animator.SetFloat("IdleTime", 0);
+
+                // Spawn projectile if needed
+                if (firstInput.SpawnProjectile) spell.Projectile.Spawn(transform);
             }
         }
     }
@@ -119,8 +122,6 @@ public class MainCharacterSpells : MonoBehaviour
         // Spells list
         runningSpells.Clear();
 
-        Debug.Log("?");
-
         // Update state
         StartCoroutine(unsetRunningSpells());
     }
@@ -129,10 +130,6 @@ public class MainCharacterSpells : MonoBehaviour
     {
         PlayerInput currentInput = spell.GetInputAtStep(currentStep);
         currentInput.DoAllActions();
-
-        if (currentInput.SpawnProjectile) spell.Projectile.Spawn(transform);
-        if (currentInput.NextProjectileState) spell.Projectile.NextState();
-        if (currentInput.DetonateProjectile) spell.Projectile.Detonate();
 
         // Steps
         currentStep = 0;
@@ -153,14 +150,15 @@ public class MainCharacterSpells : MonoBehaviour
         PlayerInput currentInput = spell.GetInputAtStep(currentStep);
         currentInput.DoAllActions();
 
-        if (currentInput.SpawnProjectile) spell.Projectile.Spawn(transform);
-        if (currentInput.NextProjectileState) spell.Projectile.NextState();
-        if (currentInput.DetonateProjectile) spell.Projectile.Detonate();
-
         // Steps
         currentStep++;
         currentStepTime = 0;
         currentInput = spell.GetInputAtStep(currentStep);
+
+        // Projectiles
+        if (currentInput.SpawnProjectile) spell.Projectile.Spawn(transform);
+        if (currentInput.NextProjectileState) spell.Projectile.NextState();
+        if (currentInput.DetonateProjectile) spell.Projectile.Detonate();
 
         // Animations
         animator.SetInteger("SpellAnimID", currentInput.AnimationID);

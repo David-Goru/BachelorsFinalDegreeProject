@@ -27,7 +27,7 @@ MonoBehaviour:
     animationID: 3
     requiresTime: 0
     timeAmount: 0
-    spawnProjectile: 1
+    spawnProjectile: 0
     nextProjectileState: 0
     detonateProjectile: 0
     conditions: []
@@ -36,8 +36,8 @@ MonoBehaviour:
     animationID: 4
     requiresTime: 0
     timeAmount: 0
-    spawnProjectile: 0
-    nextProjectileState: 1
+    spawnProjectile: 1
+    nextProjectileState: 0
     detonateProjectile: 0
     conditions:
     - {fileID: 11400000, guid: 90c18fd607a94ae49867f392b3bdfef9, type: 2}
@@ -47,7 +47,7 @@ MonoBehaviour:
     requiresTime: 0
     timeAmount: 0
     spawnProjectile: 0
-    nextProjectileState: 0
+    nextProjectileState: 1
     detonateProjectile: 0
     conditions:
     - {fileID: 11400000, guid: 90c18fd607a94ae49867f392b3bdfef9, type: 2}

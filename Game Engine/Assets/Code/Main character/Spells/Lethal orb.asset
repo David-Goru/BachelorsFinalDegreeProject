@@ -19,6 +19,7 @@ MonoBehaviour:
     requiresTime: 1
     timeAmount: 1
     spawnProjectile: 1
+    nextProjectileState: 0
     detonateProjectile: 0
     conditions:
     - {fileID: 11400000, guid: b3d5f9359b99d3140a4dc575676603d7, type: 2}
@@ -28,6 +29,7 @@ MonoBehaviour:
     requiresTime: 0
     timeAmount: 0
     spawnProjectile: 0
+    nextProjectileState: 0
     detonateProjectile: 1
     conditions:
     - {fileID: 11400000, guid: 62e4280152d1a1349a509b3ab61ce6d3, type: 2}
