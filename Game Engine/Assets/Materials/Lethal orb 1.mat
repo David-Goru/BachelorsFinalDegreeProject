@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_Fire soil
-  m_Shader: {fileID: -6465566751694194690, guid: 0073d47f84e8c6649a19550c152bc452, type: 3}
+  m_Name: Lethal orb 1
+  m_Shader: {fileID: -6465566751694194690, guid: ba866515717245940bc36904ee877c53, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,8 +19,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_59b28e82c7394377b1f7f8f530e810f5:
-        m_Texture: {fileID: 2800000, guid: 72d45c322cffa0b4abd7497fce6c9f73, type: 3}
+    - Texture2D_226dce6f64824d99adfcddcf58293bf2:
+        m_Texture: {fileID: 2800000, guid: 1571030fe2f2e7040bdc19c5e3b573d4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -36,9 +36,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_15742c12472c4789be8388ef813b821b: 0.8
-    - Vector1_80f7b7416d2c4c9f8aed690bd9d0300a: 8
+    - Vector1_aed0a5939fe1416891a56d5517fdc851: 0.2
     m_Colors:
-    - Color_1c74365aad6147ceb05d3a795691ead2: {r: 47.18214, g: 0.8314034, b: 0.4157017, a: 0}
-    - Vector2_e50630c308ff47f2876677c9e1eeae47: {r: -0.2, g: -0.5, b: 0, a: 0}
+    - Color_480598d73b504f739c272741ff1e569b: {r: 0.6509434, g: 0.627969, b: 0, a: 0}
+    - Color_8103e2cf82fd4c93b9ec09bcf34ff4e3: {r: 0.07, g: 0.07, b: 0.07, a: 0}
   m_BuildTextureStacks: []
