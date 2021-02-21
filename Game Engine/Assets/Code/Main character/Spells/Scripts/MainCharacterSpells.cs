@@ -7,6 +7,7 @@ public class MainCharacterSpells : MonoBehaviour
     [Header("References")]
     [SerializeField] private List<Spell> spells;
     [SerializeField] private Animator animator;
+    [SerializeField] private Transform characterModel;
 
     [Header("Debug")]
     [SerializeField] private List<Spell> runningSpells;
@@ -96,7 +97,7 @@ public class MainCharacterSpells : MonoBehaviour
                 animator.SetFloat("IdleTime", 0);
 
                 // Spawn projectile if needed
-                if (firstInput.SpawnProjectile) spell.Projectile.Spawn(transform);
+                if (firstInput.SpawnProjectile) spell.Projectile.Spawn(characterModel);
             }
         }
     }
@@ -156,7 +157,7 @@ public class MainCharacterSpells : MonoBehaviour
         currentInput = spell.GetInputAtStep(currentStep);
 
         // Projectiles
-        if (currentInput.SpawnProjectile) spell.Projectile.Spawn(transform);
+        if (currentInput.SpawnProjectile) spell.Projectile.Spawn(characterModel);
         if (currentInput.NextProjectileState) spell.Projectile.NextState();
         if (currentInput.DetonateProjectile) spell.Projectile.Detonate();
 

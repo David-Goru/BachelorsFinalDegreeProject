@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3566589677420498778}
   - component: {fileID: 491114458454049023}
   - component: {fileID: 2392606255897556021}
-  - component: {fileID: 1967778011344232293}
   m_Layer: 0
   m_Name: Lethal orb model
   m_TagString: Untagged
@@ -83,21 +82,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1967778011344232293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4194191311408535008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7209ca5464622e498b2c7dc53d91612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileDamage: 0
-  model: {fileID: 4194191311408535008}
-  explosionParticles: {fileID: 8189705706218001297}
 --- !u!1 &8189705706218001297
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +99,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7642680604436279964
 Transform:
   m_ObjectHideFlags: 0
