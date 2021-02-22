@@ -17,7 +17,7 @@ public class LethalOrbProjectileBehaviour : IProjectileBehaviour
     }
     private IEnumerator startProjectile()
     {
-        yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(0.25f);
         model.SetActive(true);
     }
 
