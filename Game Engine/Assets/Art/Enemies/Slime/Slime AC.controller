@@ -23,7 +23,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 969f352295816fd4ab6716cc479a0621, type: 2}
+  m_Motion: {fileID: 7400000, guid: a147dd547fac36447b803026f5fb25ae, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -96,7 +96,7 @@ AnimatorStateMachine:
     m_Position: {x: 320, y: -50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3997206556716222345}
-    m_Position: {x: 640, y: -50, z: 0}
+    m_Position: {x: 630, y: -50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8824404221621238979}
     m_Position: {x: 840, y: 150, z: 0}
@@ -319,7 +319,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8fd4caa4081022b4dbfcb2bd7afd173c, type: 2}
+  m_Motion: {fileID: 7400000, guid: 7170d752f629c0540b3ceebd82d58f9b, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -384,14 +384,14 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wild pig AC
+  m_Name: Slime AC
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Idle
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: Walking
     m_Type: 4
@@ -568,7 +568,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8fd4caa4081022b4dbfcb2bd7afd173c, type: 2}
+  m_Motion: {fileID: 7400000, guid: 7170d752f629c0540b3ceebd82d58f9b, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -675,7 +675,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: c89ebb58239570b408f067c081360090, type: 2}
+  m_Motion: {fileID: 7400000, guid: 0e881abf045429749b641e63e5a58edc, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -704,7 +704,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 969f352295816fd4ab6716cc479a0621, type: 2}
+  m_Motion: {fileID: 7400000, guid: a147dd547fac36447b803026f5fb25ae, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -761,7 +761,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 0ad80d11ce57cd941af32796436e5a1b, type: 2}
+  m_Motion: {fileID: 7400000, guid: 5a0efe31cd408704893063d11db2dc37, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
