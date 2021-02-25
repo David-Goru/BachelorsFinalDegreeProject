@@ -75,8 +75,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a8a00b551e163c4fab55fd3e0e1b318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileDamage: 0
+  projectileDamage: 5
+  projectileRadius: 2
   animator: {fileID: 2729373705146140517}
+  currentState: 0
 --- !u!1 &5354242515218658752
 GameObject:
   m_ObjectHideFlags: 0

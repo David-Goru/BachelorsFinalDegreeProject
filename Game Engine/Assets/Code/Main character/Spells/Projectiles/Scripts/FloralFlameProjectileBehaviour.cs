@@ -5,7 +5,8 @@ using UnityEngine;
 public class FloralFlameProjectileBehaviour : IProjectileBehaviour
 {
     [Header("Current values")]
-    [SerializeField] private float projectileDamage = 0.0f;
+    [SerializeField] private int projectileDamage = 0;
+    [SerializeField] private float projectileRadius = 0.0f;
 
     [Header("References")]
     [SerializeField] private Animator animator;
@@ -48,8 +49,10 @@ public class FloralFlameProjectileBehaviour : IProjectileBehaviour
 
     private void endDetonation()
     {
-        // For each enemy in cylinder range deal damage using projectileDamage
-        Debug.Log("Dealing " + projectileDamage + " damage in area");
+        foreach(Collider col in Physics.OverlapSphere(transform.position, projectileRadius, 1 << LayerMask.NameToLayer("Enemy")))
+        {
+            col.gameObject.GetComponent<Enemy>().GetDamage(projectileDamage);
+        }
 
         Destroy(gameObject);
     }

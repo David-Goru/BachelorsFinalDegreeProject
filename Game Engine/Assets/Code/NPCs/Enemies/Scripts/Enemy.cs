@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private string currentBehaviour = "Idle";
     [SerializeField] private float nextBehaviour = 0.0f;
     [SerializeField] private Vector3 nextPoint;
+    [SerializeField] private GameObject currentTarget = null;
 
     public void StartEnemy(EnemySpawn spawner, EnemyInfo enemyInfo)
     {
@@ -28,13 +29,21 @@ public class Enemy : MonoBehaviour
 
     public void UpdateState(float timeDifference)
     {
+        if (currentBehaviour == "Chasing enemy")
+        {
+            transform.position = Vector3.MoveTowards(transform.position, currentTarget.transform.position, enemyInfo.RunningSpeed * timeDifference);
+            if (Vector3.Distance(transform.position, currentTarget.transform.position) < enemyInfo.AttackRange) currentBehaviour = "Attack";
+            else transform.LookAt(currentTarget.transform.position);
+            return;
+        }
+
         nextBehaviour -= timeDifference;
         if (nextBehaviour <= 0) changeBehaviour();
         else
         {
             if (currentBehaviour == "Walking")
             {
-                transform.position = Vector3.MoveTowards(transform.position, nextPoint, enemyInfo.MovementSpeed * timeDifference);
+                transform.position = Vector3.MoveTowards(transform.position, nextPoint, enemyInfo.WalkingSpeed * timeDifference);
                 if (Vector3.Distance(transform.position, nextPoint) < 0.1f) changeBehaviour();
                 else transform.LookAt(nextPoint);
             }
@@ -52,6 +61,15 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void UpdateTarget(GameObject target)
+    {
+        currentTarget = target;
+        currentBehaviour = "Chasing enemy";
+        animator.SetBool("Running", true);
+        animator.SetBool("Walking", false);
+        nextBehaviour = 0;
+    }
+
     public void Attack(GameObject test)
     {
         Debug.Log("Attacking " + test.name);
@@ -59,6 +77,16 @@ public class Enemy : MonoBehaviour
 
     private void changeBehaviour()
     {
+        if (currentBehaviour == "Attack")
+        {
+            animator.SetBool("Idle", true);
+            animator.SetBool("Running", false);
+            animator.SetTrigger("Attack");
+            //currentTarget.GetComponent<DamageReceiverOrSomething>().GetDamage(enemyInfo.Damage);
+            nextBehaviour = 60 / enemyInfo.AttackRate;
+            return;
+        }
+
         nextBehaviour = Random.Range(enemyInfo.MinTimeBetweenBehaviours, enemyInfo.MaxTimeBetweenBehaviours);
         animator.SetBool(currentBehaviour, false);
         if (currentBehaviour == "Idle")
@@ -80,10 +108,11 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator kill()
     {
-        // death animation?
+        animator.SetTrigger("Die");
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Dead"));
+
         // spawn loot
 
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Dead"));
         spawner.RemoveCache(this);
         Destroy(gameObject); 
     }
