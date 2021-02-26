@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class QuickWaterDropProjectileBehaviour : IProjectileBehaviour
 {
-    [Header("Current values")]
-    [SerializeField] private float projectileDamage = 0.0f;
-    [SerializeField] private float detonationDuration = 0.0f;
-    [SerializeField] private float detonationThrust = 0.0f;
+    [Header("Attributes")]
+    [SerializeField] [Tooltip("Damage of the projectile when detonation occurs")] private int projectileDamage = 0;
+    [SerializeField] [Tooltip("Duration of the projectile detonating")] private float detonationDuration = 0.0f;
+    [SerializeField] [Tooltip("Initial thrust that the projectile has when detonating")] private float detonationThrust = 0.0f;
 
     [Header("Debug")]
     [SerializeField] private bool isDetonating = false;
@@ -36,14 +36,12 @@ public class QuickWaterDropProjectileBehaviour : IProjectileBehaviour
         GetComponent<Rigidbody>().AddForce(transform.forward * detonationThrust, ForceMode.Impulse);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider col)
     {
-        if (collision.gameObject.CompareTag("Player")) return;
+        if (col.gameObject.CompareTag("Player")) return;
 
-        Debug.Log("Quick water drop hit something.");
-
-        // If enemy: deal damage using projectileDamage
-        Debug.Log("Dealing " + projectileDamage + " damage to a target");
+        Entity e = col.gameObject.GetComponent<Entity>();
+        if (e) e.ReceiveDamage(projectileDamage);
 
         endDetonation();
     }

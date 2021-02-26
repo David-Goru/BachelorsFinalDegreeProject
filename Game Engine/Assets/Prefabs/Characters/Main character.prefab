@@ -30,6 +30,69 @@ Transform:
   m_Father: {fileID: 465665912330594629}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4668886627598584813
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2234502390179404061}
+  - component: {fileID: 6415642311413891807}
+  - component: {fileID: 6495280105390083071}
+  m_Layer: 0
+  m_Name: Noise area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2234502390179404061
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4668886627598584813}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 465665912330594629}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6415642311413891807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4668886627598584813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ca550a560c05da4bb1ca236718023f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleRadius: 2
+  walkingRadius: 3
+  runningRadius: 4
+  crouchingRadius: 2.5
+  spellsRadius: 5
+  noiseCollider: {fileID: 6495280105390083071}
+--- !u!135 &6495280105390083071
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4668886627598584813}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7207582916297278404
 GameObject:
   m_ObjectHideFlags: 0
@@ -39,6 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 465665912330594629}
+  - component: {fileID: 2851720648956925641}
   - component: {fileID: 4631880213517836787}
   - component: {fileID: 6022732348574597017}
   - component: {fileID: 4347619716028286229}
@@ -65,9 +129,29 @@ Transform:
   m_Children:
   - {fileID: 6953409698563814909}
   - {fileID: 990481585}
+  - {fileID: 2234502390179404061}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2851720648956925641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207582916297278404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbca040c8488ff9408e0fb32c0096767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  animator: {fileID: 6072499812974244785}
+  noise: {fileID: 0}
+  movement: {fileID: 4631880213517836787}
+  animations: {fileID: 6022732348574597017}
+  currentHealth: 0
+  currentState: 0
 --- !u!114 &4631880213517836787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,7 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a62cb4025ab00349ab388f16fcfb008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
   walkSpeed: 2
   crouchSpeed: 1
   runSpeed: 8
@@ -88,12 +171,12 @@ MonoBehaviour:
   crouchingCenter: 0.6
   defaultHeight: 2
   crouchingHeight: 1.2
+  mainCharacter: {fileID: 2851720648956925641}
   characterCameraComponent: {fileID: 0}
   characterCollider: {fileID: 2146348107563607564}
-  characterAnimations: {fileID: 6022732348574597017}
   characterModel: {fileID: 7724986088402890567}
   viewPoint: {fileID: 990481585}
-  currentState: 0
+  speed: 0
 --- !u!114 &6022732348574597017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3768a79c0491f094d8c18a2986c6e3c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 6072499812974244785}
+  mainCharacter: {fileID: 2851720648956925641}
 --- !u!114 &4347619716028286229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,10 +217,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b145b06bb546054db1a823b64905999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCharacter: {fileID: 2851720648956925641}
+  characterModel: {fileID: 6953409698563814909}
   spells:
   - {fileID: 11400000, guid: 5ab479e1e86bbd94d95aa692bb9514d5, type: 2}
-  inputParse: {fileID: 11400000, guid: fc30f136eaf5cef44b86da31d550e995, type: 2}
-  possibleSpells: []
+  runningSpells: []
   currentStep: 0
   currentStepTime: 0
 --- !u!136 &2146348107563607564

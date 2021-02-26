@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class FloralFlameProjectileBehaviour : IProjectileBehaviour
 {
-    [Header("Current values")]
-    [SerializeField] private int projectileDamage = 0;
-    [SerializeField] private float projectileRadius = 0.0f;
+    [Header("Attributes")]
+    [SerializeField] [Tooltip("Damage of the projectile when detonation occurs")] private int projectileDamage = 0;
+    [SerializeField] [Tooltip("Radius where the detonation has effect")] private float projectileRadius = 0.0f;
 
     [Header("References")]
     [SerializeField] private Animator animator;
@@ -43,17 +43,23 @@ public class FloralFlameProjectileBehaviour : IProjectileBehaviour
     private IEnumerator startDetonation()
     {
         animator.SetTrigger("Raise");
+        dealDamage();
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("End"));
         endDetonation();
     }
 
+    private void dealDamage()
+    {
+        foreach (Collider col in Physics.OverlapSphere(transform.position, projectileRadius))
+        {
+            if (col.gameObject.CompareTag("Player")) continue;
+            Entity e = col.gameObject.GetComponent<Entity>();
+            if (e) e.ReceiveDamage(projectileDamage);
+        }
+    }
+
     private void endDetonation()
     {
-        foreach(Collider col in Physics.OverlapSphere(transform.position, projectileRadius, 1 << LayerMask.NameToLayer("Enemy")))
-        {
-            col.gameObject.GetComponent<Enemy>().GetDamage(projectileDamage);
-        }
-
         Destroy(gameObject);
     }
 }

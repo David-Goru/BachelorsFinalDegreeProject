@@ -6,27 +6,26 @@ using UnityEngine;
 public class EnemyInfo : ScriptableObject
 {
     [Header("Attributes")]
-    [SerializeField] private float visionRange = 0.0f;
-    [SerializeField] private float listeningRadius = 0.0f;
-    [SerializeField] private int health = 0;
-    [SerializeField] private int damage = 0;
-    [SerializeField] private float attackRange = 0.0f;
-    [Tooltip("Attacks per second")] [SerializeField] private float attackRate = 0.0f;
-    [Tooltip("Meters per second")] [SerializeField] private float walkingSpeed = 0.0f;
-    [Tooltip("Meters per second")] [SerializeField] private float runningSpeed = 0.0f;
-    [SerializeField] private float wanderingArea = 0.0f;
-    [SerializeField] private float minTimeBetweenBehaviours = 0.0f;
-    [SerializeField] private float maxTimeBetweenBehaviours = 0.0f;
+    [SerializeField] [Tooltip("Health when spawned")] private int maxHealth = 0;
+    [SerializeField] [Tooltip("Damage that deals per attack")] private int damage = 0;
+    [SerializeField] [Tooltip("Distance where the enemy can start attacking")] private float attackRange = 0.0f;
+    [SerializeField] [Tooltip("Distance where the enemy forgets who was chasing")] private float forgetRange = 0.0f;
+    [SerializeField] [Tooltip("Attacks per second")] private float attackRate = 0.0f;
+    [SerializeField] [Tooltip("Meters per second")] private float walkingSpeed = 0.0f;
+    [SerializeField] [Tooltip("Meters per second")] private float runningSpeed = 0.0f;
+    [SerializeField] [Tooltip("Maximum X and Y difference per wander action")] private float wanderingArea = 0.0f;
+    [SerializeField] [Tooltip("Minimum time the enemy needs for starting a new behaviour")] private float minTimeBetweenBehaviours = 0.0f;
+    [SerializeField] [Tooltip("Maximum time the enemy needs for starting a new behaviour")] private float maxTimeBetweenBehaviours = 0.0f;
 
     [Header("References")]
     [SerializeField] private GameObject model;
     [SerializeField] private List<ItemPool> lootPools;
 
-    public float VisionRange { get => visionRange; set => visionRange = value; }
-    public float ListeningRadius { get => listeningRadius; set => listeningRadius = value; }
-    public int Health { get => health; set => health = value; }
+    // Getters and setters
+    public int MaxHealth { get => maxHealth; set => maxHealth = value; }
     public int Damage { get => damage; set => damage = value; }
     public float AttackRange { get => attackRange; set => attackRange = value; }
+    public float ForgetRange { get => forgetRange; set => forgetRange = value; }
     public float AttackRate { get => attackRate; set => attackRate = value; }
     public float WalkingSpeed { get => walkingSpeed; set => walkingSpeed = value; }
     public float RunningSpeed { get => runningSpeed; set => runningSpeed = value; }

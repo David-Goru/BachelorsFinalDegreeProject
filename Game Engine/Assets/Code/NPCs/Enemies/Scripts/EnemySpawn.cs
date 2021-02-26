@@ -5,11 +5,13 @@ using UnityEngine;
 public class EnemySpawn : MonoBehaviour
 {
     [Header("Attributes")]
-    [SerializeField] private List<EnemyInfo> enemies;
-    [SerializeField] private int maxEnemies = 0;
-    [Tooltip("Enemies per minute")] [SerializeField] private float spawnRatio = 0.0f;
-    [SerializeField] private float spawnRadius = 0.0f;
-    [SerializeField] private LayerMask checkLayers;
+    [SerializeField] [Tooltip("Maximum enemies spawned at the same time")] private int maxEnemies = 0;
+    [SerializeField] [Tooltip("Enemies per minute")] private float spawnRatio = 0.0f;
+    [SerializeField] [Tooltip("X and Y area where the enemies can spawn")] private float spawnRadius = 0.0f;
+    [SerializeField] [Tooltip("Layers to avoid")] private LayerMask checkLayers;
+
+    [Header("References")]
+    [SerializeField] [Tooltip("Enemies that can be spawned")] private List<EnemyInfo> enemies;
 
     [Header("Debug")]
     [SerializeField] private float nextSpawn = 0.0f;
@@ -19,7 +21,7 @@ public class EnemySpawn : MonoBehaviour
 
     private void Start()
     {
-        if (enemies.Count == 0 || maxEnemies == 0 || spawnRatio == 0 || spawnRadius == 0)
+        if (enemies.Count == 0 || maxEnemies == 0 || spawnRatio == 0)
         {
             Debug.Log("Attributes not set. Disabling spawn");
             enabled = false;

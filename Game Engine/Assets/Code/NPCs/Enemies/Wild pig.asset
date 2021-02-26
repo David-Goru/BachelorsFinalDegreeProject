@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a043c79383efa3341af677238ea1ed60, type: 3}
   m_Name: Wild pig
   m_EditorClassIdentifier: 
-  visionRange: 0
-  listeningRadius: 0
-  health: 30
-  damage: 0
+  maxHealth: 100
+  damage: 5
   attackRange: 1
+  forgetRange: 5
   attackRate: 20
   walkingSpeed: 1
   runningSpeed: 2

@@ -5,17 +5,14 @@ using UnityEngine;
 public class MainCharacterSpells : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private List<Spell> spells;
-    [SerializeField] private Animator animator;
+    [SerializeField] private MainCharacter mainCharacter;
     [SerializeField] private Transform characterModel;
+    [SerializeField] private List<Spell> spells;
 
     [Header("Debug")]
     [SerializeField] private List<Spell> runningSpells;
     [SerializeField] private int currentStep = 0;
     [SerializeField] private float currentStepTime = 0.0f;
-    [SerializeField] private bool isRunningSpells = false;
-
-    [HideInInspector] public bool IsRunningSpells { get => isRunningSpells; set => isRunningSpells = value; }
 
     private void Start()
     {
@@ -26,7 +23,7 @@ public class MainCharacterSpells : MonoBehaviour
 
     private void Update()
     {
-        if (!Input.anyKey || Input.GetButton("Crouch") && !isRunningSpells)
+        if (!Input.anyKey || Input.GetButton("Crouch") && runningSpells.Count == 0)
         {
             resetSpells();
             return;
@@ -89,12 +86,13 @@ public class MainCharacterSpells : MonoBehaviour
             if (firstInput.MeetsAllConditions())
             {
                 runningSpells.Add(spell);
-                isRunningSpells = true;
+                mainCharacter.Movement.enabled = false;
+                mainCharacter.CurrentState = MainCharacterState.USINGSPELLS;
+                mainCharacter.Noise.SetNoise(MainCharacterState.USINGSPELLS);
 
                 // Start animation
-                animator.SetTrigger("StartSpells");
-                animator.SetInteger("SpellAnimID", firstInput.AnimationID);
-                animator.SetFloat("IdleTime", 0);
+                mainCharacter.Animator.SetTrigger("StartSpells");
+                mainCharacter.Animator.SetInteger("SpellAnimID", firstInput.AnimationID);
 
                 // Spawn projectile if needed
                 if (firstInput.SpawnProjectile) spell.Projectile.Spawn(characterModel);
@@ -111,8 +109,8 @@ public class MainCharacterSpells : MonoBehaviour
         currentStepTime = 0;
 
         // Animations
-        animator.SetInteger("SpellAnimID", 0);
-        animator.SetTrigger("StopSpells");
+        mainCharacter.Animator.SetInteger("SpellAnimID", 0);
+        mainCharacter.Animator.SetTrigger("StopSpells");
 
         // Remove any possible projectile spawned
         foreach (Spell s in spells)
@@ -137,7 +135,7 @@ public class MainCharacterSpells : MonoBehaviour
         currentStepTime = 0;
 
         // Animations
-        animator.SetInteger("SpellAnimID", 0);
+        mainCharacter.Animator.SetInteger("SpellAnimID", 0);
 
         // Spells list
         runningSpells.Clear();
@@ -162,7 +160,7 @@ public class MainCharacterSpells : MonoBehaviour
         if (currentInput.DetonateProjectile) spell.Projectile.Detonate();
 
         // Animations
-        animator.SetInteger("SpellAnimID", currentInput.AnimationID);
+        mainCharacter.Animator.SetInteger("SpellAnimID", currentInput.AnimationID);
 
         // Check running spells and see if they can go to the next step
         foreach (Spell s in runningSpells.ToArray())
@@ -180,16 +178,9 @@ public class MainCharacterSpells : MonoBehaviour
 
     private IEnumerator unsetRunningSpells()
     {
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Quick water drop 1") == false);
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Quick water drop 2") == false);
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Floral flame 1") == false);
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Floral flame 2") == false);
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Floral flame 3") == false);
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Floral flame 4") == false);
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Floral flame 5") == false);
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Lethal orb 1") == false);
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Lethal orb 2") == false);
+        yield return new WaitUntil(() => mainCharacter.Animator.GetCurrentAnimatorStateInfo(0).IsName("Spell finished"));
 
-        isRunningSpells = false;
+        mainCharacter.Movement.enabled = true;
+        mainCharacter.Movement.CheckCurrentState();
     }
 }

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class LethalOrbProjectileBehaviour : IProjectileBehaviour
 {
-    [Header("Current values")]
-    [SerializeField] private float projectileDamage = 0.0f;
+    [Header("Attributes")]
+    [SerializeField] [Tooltip("Damage of the projectile when detonation occurs")] private int projectileDamage = 0;
+    [SerializeField] [Tooltip("Damage of the projectile when detonation occurs")] private float projectileRadius = 0.0f;
 
     [Header("References")]
     [SerializeField] private GameObject model;
@@ -34,15 +35,23 @@ public class LethalOrbProjectileBehaviour : IProjectileBehaviour
     private IEnumerator startDetonation()
     {
         explosionParticles.SetActive(true);
+        dealDamage();
         yield return new WaitForSeconds(0.25f);
         endDetonation();
     }
 
+    private void dealDamage()
+    {
+        foreach (Collider col in Physics.OverlapSphere(transform.position, projectileRadius))
+        {
+            if (col.gameObject.CompareTag("Player")) continue;
+            Entity e = col.gameObject.GetComponent<Entity>();
+            if (e) e.ReceiveDamage(projectileDamage);
+        }
+    }
+
     private void endDetonation()
     {
-        // For each enemy in sphere range deal damage using projectileDamage
-        Debug.Log("Dealing " + projectileDamage + " damage in area");
-
         Destroy(gameObject);
     }
 }

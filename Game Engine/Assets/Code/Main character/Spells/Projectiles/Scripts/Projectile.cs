@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Projectile", menuName = "Spells/Projectile", order = 0)]
 public class Projectile : ScriptableObject
 {
-    [Header("Current values")]
-    [SerializeField] private float forwardOffset = 0.0f;
-    [SerializeField] private float rightOffset = 0.0f;
+    [Header("Attributes")]
+    [SerializeField] [Tooltip("Offset of the X axis when the projectile spawns")] private float forwardOffset = 0.0f;
+    [SerializeField] [Tooltip("Offset of the Y axis when the projectile spawns")] private float rightOffset = 0.0f;
 
     [Header("References")]
     [SerializeField] private GameObject projectilePrefab = null;

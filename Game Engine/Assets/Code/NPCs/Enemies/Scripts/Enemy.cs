@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Entity
 {
     [Header("References")]
-    [Tooltip("In seconds")] [SerializeField] private EnemyInfo enemyInfo;
+    [SerializeField] private EnemyInfo enemyInfo;
 
     [Header("Debug")]
-    [SerializeField] private int health = 0;
+    [SerializeField] private int currentHealth = 0;
     [SerializeField] private Animator animator;
     [SerializeField] private EnemySpawn spawner;
     [SerializeField] private string currentBehaviour = "Idle";
@@ -23,16 +23,18 @@ public class Enemy : MonoBehaviour
         this.enemyInfo = enemyInfo;
 
         // Initialize stats
-        health = enemyInfo.Health;
+        currentHealth = enemyInfo.MaxHealth;
         nextBehaviour = Random.Range(enemyInfo.MinTimeBetweenBehaviours, enemyInfo.MaxTimeBetweenBehaviours);
     }
 
     public void UpdateState(float timeDifference)
     {
+        if (currentHealth <= 0) return;
         if (currentBehaviour == "Chasing enemy")
         {
             transform.position = Vector3.MoveTowards(transform.position, currentTarget.transform.position, enemyInfo.RunningSpeed * timeDifference);
             if (Vector3.Distance(transform.position, currentTarget.transform.position) < enemyInfo.AttackRange) currentBehaviour = "Attack";
+            else if (Vector3.Distance(transform.position, currentTarget.transform.position) > enemyInfo.ForgetRange) currentBehaviour = "Walk";
             else transform.LookAt(currentTarget.transform.position);
             return;
         }
@@ -41,7 +43,7 @@ public class Enemy : MonoBehaviour
         if (nextBehaviour <= 0) changeBehaviour();
         else
         {
-            if (currentBehaviour == "Walking")
+            if (currentBehaviour == "Walk")
             {
                 transform.position = Vector3.MoveTowards(transform.position, nextPoint, enemyInfo.WalkingSpeed * timeDifference);
                 if (Vector3.Distance(transform.position, nextPoint) < 0.1f) changeBehaviour();
@@ -51,44 +53,34 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void GetDamage(int damageAmount)
-    {
-        health -= damageAmount;
-        if (health <= 0) StartCoroutine(kill());
-        else
-        {
-            // update do something? update ui? hit effect? sound?
-        }
-    }
-
     public void UpdateTarget(GameObject target)
     {
         currentTarget = target;
         currentBehaviour = "Chasing enemy";
-        animator.SetBool("Running", true);
-        animator.SetBool("Walking", false);
+        animator.SetTrigger("Run");
         nextBehaviour = 0;
     }
 
-    public void Attack(GameObject test)
+    public override void ReceiveDamage(int damageAmount)
     {
-        Debug.Log("Attacking " + test.name);
+        currentHealth -= damageAmount;
+        if (currentHealth <= 0) StartCoroutine(kill());
+        else
+        {
+            // do something? update ui? hit effect? sound?
+        }
     }
 
     private void changeBehaviour()
     {
         if (currentBehaviour == "Attack")
         {
-            animator.SetBool("Idle", true);
-            animator.SetBool("Running", false);
-            animator.SetTrigger("Attack");
-            //currentTarget.GetComponent<DamageReceiverOrSomething>().GetDamage(enemyInfo.Damage);
+            attack();
             nextBehaviour = 60 / enemyInfo.AttackRate;
             return;
         }
 
         nextBehaviour = Random.Range(enemyInfo.MinTimeBetweenBehaviours, enemyInfo.MaxTimeBetweenBehaviours);
-        animator.SetBool(currentBehaviour, false);
         if (currentBehaviour == "Idle")
         {
             nextPoint = new Vector3(transform.position.x + Random.Range(-enemyInfo.WanderingArea, enemyInfo.WanderingArea), transform.position.y, transform.position.z + Random.Range(-enemyInfo.WanderingArea, enemyInfo.WanderingArea));
@@ -100,10 +92,10 @@ public class Enemy : MonoBehaviour
                 checks++;
             }
             if (checks == 100) currentBehaviour = "Idle";
-            else currentBehaviour = "Walking";
+            else currentBehaviour = "Walk";
         }
         else currentBehaviour = "Idle";
-        animator.SetBool(currentBehaviour, true);
+        animator.SetTrigger(currentBehaviour);
     }
 
     private IEnumerator kill()
@@ -114,6 +106,13 @@ public class Enemy : MonoBehaviour
         // spawn loot
 
         spawner.RemoveCache(this);
-        Destroy(gameObject); 
+        Destroy(gameObject);
+    }
+
+    private void attack()
+    {
+        animator.SetTrigger("Attack");
+        Entity e = currentTarget.GetComponent<Entity>();
+        if (e) e.ReceiveDamage(enemyInfo.Damage);
     }
 }

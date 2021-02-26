@@ -5,82 +5,21 @@ using UnityEngine;
 public class MainCharacterAnimations : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private Animator animator;
-    [SerializeField] private MainCharacterSpells mainCharacterSpells;
-
-    [Header("Debug")]
-    [SerializeField] private MainCharacterAnimation currentAnimation;
-    [SerializeField] private float idleTime = 0f;
-
-    private void Start()
-    {
-        currentAnimation = MainCharacterAnimation.IDLE;
-    }
+    [SerializeField] private MainCharacter mainCharacter;
 
     private void Update()
     {
-        if (!IsRunningSpells() && currentAnimation == MainCharacterAnimation.IDLE)
-        {
-            idleTime += Time.deltaTime;
-            animator.SetFloat("IdleTime", idleTime);
-        }
-        else idleTime = 0;
+        if (mainCharacter.Movement.enabled && mainCharacter.CurrentState == MainCharacterState.IDLE) mainCharacter.Animator.SetFloat("IdleTime", mainCharacter.Animator.GetFloat("IdleTime") + Time.deltaTime);
     }
 
-    public void SetAnimation(MainCharacterAnimation animation)
+    public void SetAnimation(MainCharacterState state)
     {
-        currentAnimation = animation;
-        switch (animation)
-        {
-            case MainCharacterAnimation.IDLE:
-                animator.SetBool("Idle", true);
-                animator.SetFloat("IdleTime", 0);
-                animator.SetBool("Walking", false);
-                animator.SetBool("Running", false);
-                animator.SetBool("Crouching", false);
-                break;
-            case MainCharacterAnimation.WALKING:
-                animator.SetBool("Idle", false);
-                animator.SetFloat("IdleTime", 0);
-                animator.SetBool("Walking", true);
-                animator.SetBool("Running", false);
-                animator.SetBool("Crouching", false);
-                break;
-            case MainCharacterAnimation.RUNNING:
-                animator.SetBool("Idle", false);
-                animator.SetFloat("IdleTime", 0);
-                animator.SetBool("Walking", false);
-                animator.SetBool("Running", true);
-                animator.SetBool("Crouching", false);
-                break;
-            case MainCharacterAnimation.CROUCH:
-                animator.SetBool("Idle", true);
-                animator.SetFloat("IdleTime", 0);
-                animator.SetBool("Walking", false);
-                animator.SetBool("Running", false);
-                animator.SetBool("Crouching", true);
-                break;
-            case MainCharacterAnimation.WALKINGCROUCHED:
-                animator.SetBool("Idle", false);
-                animator.SetFloat("IdleTime", 0);
-                animator.SetBool("Walking", true);
-                animator.SetBool("Running", false);
-                animator.SetBool("Crouching", true);
-                break;
-        }
-    }
+        mainCharacter.CurrentState = state;
 
-    public bool IsRunningSpells()
-    {
-        return mainCharacterSpells.IsRunningSpells;
-    }
-}
+        if (state == MainCharacterState.IDLE) mainCharacter.Animator.SetFloat("IdleTime", 0);
+        mainCharacter.Animator.SetTrigger(state.ToString());
 
-public enum MainCharacterAnimation
-{
-    IDLE,
-    WALKING,
-    RUNNING,
-    CROUCH,
-    WALKINGCROUCHED
+        // Update noise radius
+        mainCharacter.Noise.SetNoise(state);
+    }
 }
