@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-    [Header("References")]
-    [SerializeField] private EnemyInfo enemyInfo;
-
     [Header("Debug")]
+    [SerializeField] private EnemyInfo enemyInfo;
     [SerializeField] private int currentHealth = 0;
     [SerializeField] private Animator animator;
     [SerializeField] private EnemySpawn spawner;
@@ -30,35 +28,42 @@ public class Enemy : Entity
     public void UpdateState(float timeDifference)
     {
         if (currentHealth <= 0) return;
-        if (currentBehaviour == "Chasing enemy")
-        {
-            transform.position = Vector3.MoveTowards(transform.position, currentTarget.transform.position, enemyInfo.RunningSpeed * timeDifference);
-            if (Vector3.Distance(transform.position, currentTarget.transform.position) < enemyInfo.AttackRange) currentBehaviour = "Attack";
-            else if (Vector3.Distance(transform.position, currentTarget.transform.position) > enemyInfo.ForgetRange) currentBehaviour = "Walk";
-            else transform.LookAt(currentTarget.transform.position);
-            return;
-        }
-
         nextBehaviour -= timeDifference;
-        if (nextBehaviour <= 0) changeBehaviour();
-        else
+
+        if (currentTarget != null) transform.LookAt(currentTarget.transform.position);
+
+        if (currentBehaviour == "Run")
         {
-            if (currentBehaviour == "Walk")
+            Vector3 ctpos = currentTarget.transform.position;
+            transform.position = Vector3.MoveTowards(transform.position, ctpos, enemyInfo.RunningSpeed * timeDifference);
+
+            if (Vector3.Distance(transform.position, ctpos) < enemyInfo.AttackRange)
             {
-                transform.position = Vector3.MoveTowards(transform.position, nextPoint, enemyInfo.WalkingSpeed * timeDifference);
-                if (Vector3.Distance(transform.position, nextPoint) < 0.1f) changeBehaviour();
-                else transform.LookAt(nextPoint);
+                currentBehaviour = "Attack";
+                animator.SetTrigger("Idle");
             }
-            else animator.SetFloat("IdleTime", animator.GetFloat("IdleTime") + Time.deltaTime);
+            else if (Vector3.Distance(transform.position, ctpos) > enemyInfo.ForgetRange)
+            {
+                currentTarget = null;
+                setBehaviour("Idle");
+            }
         }
+        else if (currentBehaviour == "Attack" && Vector3.Distance(transform.position, currentTarget.transform.position) > enemyInfo.AttackRange) setBehaviour("Run");
+        else if (nextBehaviour <= 0) changeBehaviour();
+        else if (currentBehaviour == "Walk")
+        {
+            transform.position = Vector3.MoveTowards(transform.position, nextPoint, enemyInfo.WalkingSpeed * timeDifference);
+            if (Vector3.Distance(transform.position, nextPoint) < 0.1f) changeBehaviour();
+            else transform.LookAt(nextPoint);
+        }
+        else if (currentBehaviour == "Idle") animator.SetFloat("IdleTime", animator.GetFloat("IdleTime") + Time.deltaTime);
     }
 
     public void UpdateTarget(GameObject target)
     {
-        currentTarget = target;
-        currentBehaviour = "Chasing enemy";
-        animator.SetTrigger("Run");
-        nextBehaviour = 0;
+        currentTarget = target; 
+        setBehaviour("Run");
+        nextBehaviour = 60 / enemyInfo.AttackRate;
     }
 
     public override void ReceiveDamage(int damageAmount)
@@ -91,11 +96,23 @@ public class Enemy : Entity
                 nextPoint = new Vector3(transform.position.x + Random.Range(-enemyInfo.WanderingArea, enemyInfo.WanderingArea), transform.position.y, transform.position.z + Random.Range(-enemyInfo.WanderingArea, enemyInfo.WanderingArea));
                 checks++;
             }
-            if (checks == 100) currentBehaviour = "Idle";
-            else currentBehaviour = "Walk";
+            if (checks == 100) setBehaviour("Idle");
+            else setBehaviour("Walk");
         }
-        else currentBehaviour = "Idle";
-        animator.SetTrigger(currentBehaviour);
+        else setBehaviour("Idle");
+    }
+
+    private void setBehaviour(string nextBehaviour)
+    {
+        currentBehaviour = nextBehaviour;
+        animator.SetTrigger(nextBehaviour);
+    }
+
+    private void attack()
+    {
+        setBehaviour("Attack");
+        Entity e = currentTarget.GetComponent<Entity>();
+        if (e) e.ReceiveDamage(enemyInfo.Damage);
     }
 
     private IEnumerator kill()
@@ -107,12 +124,5 @@ public class Enemy : Entity
 
         spawner.RemoveCache(this);
         Destroy(gameObject);
-    }
-
-    private void attack()
-    {
-        animator.SetTrigger("Attack");
-        Entity e = currentTarget.GetComponent<Entity>();
-        if (e) e.ReceiveDamage(enemyInfo.Damage);
     }
 }

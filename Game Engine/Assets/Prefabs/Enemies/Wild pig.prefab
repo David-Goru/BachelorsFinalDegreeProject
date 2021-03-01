@@ -904,6 +904,7 @@ GameObject:
   - component: {fileID: 3662729355155842937}
   - component: {fileID: 7748864520499119284}
   - component: {fileID: 2359821391434199540}
+  - component: {fileID: 4043627387498772936}
   m_Layer: 6
   m_Name: Wild pig
   m_TagString: Enemy
@@ -919,7 +920,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7940489143957896936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.48502743, y: 0.00000047683716, z: 0.087}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1858101190834730188}
@@ -972,7 +973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyInfo: {fileID: 0}
-  health: 0
+  currentHealth: 0
   animator: {fileID: 0}
   spawner: {fileID: 0}
   currentBehaviour: Idle
@@ -987,14 +988,27 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7940489143957896936}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!65 &4043627387498772936
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7940489143957896936}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0.2}
 --- !u!1 &8402446551048851448
 GameObject:
   m_ObjectHideFlags: 0

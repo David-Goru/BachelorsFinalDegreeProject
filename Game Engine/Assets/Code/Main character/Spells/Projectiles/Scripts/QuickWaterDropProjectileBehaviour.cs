@@ -36,6 +36,11 @@ public class QuickWaterDropProjectileBehaviour : IProjectileBehaviour
         GetComponent<Rigidbody>().AddForce(transform.forward * detonationThrust, ForceMode.Impulse);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        endDetonation();
+    }
+
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Player")) return;
