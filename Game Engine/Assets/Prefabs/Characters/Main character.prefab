@@ -171,6 +171,9 @@ MonoBehaviour:
   crouchingCenter: 0.6
   defaultHeight: 2
   crouchingHeight: 1.2
+  crouchLayer:
+    serializedVersion: 2
+    m_Bits: 192
   mainCharacter: {fileID: 2851720648956925641}
   characterCameraComponent: {fileID: 0}
   characterCollider: {fileID: 2146348107563607564}

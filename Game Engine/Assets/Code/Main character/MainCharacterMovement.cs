@@ -9,9 +9,10 @@ public class MainCharacterMovement : MonoBehaviour
     [SerializeField] [Tooltip("Crouching speed in m/s")] [Range(0, 20)] private float crouchSpeed = 0f;
     [SerializeField] [Tooltip("Running speed in m/s")] [Range(0, 20)] private float runSpeed = 0f;
     [SerializeField] [Tooltip("Default collider center position")] private float defaultCenter = 0f;
-    [SerializeField] [Tooltip("Collider center position when crouching")]  private float crouchingCenter = 0f;
-    [SerializeField] [Tooltip("Default collider height")]  private float defaultHeight = 0f;
-    [SerializeField] [Tooltip("Collider height when crouching")]  private float crouchingHeight = 0f;
+    [SerializeField] [Tooltip("Collider center position when crouching")] private float crouchingCenter = 0f;
+    [SerializeField] [Tooltip("Default collider height")] private float defaultHeight = 0f;
+    [SerializeField] [Tooltip("Collider height when crouching")] private float crouchingHeight = 0f;
+    [SerializeField] [Tooltip("Layers to check when crouching")] private LayerMask crouchLayer;
 
     [Header("References")]
     [SerializeField] private MainCharacter mainCharacter = null;
@@ -82,7 +83,7 @@ public class MainCharacterMovement : MonoBehaviour
 
     private void stopCrouching()
     {
-        if (Physics.CheckSphere(new Vector3(transform.position.x, crouchingCenter + crouchingHeight / 2 + characterCollider.radius + 0.05f, transform.position.z), characterCollider.radius)) return;
+        if (Physics.CheckSphere(new Vector3(transform.position.x, crouchingCenter + crouchingHeight / 2 + characterCollider.radius + 0.05f, transform.position.z), characterCollider.radius, crouchLayer)) return;
 
         speed = walkSpeed;
         mainCharacter.Animations.SetAnimation(mainCharacter.CurrentState == MainCharacterState.CROUCH ? MainCharacterState.WALK : MainCharacterState.IDLE);

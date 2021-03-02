@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 200
   damage: 5
-  attackRange: 5
+  attackRange: 2
   forgetRange: 20
-  attackRate: 20
+  attackRate: 30
   walkingSpeed: 0.5
   runningSpeed: 1.5
   wanderingArea: 3

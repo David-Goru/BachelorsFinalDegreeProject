@@ -16,7 +16,7 @@ MonoBehaviour:
   damage: 10
   attackRange: 6
   forgetRange: 40
-  attackRate: 45
+  attackRate: 60
   walkingSpeed: 2
   runningSpeed: 3
   wanderingArea: 6
