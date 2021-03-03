@@ -5,16 +5,19 @@ using UnityEngine.AI;
 
 public class Enemy : Entity
 {
+    [Header("References")]
+    [SerializeField] private Transform projectileSpawner = null;
+
     [Header("Debug")]
     [SerializeField] private int currentHealth = 0;
     [SerializeField] private float nextBehaviour = 0.0f;
+    [SerializeField] private float nextAttack = 0.0f;
     [SerializeField] private EnemyInfo enemyInfo;
     [SerializeField] private Animator animator;
     [SerializeField] private EnemySpawn spawner;
     [SerializeField] private GameObject currentTarget = null;
     [SerializeField] private Vector3 nextPoint;
     [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private NavMeshObstacle obstacle;
 
     private System.Action<float> currentBehaviour = null;
 
@@ -22,7 +25,6 @@ public class Enemy : Entity
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        obstacle = GetComponent<NavMeshObstacle>();
         this.spawner = spawner;
         this.enemyInfo = enemyInfo;
 
@@ -34,7 +36,6 @@ public class Enemy : Entity
 
     public void UpdateState(float timeDifference)
     {
-        nextBehaviour -= timeDifference;
         if (currentBehaviour != null) currentBehaviour(timeDifference);
     }
 
@@ -43,14 +44,14 @@ public class Enemy : Entity
         resetAllTriggers();
         animator.SetTrigger("Idle");
         animator.SetFloat("IdleTime", 0);
-        agent.enabled = false;
-        obstacle.enabled = true;
+        agent.isStopped = true;
         currentBehaviour = td => updateIdle(td);
         nextBehaviour = Random.Range(enemyInfo.MinTimeBetweenBehaviours, enemyInfo.MaxTimeBetweenBehaviours);
     }
 
     private void updateIdle(float timeDifference)
     {
+        nextBehaviour -= timeDifference;
         if (nextBehaviour <= 0.0f)
         {
             if (getRandomPoint()) walk();
@@ -63,8 +64,7 @@ public class Enemy : Entity
     {
         resetAllTriggers();
         animator.SetTrigger("Walk");
-        obstacle.enabled = false;
-        agent.enabled = true;
+        agent.isStopped = false;
         agent.speed = enemyInfo.WalkingSpeed;
         currentBehaviour = td => updateWalk(td);
     }
@@ -80,8 +80,7 @@ public class Enemy : Entity
     {
         resetAllTriggers();
         animator.SetTrigger("Run");
-        obstacle.enabled = false;
-        agent.enabled = true;
+        agent.isStopped = false;
         agent.speed = enemyInfo.RunningSpeed;
         currentBehaviour = td => updateChase(td);
         
@@ -103,24 +102,30 @@ public class Enemy : Entity
         resetAllTriggers();
         animator.SetFloat("IdleTime", 0);
         animator.SetTrigger("Attack");
-        agent.enabled = false;
-        obstacle.enabled = true;
+        agent.isStopped = true;
         currentBehaviour = td => updateAttack(td);
-        Entity e = currentTarget.GetComponent<Entity>();
-        if (e) e.ReceiveDamage(enemyInfo.Damage);
+
+        if (nextAttack <= 0.0f)
+        {
+            nextAttack = 60 / enemyInfo.AttackRate;
+
+            if (enemyInfo.Projectile != null) Instantiate(enemyInfo.Projectile, projectileSpawner.position, Quaternion.identity).GetComponent<EnemyProjectile>().StartProjectile(enemyInfo.Damage, currentTarget.transform);
+            else
+            {
+                Entity e = currentTarget.GetComponent<Entity>();
+                if (e) e.ReceiveDamage(enemyInfo.Damage);
+            }
+        }
     }
 
     private void updateAttack(float timeDifference)
     {
+        nextAttack -= timeDifference;
         if (Vector3.Distance(transform.position, currentTarget.transform.position) > (enemyInfo.AttackRange + 1)) chase();
         else
         {
             transform.LookAt(currentTarget.transform.position); 
-            if (nextBehaviour <= 0)
-            {
-                nextBehaviour = 60 / enemyInfo.AttackRate;
-                attack();
-            }
+            if (nextAttack <= 0) attack();
         }
     }
 
@@ -160,14 +165,29 @@ public class Enemy : Entity
         resetAllTriggers();
         animator.SetTrigger("Die");
         agent.enabled = false;
-        obstacle.enabled = true;
         currentBehaviour = null;
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Dead"));
 
-        // spawn loot
+        spawnLoot();
 
         spawner.RemoveCache(this);
         Destroy(gameObject);
+    }
+
+    private void spawnLoot()
+    {
+        float spawnProb = 0.8f;
+        foreach (ItemPool lootPool in enemyInfo.LootPools)
+        {
+            foreach (Item loot in lootPool.Items)
+            {
+                if (Random.Range(0.0f, 1.0f) < spawnProb)
+                {
+                    Instantiate(loot.ItemModel, transform.position + Vector3.right * Random.Range(-1.5f, 1.5f) + Vector3.forward * Random.Range(-1.5f, 1.5f), Quaternion.Euler(0, Random.Range(0, 360), 0)).GetComponent<ItemOnWorld>().Initialize(loot);
+                    spawnProb = spawnProb * 2.0f / 3.0f; // Reduce a bit the prob for next items
+                }
+            }
+        }
     }
 
     private void resetAllTriggers()

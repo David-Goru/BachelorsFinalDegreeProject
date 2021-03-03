@@ -592,10 +592,9 @@ GameObject:
   - component: {fileID: 5038553853993870369}
   - component: {fileID: 5038553853993870368}
   - component: {fileID: 5038553853993870371}
-  - component: {fileID: 5038553853993870370}
   - component: {fileID: 5038553853993870365}
   - component: {fileID: 3660882733677461421}
-  - component: {fileID: -6767606498899610321}
+  - component: {fileID: 4413513579593114334}
   m_Layer: 6
   m_Name: Butterfly
   m_TagString: Enemy
@@ -616,6 +615,7 @@ Transform:
   m_Children:
   - {fileID: 3609511915314835000}
   - {fileID: 8851539428610909635}
+  - {fileID: 8507700941639695918}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -663,31 +663,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d3e71766e8a964bb04611c429a8edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileSpawner: {fileID: 8507700941639695918}
   currentHealth: 0
   nextBehaviour: 0
+  nextAttack: 0
   enemyInfo: {fileID: 0}
   animator: {fileID: 0}
   spawner: {fileID: 0}
   currentTarget: {fileID: 0}
   nextPoint: {x: 0, y: 0, z: 0}
   agent: {fileID: 0}
-  obstacle: {fileID: 0}
---- !u!54 &5038553853993870370
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5038553853993870364}
-  serializedVersion: 2
-  m_Mass: 100
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
 --- !u!65 &5038553853993870365
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -723,22 +708,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!208 &-6767606498899610321
-NavMeshObstacle:
+--- !u!54 &4413513579593114334
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5038553853993870364}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 0.1, y: 0.5, z: 0.1}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
-  m_TimeToStationary: 0.5
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &5279052182110085099
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,6 +786,36 @@ Transform:
   - {fileID: 4234790891947688535}
   m_Father: {fileID: 7072010282811829688}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5646744165410759799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8507700941639695918}
+  m_Layer: 6
+  m_Name: Projectile spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8507700941639695918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5646744165410759799}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.685, z: 0.557}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5667598318407696038}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6073608591169216982
 GameObject:

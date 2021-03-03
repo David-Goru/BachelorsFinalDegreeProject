@@ -39,6 +39,12 @@ public class MainCharacterSpells : MonoBehaviour
             return;
         }
 
+        if (mainCharacter.Movement.enabled) // Whoops
+        {
+            resetSpells();
+            return;
+        }
+
         // Step time
         currentStepTime += Time.deltaTime;
 
@@ -91,6 +97,7 @@ public class MainCharacterSpells : MonoBehaviour
                 mainCharacter.Noise.SetNoise(MainCharacterState.USINGSPELLS);
 
                 // Start animation
+                mainCharacter.Animations.ResetAllTriggers();
                 mainCharacter.Animator.SetTrigger("StartSpells");
                 mainCharacter.Animator.SetInteger("SpellAnimID", firstInput.AnimationID);
 
@@ -112,6 +119,7 @@ public class MainCharacterSpells : MonoBehaviour
         mainCharacter.Animator.SetInteger("SpellAnimID", 0);
         mainCharacter.Animator.SetTrigger("StopSpells");
 
+        Debug.Log("Y");
         // Remove any possible projectile spawned
         foreach (Spell s in spells)
         {
@@ -178,7 +186,7 @@ public class MainCharacterSpells : MonoBehaviour
 
     private IEnumerator unsetRunningSpells()
     {
-        yield return new WaitUntil(() => mainCharacter.Animator.GetCurrentAnimatorStateInfo(0).IsName("Spell finished"));
+        yield return new WaitUntil(() => mainCharacter.Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle 1"));
 
         mainCharacter.Movement.enabled = true;
         mainCharacter.Movement.CheckCurrentState();

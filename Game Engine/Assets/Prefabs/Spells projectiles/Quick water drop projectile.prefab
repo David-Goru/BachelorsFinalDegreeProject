@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileDamage: 10
-  detonationDuration: 2
-  detonationThrust: 20
+  detonationDuration: 5
+  detonationThrust: 35
   isDetonating: 0
   timeDetonating: 0
 --- !u!54 &6968794558931588901
@@ -79,7 +79,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.35
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &4700030185775717459
 GameObject:

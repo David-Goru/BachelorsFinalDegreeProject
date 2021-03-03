@@ -16,21 +16,24 @@ public class EnemyInfo : ScriptableObject
     [SerializeField] [Tooltip("Maximum X and Y difference per wander action")] private float wanderingArea = 0.0f;
     [SerializeField] [Tooltip("Minimum time the enemy needs for starting a new behaviour")] private float minTimeBetweenBehaviours = 0.0f;
     [SerializeField] [Tooltip("Maximum time the enemy needs for starting a new behaviour")] private float maxTimeBetweenBehaviours = 0.0f;
+    [SerializeField] [Tooltip("The enemy projectile - if any")] private GameObject projectile = null;
 
     [Header("References")]
     [SerializeField] private GameObject model;
     [SerializeField] private List<ItemPool> lootPools;
 
-    // Getters and setters
-    public int MaxHealth { get => maxHealth; set => maxHealth = value; }
-    public int Damage { get => damage; set => damage = value; }
-    public float AttackRange { get => attackRange; set => attackRange = value; }
-    public float ForgetRange { get => forgetRange; set => forgetRange = value; }
-    public float AttackRate { get => attackRate; set => attackRate = value; }
-    public float WalkingSpeed { get => walkingSpeed; set => walkingSpeed = value; }
-    public float RunningSpeed { get => runningSpeed; set => runningSpeed = value; }
-    public GameObject Model { get => model; set => model = value; }
-    public float WanderingArea { get => wanderingArea; set => wanderingArea = value; }
-    public float MinTimeBetweenBehaviours { get => minTimeBetweenBehaviours; set => minTimeBetweenBehaviours = value; }
-    public float MaxTimeBetweenBehaviours { get => maxTimeBetweenBehaviours; set => maxTimeBetweenBehaviours = value; }
+    // Getters
+    public int MaxHealth { get => maxHealth; }
+    public int Damage { get => damage; }
+    public float AttackRange { get => attackRange; }
+    public float ForgetRange { get => forgetRange; }
+    public float AttackRate { get => attackRate; }
+    public float WalkingSpeed { get => walkingSpeed; }
+    public float RunningSpeed { get => runningSpeed; }
+    public GameObject Model { get => model; }
+    public float WanderingArea { get => wanderingArea; }
+    public float MinTimeBetweenBehaviours { get => minTimeBetweenBehaviours; }
+    public float MaxTimeBetweenBehaviours { get => maxTimeBetweenBehaviours; }
+    public GameObject Projectile { get => projectile; }
+    public List<ItemPool> LootPools { get => lootPools; }
 }

@@ -12,15 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a043c79383efa3341af677238ea1ed60, type: 3}
   m_Name: Wild pig
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  damage: 5
+  maxHealth: 35
+  damage: 4
   attackRange: 2
-  forgetRange: 25
+  forgetRange: 10
   attackRate: 45
   walkingSpeed: 1
   runningSpeed: 2
   wanderingArea: 5
   minTimeBetweenBehaviours: 3
   maxTimeBetweenBehaviours: 10
+  projectile: {fileID: 0}
   model: {fileID: 7940489143957896936, guid: 6800c1471e3b64f41ba54ebf27506d48, type: 3}
-  lootPools: []
+  lootPools:
+  - {fileID: 11400000, guid: ba510db2947ee9e4091375ad60e87a9f, type: 2}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,9 +18,20 @@ public class MainCharacterAnimations : MonoBehaviour
         mainCharacter.CurrentState = state;
 
         if (state == MainCharacterState.IDLE) mainCharacter.Animator.SetFloat("IdleTime", 0);
+
+        ResetAllTriggers();
         mainCharacter.Animator.SetTrigger(state.ToString());
 
         // Update noise radius
         mainCharacter.Noise.SetNoise(state);
+    }
+
+    public void ResetAllTriggers()
+    {
+        foreach (MainCharacterState state in (MainCharacterState[])Enum.GetValues(typeof(MainCharacterState)))
+        {
+            if (state == MainCharacterState.USINGSPELLS) continue;
+            mainCharacter.Animator.ResetTrigger(state.ToString());
+        }
     }
 }
