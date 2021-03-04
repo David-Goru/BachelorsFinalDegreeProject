@@ -17,90 +17,107 @@ public class MainCharacterMovement : MonoBehaviour
     [Header("References")]
     [SerializeField] private MainCharacter mainCharacter = null;
     [SerializeField] private CinemachineFreeLook characterCameraComponent;
-    [SerializeField] private CapsuleCollider characterCollider = null;
+    [SerializeField] private BoxCollider characterCollider = null;
     [SerializeField] private GameObject characterModel = null;
     [SerializeField] private Transform viewPoint = null;
 
     [Header("Debug")]
-    [SerializeField] private float speed = 0f;
+    [SerializeField] private float speed = 0.0f;
+    [SerializeField] private float xMovementLastFrame = 0.0f;
+    [SerializeField] private float zMovementLastFrame = 0.0f;
 
     private void Start()
     {
         speed = walkSpeed;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        CheckCurrentState();
+        GetCurrentState();
     }
 
-    public void CheckCurrentState()
+    private void FixedUpdate()
     {
-        float xMovement = Input.GetAxis("Horizontal");
-        float zMovement = Input.GetAxis("Vertical");
+        if (xMovementLastFrame != 0 || zMovementLastFrame != 0) UpdatePosition();
+    }
 
-        if (Input.GetButton("Crouch") && mainCharacter.CurrentState != MainCharacterState.CROUCH && mainCharacter.CurrentState != MainCharacterState.WALKCROUCH) crouch();
-        else if (!Input.GetButton("Crouch") && (mainCharacter.CurrentState == MainCharacterState.CROUCH || mainCharacter.CurrentState == MainCharacterState.WALKCROUCH)) stopCrouching();
+    public void GetCurrentState()
+    {
+        xMovementLastFrame = Input.GetAxis("Horizontal");
+        zMovementLastFrame = Input.GetAxis("Vertical");
 
-        if (xMovement == 0 && zMovement == 0)
+        if (Input.GetButton("Crouch")) crouch();
+        else if (xMovementLastFrame != 0 || zMovementLastFrame != 0)
         {
-            if (mainCharacter.CurrentState != MainCharacterState.IDLE && mainCharacter.CurrentState != MainCharacterState.CROUCH) stopMoving();
-            else if (mainCharacter.CurrentState == MainCharacterState.WALKCROUCH) mainCharacter.Animations.SetAnimation(MainCharacterState.CROUCH);
-            return;
+            if (Input.GetButton("Run")) run();
+            else walk();
         }
+        else idle();
+    }
 
-        if (Input.GetButton("Run") && mainCharacter.CurrentState != MainCharacterState.RUN && mainCharacter.CurrentState != MainCharacterState.WALKCROUCH && mainCharacter.CurrentState != MainCharacterState.CROUCH) run();
-        else if (!Input.GetButton("Run") && mainCharacter.CurrentState == MainCharacterState.RUN) stopRunning();
-        else if (mainCharacter.CurrentState == MainCharacterState.IDLE || mainCharacter.CurrentState == MainCharacterState.USINGSPELLS) walk();
-        else if (mainCharacter.CurrentState == MainCharacterState.CROUCH) mainCharacter.Animations.SetAnimation(MainCharacterState.WALKCROUCH);
-
+    public void UpdatePosition()
+    {
         transform.eulerAngles = new Vector3(0, characterCameraComponent.m_XAxis.Value, 0);
-        transform.Translate(new Vector3(xMovement, 0, zMovement) * speed * Time.deltaTime);
+        transform.Translate(new Vector3(xMovementLastFrame, 0, zMovementLastFrame) * speed * Time.fixedDeltaTime);
         viewPoint.position = transform.position;
-        viewPoint.Translate(new Vector3(xMovement, 0, zMovement) * speed * 10 * Time.deltaTime);
+        viewPoint.Translate(new Vector3(xMovementLastFrame, 0, zMovementLastFrame) * speed * 10 * Time.fixedDeltaTime);
         characterModel.transform.LookAt(viewPoint);
+    }
+
+    private void idle()
+    {
+        changeState(MainCharacterState.IDLE);
     }
 
     private void walk()
     {
         speed = walkSpeed;
-        mainCharacter.Animations.SetAnimation(MainCharacterState.WALK);
-    }
-
-    private void stopMoving()
-    {
-        mainCharacter.Animations.SetAnimation(mainCharacter.CurrentState == MainCharacterState.WALKCROUCH ? MainCharacterState.CROUCH : MainCharacterState.IDLE);
+        changeState(MainCharacterState.WALK);
     }
 
     private void crouch()
     {
-        speed = crouchSpeed;
-        mainCharacter.Animations.SetAnimation(mainCharacter.CurrentState == MainCharacterState.IDLE ? MainCharacterState.CROUCH : MainCharacterState.WALKCROUCH);
+        if (xMovementLastFrame != 0 || zMovementLastFrame != 0)
+        {
+            speed = crouchSpeed;
+            changeState(MainCharacterState.WALKCROUCH);
+        }
+        else changeState(MainCharacterState.CROUCH);
 
         characterCollider.center = new Vector3(0, crouchingCenter, 0);
-        characterCollider.height = crouchingHeight;
+        characterCollider.size = new Vector3(1, crouchingHeight, 1);
     }
 
-    private void stopCrouching()
+    private bool stopCrouching()
     {
-        if (Physics.CheckSphere(new Vector3(transform.position.x, crouchingCenter + crouchingHeight / 2 + characterCollider.radius + 0.05f, transform.position.z), characterCollider.radius, crouchLayer)) return;
+        if (Physics.CheckSphere(new Vector3(transform.position.x, crouchingHeight + 1.0f, transform.position.z), 0.5f, crouchLayer)) return false;
 
         speed = walkSpeed;
-        mainCharacter.Animations.SetAnimation(mainCharacter.CurrentState == MainCharacterState.CROUCH ? MainCharacterState.WALK : MainCharacterState.IDLE);
 
         characterCollider.center = new Vector3(0, defaultCenter, 0);
-        characterCollider.height = defaultHeight;
+        characterCollider.size = new Vector3(1, defaultHeight, 1);
+        return true;
     }
 
     private void run()
     {
         speed = runSpeed;
-        mainCharacter.Animations.SetAnimation(MainCharacterState.RUN);
+        changeState(MainCharacterState.RUN);
     }
 
-    private void stopRunning()
+    private void changeState(MainCharacterState newState)
     {
-        speed = walkSpeed;
-        mainCharacter.Animations.SetAnimation(MainCharacterState.WALK);
+        if (mainCharacter.CurrentState == newState) return;
+
+        if (mainCharacter.CurrentState == MainCharacterState.CROUCH || mainCharacter.CurrentState == MainCharacterState.WALKCROUCH)
+        {
+            if (!stopCrouching() && newState != MainCharacterState.WALKCROUCH && newState != MainCharacterState.CROUCH)
+            {
+                crouch();
+                return;
+            }
+        }
+
+        mainCharacter.SetState(newState);
     }
 }

@@ -19,16 +19,26 @@ public class MainCharacter : Entity
 
     // Getters
     public Animator Animator { get => animator; }
-    public MainCharacterNoise Noise { get => noise; }
     public MainCharacterMovement Movement { get => movement; }
-    public MainCharacterAnimations Animations { get => animations; }
 
+    // Getters and setters
     public MainCharacterState CurrentState { get => currentState; set => currentState = value; }
 
     private void Start()
     {
         currentHealth = maxHealth;
         currentState = MainCharacterState.IDLE;
+    }
+
+    public void SetState(MainCharacterState newState)
+    {
+        if (currentState == newState) return;
+
+        currentState = newState;
+        animations.UpdateAnimation();
+
+        // Update noise radius
+        noise.SetNoise(newState);
     }
 
     public override void ReceiveDamage(int damageAmount)
@@ -44,7 +54,7 @@ public class MainCharacter : Entity
     private IEnumerator kill()
     {
         movement.enabled = false;
-        animations.SetAnimation(MainCharacterState.DIE);
+        SetState(MainCharacterState.DIE);
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Dead"));
 
         // End screen?

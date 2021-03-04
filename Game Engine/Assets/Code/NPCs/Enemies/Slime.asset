@@ -24,4 +24,6 @@ MonoBehaviour:
   maxTimeBetweenBehaviours: 12
   projectile: {fileID: 0}
   model: {fileID: 5242683058187033674, guid: b05aa220ad3df694ba342310240889ed, type: 3}
-  lootPools: []
+  lootPools:
+  - {fileID: 11400000, guid: ea90b10c90777f44a854e2871f1121b7, type: 2}
+  - {fileID: 11400000, guid: 7566f83a3a2de7e4e8f116b2a53beb23, type: 2}

@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileDamage: 15
-  projectileRadius: 2
+  projectileRadius: 2.25
   animator: {fileID: 2729373705146140517}
   currentState: 0
 --- !u!1 &5354242515218658752

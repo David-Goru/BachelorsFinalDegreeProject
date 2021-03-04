@@ -26,3 +26,4 @@ MonoBehaviour:
   model: {fileID: 7940489143957896936, guid: 6800c1471e3b64f41ba54ebf27506d48, type: 3}
   lootPools:
   - {fileID: 11400000, guid: ba510db2947ee9e4091375ad60e87a9f, type: 2}
+  - {fileID: 11400000, guid: 7566f83a3a2de7e4e8f116b2a53beb23, type: 2}

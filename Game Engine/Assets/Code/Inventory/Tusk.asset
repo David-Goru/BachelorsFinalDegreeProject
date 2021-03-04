@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c965122b1454164ba4e1845261eac96, type: 3}
-  m_Name: Wild pig loot
+  m_Script: {fileID: 11500000, guid: 4cfee8ae562a9664f8e0b4e79e1bd9b0, type: 3}
+  m_Name: Tusk
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 11400000, guid: b10391c04c4405b45950e5ecc10167c2, type: 2}
-  - {fileID: 11400000, guid: 0b6d09133ccdba04cacbb4b19a9d1d38, type: 2}
+  itemModel: {fileID: 6054549044538550735, guid: cabc2883ec2cab045b4b48ebb6633364, type: 3}

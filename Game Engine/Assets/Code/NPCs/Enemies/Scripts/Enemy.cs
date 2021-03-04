@@ -131,6 +131,8 @@ public class Enemy : Entity
 
     public void UpdateTarget(GameObject target)
     {
+        if (!agent.isOnNavMesh) return;
+
         currentTarget = target;
         chase();        
     }

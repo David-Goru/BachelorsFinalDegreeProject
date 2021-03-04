@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Quick water drop
   m_EditorClassIdentifier: 
   projectile: {fileID: 11400000, guid: 8385002ba3c7f134ab08c8d96115beab, type: 2}
+  isSkillshot: 1
   inputSequence:
   - buttonName: Right click
     animationID: 1
     requiresTime: 1
     timeAmount: 0.2
     spawnProjectile: 0
+    nextProjectileState: 0
     detonateProjectile: 0
     conditions: []
     actions: []
@@ -27,6 +29,7 @@ MonoBehaviour:
     requiresTime: 0
     timeAmount: 0
     spawnProjectile: 1
+    nextProjectileState: 0
     detonateProjectile: 1
     conditions:
     - {fileID: 11400000, guid: cf3ed99d40a5f674abe46adef9f0c6fa, type: 2}

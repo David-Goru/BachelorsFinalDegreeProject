@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 8568831743052215729}
   - component: {fileID: 4292526585091514924}
   - component: {fileID: 3819095476380293590}
+  - component: {fileID: -1971550448488608048}
   - component: {fileID: 6573780467717576264}
   m_Layer: 0
   m_Name: Tusk
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,7 +63,20 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.22, y: 0.13, z: 0.4}
-  m_Center: {x: -0.02, y: 0, z: 0.01}
+  m_Center: {x: -0.02, y: 0.05, z: 0.01}
+--- !u!65 &-1971550448488608048
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6054549044538550735}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.3, z: 1}
+  m_Center: {x: 0, y: 0.15, z: 0}
 --- !u!114 &6573780467717576264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,7 +107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 29c7d80c0736fe2468969480052bd0b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 29c7d80c0736fe2468969480052bd0b3, type: 3}
       propertyPath: m_LocalPosition.z

@@ -44,7 +44,7 @@ public class LethalOrbProjectileBehaviour : IProjectileBehaviour
     {
         foreach (Collider col in Physics.OverlapSphere(transform.position, projectileRadius))
         {
-            if (col.gameObject.CompareTag("Player")) continue;
+            if (col.gameObject.CompareTag("Player") || col.gameObject.CompareTag("Item")) continue;
             Entity e = col.gameObject.GetComponent<Entity>();
             if (e) e.ReceiveDamage(projectileDamage);
         }

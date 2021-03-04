@@ -8,6 +8,7 @@ public class MainCharacterSpells : MonoBehaviour
     [SerializeField] private MainCharacter mainCharacter;
     [SerializeField] private Transform characterModel;
     [SerializeField] private List<Spell> spells;
+    [SerializeField] private Transform cameraSkillshotPoint;
 
     [Header("Debug")]
     [SerializeField] private List<Spell> runningSpells;
@@ -36,6 +37,7 @@ public class MainCharacterSpells : MonoBehaviour
             {
                 checkIfCanStart(spell);
             }
+            if (runningSpells.Count != 0) startSpell(runningSpells[0]);
             return;
         }
 
@@ -73,38 +75,32 @@ public class MainCharacterSpells : MonoBehaviour
                 finishSpell(spell);
                 return;
             }
-            else if (Input.GetButtonDown(nextInput.ButtonName) && nextInput.MeetsAllConditions())
-            {
-                nextStep(spell);
-            }
-            else if (currentInput.MeetsAllConditions())
-            {
-                runningSpells.Add(spell);
-            }
+            else if (Input.GetButtonDown(nextInput.ButtonName) && nextInput.MeetsAllConditions()) nextStep(spell);
+            else if (currentInput.MeetsAllConditions()) runningSpells.Add(spell);
         }
     }
 
     private void checkIfCanStart(Spell spell)
     {
         PlayerInput firstInput = spell.GetInputAtStep(0);
-        if (Input.GetButtonDown(firstInput.ButtonName))
-        {
-            if (firstInput.MeetsAllConditions())
-            {
-                runningSpells.Add(spell);
-                mainCharacter.Movement.enabled = false;
-                mainCharacter.CurrentState = MainCharacterState.USINGSPELLS;
-                mainCharacter.Noise.SetNoise(MainCharacterState.USINGSPELLS);
+        if (Input.GetButtonDown(firstInput.ButtonName) && firstInput.MeetsAllConditions()) runningSpells.Add(spell);
+    }
 
-                // Start animation
-                mainCharacter.Animations.ResetAllTriggers();
-                mainCharacter.Animator.SetTrigger("StartSpells");
-                mainCharacter.Animator.SetInteger("SpellAnimID", firstInput.AnimationID);
+    private void startSpell(Spell spell)
+    {
+        PlayerInput firstInput = spell.GetInputAtStep(0);
+        mainCharacter.Movement.enabled = false;
+        mainCharacter.SetState(MainCharacterState.USINGSPELLS);
 
-                // Spawn projectile if needed
-                if (firstInput.SpawnProjectile) spell.Projectile.Spawn(characterModel);
-            }
-        }
+        // If skillshot, make character look at player target
+        if (spell.IsSkillshot) characterModel.transform.LookAt(new Vector3(cameraSkillshotPoint.position.x, characterModel.transform.position.y, cameraSkillshotPoint.position.z));
+
+        // Start animation
+        mainCharacter.Animator.SetTrigger("StartSpells");
+        mainCharacter.Animator.SetInteger("SpellAnimID", firstInput.AnimationID);
+
+        // Spawn projectile if needed
+        if (firstInput.SpawnProjectile) spell.Projectile.Spawn(characterModel);
     }
 
     private void resetSpells()
@@ -119,7 +115,6 @@ public class MainCharacterSpells : MonoBehaviour
         mainCharacter.Animator.SetInteger("SpellAnimID", 0);
         mainCharacter.Animator.SetTrigger("StopSpells");
 
-        Debug.Log("Y");
         // Remove any possible projectile spawned
         foreach (Spell s in spells)
         {
@@ -170,7 +165,7 @@ public class MainCharacterSpells : MonoBehaviour
         // Animations
         mainCharacter.Animator.SetInteger("SpellAnimID", currentInput.AnimationID);
 
-        // Check running spells and see if they can go to the next step
+        // Check recently added running spells and see if they can go to the next step
         foreach (Spell s in runningSpells.ToArray())
         {
             PlayerInput nextInput = s.GetInputAtStep(currentStep);
@@ -187,8 +182,6 @@ public class MainCharacterSpells : MonoBehaviour
     private IEnumerator unsetRunningSpells()
     {
         yield return new WaitUntil(() => mainCharacter.Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle 1"));
-
         mainCharacter.Movement.enabled = true;
-        mainCharacter.Movement.CheckCurrentState();
     }
 }

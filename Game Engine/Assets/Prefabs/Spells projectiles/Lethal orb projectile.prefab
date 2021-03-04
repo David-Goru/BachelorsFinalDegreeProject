@@ -4852,7 +4852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileDamage: 35
-  projectileRadius: 4
+  projectileRadius: 5
   model: {fileID: 8240058022520605368}
   explosionParticles: {fileID: 4164138784380079305}
 --- !u!1 &8240058022520605368

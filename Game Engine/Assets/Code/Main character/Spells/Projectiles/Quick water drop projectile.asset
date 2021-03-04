@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Quick water drop projectile
   m_EditorClassIdentifier: 
   forwardOffset: -0.5
-  rightOffset: 1
+  rightOffset: 2
   projectilePrefab: {fileID: 3203991752741547675, guid: bd6edbb581fff1741a400aa1f43d08bc, type: 3}
   currentProjectile: {fileID: 0}

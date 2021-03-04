@@ -12,9 +12,9 @@ public class ItemOnWorld : MonoBehaviour
         this.item = item;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider col)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (col.gameObject.CompareTag("PlayerItemGatherArea"))
         {
             // Add to inventory
 

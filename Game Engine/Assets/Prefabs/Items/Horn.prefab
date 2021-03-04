@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 4922624984958681107}
   - component: {fileID: 8129700340348013476}
   - component: {fileID: 3867460117215008898}
+  - component: {fileID: 8657747269872125533}
   - component: {fileID: 494571589231342761}
   m_Layer: 0
   m_Name: Horn
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,7 +63,20 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.1, z: 0.55}
-  m_Center: {x: -0.15, y: 0.05, z: 0}
+  m_Center: {x: 0, y: 0.05, z: 0}
+--- !u!65 &8657747269872125533
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6895918664229661808}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.3, z: 1}
+  m_Center: {x: 0, y: 0.15, z: 0}
 --- !u!114 &494571589231342761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89f761339545c7a449c726f00044b21a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89f761339545c7a449c726f00044b21a, type: 3}
       propertyPath: m_LocalPosition.y
