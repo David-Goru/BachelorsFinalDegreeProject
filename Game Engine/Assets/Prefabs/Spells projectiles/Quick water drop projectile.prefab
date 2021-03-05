@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63bf1811d4e85f24cb67698602dc04c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileDamage: 10
+  projectileDamage: 30
   detonationDuration: 1
   detonationThrust: 35
   isDetonating: 0

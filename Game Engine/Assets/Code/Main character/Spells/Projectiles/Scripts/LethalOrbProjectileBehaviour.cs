@@ -11,6 +11,7 @@ public class LethalOrbProjectileBehaviour : IProjectileBehaviour
     [Header("References")]
     [SerializeField] private GameObject model;
     [SerializeField] private GameObject explosionParticles;
+    [SerializeField] private Material detonatedMaterial;
 
     public override void StartProjectile()
     {
@@ -35,8 +36,14 @@ public class LethalOrbProjectileBehaviour : IProjectileBehaviour
     private IEnumerator startDetonation()
     {
         explosionParticles.SetActive(true);
+
+        yield return new WaitForSeconds(0.1f);
+
+        model.GetComponent<MeshRenderer>().material = detonatedMaterial;
         dealDamage();
-        yield return new WaitForSeconds(0.25f);
+
+        yield return new WaitForSeconds(0.15f);
+
         endDetonation();
     }
 

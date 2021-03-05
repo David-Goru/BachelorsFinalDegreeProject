@@ -41,13 +41,22 @@ public class MainCharacter : Entity
         noise.SetNoise(newState);
     }
 
+
+    // Currently not used
     public override void ReceiveDamage(int damageAmount)
     {
-        currentHealth -= damageAmount;
-        if (currentHealth <= 0) StartCoroutine(kill());
+        if (PlayerAndEnemiesPlaytesting.Instance != null)
+        {
+            PlayerAndEnemiesPlaytesting.Instance.ChangeHealth(-damageAmount);
+        }
         else
         {
-            // do something? update ui? hit effect? sound?
+            currentHealth -= damageAmount;
+            if (currentHealth <= 0) StartCoroutine(kill());
+            else
+            {
+                // do something? update ui? hit effect? sound?
+            }
         }
     }
 

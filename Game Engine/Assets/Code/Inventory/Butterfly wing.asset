@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cfee8ae562a9664f8e0b4e79e1bd9b0, type: 3}
-  m_Name: Buterfly wing
+  m_Name: Butterfly wing
   m_EditorClassIdentifier: 
   itemModel: {fileID: 8260635993651653178, guid: 134d50a5fd8c2f34da46b78da5727128, type: 3}

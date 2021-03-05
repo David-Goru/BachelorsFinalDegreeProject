@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a8a00b551e163c4fab55fd3e0e1b318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileDamage: 15
+  projectileDamage: 30
   projectileRadius: 2.25
   animator: {fileID: 2729373705146140517}
   currentState: 0

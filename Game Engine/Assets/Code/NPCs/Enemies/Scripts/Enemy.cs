@@ -112,7 +112,7 @@ public class Enemy : Entity
             if (enemyInfo.Projectile != null) Instantiate(enemyInfo.Projectile, projectileSpawner.position, Quaternion.identity).GetComponent<EnemyProjectile>().StartProjectile(enemyInfo.Damage, currentTarget.transform);
             else
             {
-                Entity e = currentTarget.GetComponent<Entity>();
+                Entity e = currentTarget.transform.parent.GetComponent<Entity>();
                 if (e) e.ReceiveDamage(enemyInfo.Damage);
             }
         }
@@ -171,6 +171,7 @@ public class Enemy : Entity
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Dead"));
 
         spawnLoot();
+        if (PlayerAndEnemiesPlaytesting.Instance != null) PlayerAndEnemiesPlaytesting.Instance.UpdateStat(enemyInfo.name, 1);
 
         spawner.RemoveCache(this);
         Destroy(gameObject);

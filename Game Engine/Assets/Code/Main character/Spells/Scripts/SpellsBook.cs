@@ -15,7 +15,7 @@ public class SpellsBook : MonoBehaviour
 
     public bool Open { get => open; set => open = value; }
 
-    private void Start()
+    private void Awake()
     {
         pages = new Dictionary<int, GameObject>();
         foreach (Transform page in bookUI.transform.Find("Pages"))

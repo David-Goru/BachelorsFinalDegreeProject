@@ -39,15 +39,8 @@ public class QuickWaterDropProjectileBehaviour : IProjectileBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("PlayerItemGatherArea") || collision.gameObject.CompareTag("Item")) return;
-
-        endDetonation();
-    }
-
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col.gameObject.CompareTag("Player") || col.gameObject.CompareTag("PlayerItemGatherArea") || col.gameObject.CompareTag("Item")) return;
-
-        Entity e = col.gameObject.GetComponent<Entity>();
+        
+        Entity e = collision.gameObject.GetComponent<Entity>();
         if (e) e.ReceiveDamage(projectileDamage);
 
         endDetonation();

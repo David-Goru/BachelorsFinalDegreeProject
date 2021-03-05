@@ -17,6 +17,7 @@ public class ItemOnWorld : MonoBehaviour
         if (col.gameObject.CompareTag("PlayerItemGatherArea"))
         {
             // Add to inventory
+            if (PlayerAndEnemiesPlaytesting.Instance != null) PlayerAndEnemiesPlaytesting.Instance.UpdateStat(item.name, 1);
 
             Destroy(gameObject);
         }
