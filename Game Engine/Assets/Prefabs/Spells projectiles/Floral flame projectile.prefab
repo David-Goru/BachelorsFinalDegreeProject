@@ -880,7 +880,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 6.51
+    angle: 0
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0
@@ -966,7 +966,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 3.95
+      value: 2.93
       mode: 0
       spread: 0
       speed:
@@ -1085,7 +1085,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 30
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1202,21 +1202,21 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 1
-          inSlope: -1
-          outSlope: -1
-          tangentMode: 34
+          value: 0.8349514
+          inSlope: 0.38139442
+          outSlope: 0.38139442
+          tangentMode: 0
           weightedMode: 0
           inWeight: 0
-          outWeight: 0
+          outWeight: 0.26983202
         - serializedVersion: 3
-          time: 1
+          time: 0.7133752
           value: 0
-          inSlope: -1
-          outSlope: -1
-          tangentMode: 34
+          inSlope: -3.3938158
+          outSlope: -3.3938158
+          tangentMode: 0
           weightedMode: 0
-          inWeight: 0
+          inWeight: 0.13473967
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -4978,7 +4978,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e464b42627b46fb4eb4f9a2b40237f12, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

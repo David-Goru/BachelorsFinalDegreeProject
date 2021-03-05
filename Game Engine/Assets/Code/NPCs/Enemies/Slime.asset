@@ -18,7 +18,7 @@ MonoBehaviour:
   forgetRange: 8
   attackRate: 30
   walkingSpeed: 0.5
-  runningSpeed: 1.5
+  runningSpeed: 2.5
   wanderingArea: 3
   minTimeBetweenBehaviours: 8
   maxTimeBetweenBehaviours: 20
