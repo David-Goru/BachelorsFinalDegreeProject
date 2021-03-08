@@ -14,6 +14,11 @@ public class MainCharacterNoise : MonoBehaviour
     [Header("References")]
     [SerializeField] private SphereCollider noiseCollider;
 
+    private void Start()
+    {
+        noiseCollider = gameObject.GetComponent<SphereCollider>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))

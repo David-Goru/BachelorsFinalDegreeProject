@@ -16,7 +16,7 @@ public class MainCharacterMovement : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private MainCharacter mainCharacter = null;
-    [SerializeField] private CinemachineFreeLook characterCameraComponent;
+    [SerializeField] private CinemachineFreeLook characterCameraComponent = null;
     [SerializeField] private BoxCollider characterCollider = null;
     [SerializeField] private GameObject characterModel = null;
     [SerializeField] private Transform viewPoint = null;
@@ -28,6 +28,14 @@ public class MainCharacterMovement : MonoBehaviour
 
     private void Start()
     {
+        // Get components
+        characterCameraComponent = GameObject.FindGameObjectWithTag("FreeLookCamera").GetComponent<CinemachineFreeLook>();
+        mainCharacter = gameObject.GetComponent<MainCharacter>();
+        characterCollider = gameObject.GetComponent<BoxCollider>();
+        characterModel = transform.Find("Main character").gameObject;
+        viewPoint = transform.Find("View point");
+
+        // Set base stats
         speed = walkSpeed;
     }
 
@@ -58,9 +66,9 @@ public class MainCharacterMovement : MonoBehaviour
     public void UpdatePosition()
     {
         transform.eulerAngles = new Vector3(0, characterCameraComponent.m_XAxis.Value, 0);
-        transform.Translate(new Vector3(xMovementLastFrame, 0, zMovementLastFrame) * speed * Time.fixedDeltaTime);
+        transform.Translate(new Vector3(xMovementLastFrame, 0, zMovementLastFrame).normalized * speed * Time.fixedDeltaTime);
         viewPoint.position = transform.position;
-        viewPoint.Translate(new Vector3(xMovementLastFrame, 0, zMovementLastFrame) * speed * 10 * Time.fixedDeltaTime);
+        viewPoint.Translate(new Vector3(xMovementLastFrame, 0, zMovementLastFrame).normalized * speed * 10 * Time.fixedDeltaTime);
         characterModel.transform.LookAt(viewPoint);
     }
 

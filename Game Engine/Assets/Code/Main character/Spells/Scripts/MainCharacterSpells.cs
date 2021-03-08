@@ -5,18 +5,23 @@ using UnityEngine;
 public class MainCharacterSpells : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private MainCharacter mainCharacter;
-    [SerializeField] private Transform characterModel;
+    [SerializeField] private MainCharacter mainCharacter = null;
+    [SerializeField] private Transform characterModel = null;
     [SerializeField] private List<Spell> spells;
-    [SerializeField] private Transform cameraSkillshotPoint;
+    [SerializeField] private Transform cameraSkillshotPoint = null;
 
     [Header("Debug")]
-    [SerializeField] private List<Spell> runningSpells;
+    [SerializeField] private List<Spell> runningSpells = null;
     [SerializeField] private int currentStep = 0;
     [SerializeField] private float currentStepTime = 0.0f;
 
     private void Start()
     {
+        // Get components
+        mainCharacter = gameObject.GetComponent<MainCharacter>();
+        characterModel = transform.Find("Main character");
+
+        // Set base stats
         runningSpells = new List<Spell>();
         currentStep = 0;
         currentStepTime = 0.0f;
@@ -75,8 +80,15 @@ public class MainCharacterSpells : MonoBehaviour
                 finishSpell(spell);
                 return;
             }
-            else if (Input.GetButtonDown(nextInput.ButtonName) && nextInput.MeetsAllConditions()) nextStep(spell);
-            else if (currentInput.MeetsAllConditions()) runningSpells.Add(spell);
+            else if (Input.GetButtonDown(nextInput.ButtonName) && nextInput.MeetsAllConditions())
+            {
+                nextStep(spell);
+                return;
+            }
+            else if (currentInput.MeetsAllConditions())
+            {
+                if (!currentInput.RequiresTime || (currentInput.RequiresTime && Input.GetButton(currentInput.ButtonName))) runningSpells.Add(spell);
+            }
         }
     }
 
@@ -181,7 +193,10 @@ public class MainCharacterSpells : MonoBehaviour
 
     private IEnumerator unsetRunningSpells()
     {
+        mainCharacter.SetState(MainCharacterState.IDLE);
         yield return new WaitUntil(() => mainCharacter.Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle 1"));
+        
+        yield return new WaitForSeconds(0.05f);
         mainCharacter.Movement.enabled = true;
     }
 }

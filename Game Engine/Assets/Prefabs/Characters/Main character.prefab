@@ -196,6 +196,7 @@ MonoBehaviour:
   noise: {fileID: 0}
   movement: {fileID: 4631880213517836787}
   animations: {fileID: 6022732348574597017}
+  onHitParticles: {fileID: 3699209077362486190, guid: 6231a0ef15ac46648bdb50e85cc47b89, type: 3}
   currentHealth: 0
   currentState: 0
 --- !u!114 &4631880213517836787
@@ -253,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26fa74790cedced41a885f0c41244ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 350
+  rotationSpeed: 250
   zoomSpeed: 10
   characterCameraComponent: {fileID: 0}
 --- !u!114 &2510023554637463281
@@ -272,6 +273,7 @@ MonoBehaviour:
   characterModel: {fileID: 6953409698563814909}
   spells:
   - {fileID: 11400000, guid: 5ab479e1e86bbd94d95aa692bb9514d5, type: 2}
+  cameraSkillshotPoint: {fileID: 0}
   runningSpells: []
   currentStep: 0
   currentStepTime: 0

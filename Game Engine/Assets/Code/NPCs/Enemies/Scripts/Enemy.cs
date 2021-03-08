@@ -18,7 +18,7 @@ public class Enemy : Entity
     [SerializeField] private GameObject currentTarget = null;
     [SerializeField] private Vector3 nextPoint;
     [SerializeField] private NavMeshAgent agent;
-
+    
     private System.Action<float> currentBehaviour = null;
 
     public void StartEnemy(EnemySpawn spawner, EnemyInfo enemyInfo)
@@ -121,7 +121,7 @@ public class Enemy : Entity
     private void updateAttack(float timeDifference)
     {
         nextAttack -= timeDifference;
-        if (Vector3.Distance(transform.position, currentTarget.transform.position) > (enemyInfo.AttackRange + 1)) chase();
+        if (Vector3.Distance(transform.position, currentTarget.transform.position) > (enemyInfo.AttackRange + 0.25f)) chase();
         else
         {
             transform.LookAt(currentTarget.transform.position); 
@@ -139,11 +139,15 @@ public class Enemy : Entity
 
     public override void ReceiveDamage(int damageAmount)
     {
+        if (currentHealth <= 0) return;
+
         currentHealth -= damageAmount;
         if (currentHealth <= 0) StartCoroutine(kill());
         else
         {
             // do something? update ui? hit effect? sound?
+
+            //if (onHitParticles) Instantiate(onHitParticles, transform);
         }
     }
 

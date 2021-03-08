@@ -466,6 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpawner: {fileID: 0}
+  onHitParticles: {fileID: 3699209077362486190, guid: 6231a0ef15ac46648bdb50e85cc47b89, type: 3}
   currentHealth: 0
   nextBehaviour: 0
   nextAttack: 0

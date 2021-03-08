@@ -8,7 +8,8 @@ public class PlayerAndEnemiesPlaytesting : MonoBehaviour
     [Header("References")]
     [SerializeField] private SpellsBook spellsBook = null;
     [SerializeField] private Text healthUI = null;
-    [SerializeField] private Text infoUI = null;
+    [SerializeField] private Text enemyUI = null;
+    [SerializeField] private Text inventoryUI = null;
 
     [Header("Debug")]
     [SerializeField] private int currentHealth = 100;
@@ -67,6 +68,12 @@ public class PlayerAndEnemiesPlaytesting : MonoBehaviour
                 break;
         }
 
-        infoUI.text = string.Format("Enemies killed\n{0} wild pigs, {1} butterflies, {2} slimes\n\nInventory\n{3} dark essences, {4} horns, {5} tusks, {6} butterfly wings, {7} slime liquids", stats[0], stats[1], stats[2], stats[3], stats[4], stats[5], stats[6], stats[7]);
+        enemyUI.text = string.Format("Enemies killed\n{0} wild pigs, {1} butterflies, {2} slimes", stats[0], stats[1], stats[2]);
+        inventoryUI.text = string.Format("Inventory\n\n{0} dark essences\n\n{1} horns\n\n{2} tusks\n\n{3} butterfly wings\n\n{4} slime liquids", stats[3], stats[4], stats[5], stats[6], stats[7]);
+    }
+
+    public void CloseTheGame()
+    {
+        Application.Quit();
     }
 }

@@ -8,7 +8,12 @@ public class MainCharacterCamera : MonoBehaviour
     [SerializeField] [Tooltip("Speed for camera zoom")] [Range(0, 25)] private float zoomSpeed = 0f;
 
     [Header("References")]
-    [SerializeField] private CinemachineFreeLook characterCameraComponent;
+    [SerializeField] private CinemachineFreeLook characterCameraComponent = null;
+
+    private void Awake()
+    {
+        characterCameraComponent = GameObject.FindGameObjectWithTag("FreeLookCamera").GetComponent<CinemachineFreeLook>();
+    }
 
     private void OnEnable()
     {

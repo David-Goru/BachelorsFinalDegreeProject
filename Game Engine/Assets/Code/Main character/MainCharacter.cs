@@ -26,6 +26,13 @@ public class MainCharacter : Entity
 
     private void Start()
     {
+        // Get components
+        animator = transform.Find("Main character").GetComponent<Animator>();
+        noise = transform.Find("Noise area").GetComponent<MainCharacterNoise>();
+        movement = gameObject.GetComponent<MainCharacterMovement>();
+        animations = gameObject.GetComponent<MainCharacterAnimations>();
+
+        // Set base stats
         currentHealth = maxHealth;
         currentState = MainCharacterState.IDLE;
     }
@@ -56,6 +63,8 @@ public class MainCharacter : Entity
             else
             {
                 // do something? update ui? hit effect? sound?
+
+                //if (onHitParticles) Instantiate(onHitParticles, transform);
             }
         }
     }

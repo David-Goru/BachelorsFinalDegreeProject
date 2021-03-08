@@ -6,7 +6,12 @@ using UnityEngine;
 public class MainCharacterAnimations : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private MainCharacter mainCharacter;
+    [SerializeField] private MainCharacter mainCharacter = null;
+
+    private void Start()
+    {
+        mainCharacter = gameObject.GetComponent<MainCharacter>();
+    }
 
     private void Update()
     {
