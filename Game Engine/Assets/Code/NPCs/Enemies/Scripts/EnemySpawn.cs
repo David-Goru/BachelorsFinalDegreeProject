@@ -33,7 +33,7 @@ public class EnemySpawn : MonoBehaviour
     {
         foreach (Enemy enemy in enemiesCache)
         {
-            enemy.UpdateState(Time.deltaTime);
+            enemy.UpdateState();
         }
 
         if (enemiesCache.Count >= maxEnemies) return;

@@ -4851,8 +4851,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7209ca5464622e498b2c7dc53d91612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileDamage: 25
+  projectileDamage: 100
   projectileRadius: 5
+  pushForce: 3000
   model: {fileID: 8240058022520605368}
   explosionParticles: {fileID: 4164138784380079305}
   detonatedMaterial: {fileID: 2100000, guid: 19832badb14fe2f4ea1734a97db0f4b3, type: 2}

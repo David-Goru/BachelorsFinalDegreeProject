@@ -19,7 +19,7 @@ public class Enemy : Entity
     [SerializeField] private Vector3 nextPoint;
     [SerializeField] private NavMeshAgent agent;
     
-    private System.Action<float> currentBehaviour = null;
+    private System.Action currentBehaviour = null;
 
     public void StartEnemy(EnemySpawn spawner, EnemyInfo enemyInfo)
     {
@@ -34,9 +34,9 @@ public class Enemy : Entity
         idle();
     }
 
-    public void UpdateState(float timeDifference)
+    public void UpdateState()
     {
-        if (currentBehaviour != null) currentBehaviour(timeDifference);
+        if (currentBehaviour != null) currentBehaviour();
     }
 
     private void idle()
@@ -45,13 +45,13 @@ public class Enemy : Entity
         animator.SetTrigger("Idle");
         animator.SetFloat("IdleTime", 0);
         agent.isStopped = true;
-        currentBehaviour = td => updateIdle(td);
+        currentBehaviour = updateIdle;
         nextBehaviour = Random.Range(enemyInfo.MinTimeBetweenBehaviours, enemyInfo.MaxTimeBetweenBehaviours);
     }
 
-    private void updateIdle(float timeDifference)
+    private void updateIdle()
     {
-        nextBehaviour -= timeDifference;
+        nextBehaviour -= Time.deltaTime;
         if (nextBehaviour <= 0.0f)
         {
             if (getRandomPoint()) walk();
@@ -66,10 +66,10 @@ public class Enemy : Entity
         animator.SetTrigger("Walk");
         agent.isStopped = false;
         agent.speed = enemyInfo.WalkingSpeed;
-        currentBehaviour = td => updateWalk(td);
+        currentBehaviour = updateWalk;
     }
 
-    private void updateWalk(float timeDifference)
+    private void updateWalk()
     {
         agent.SetDestination(nextPoint);
         if (Vector3.Distance(transform.position, nextPoint) < 0.1f) idle();
@@ -82,12 +82,12 @@ public class Enemy : Entity
         animator.SetTrigger("Run");
         agent.isStopped = false;
         agent.speed = enemyInfo.RunningSpeed;
-        currentBehaviour = td => updateChase(td);
+        currentBehaviour = updateChase;
         
         nextBehaviour = 60 / enemyInfo.AttackRate;
     }
 
-    private void updateChase(float timeDifference)
+    private void updateChase()
     {
         Vector3 ctpos = currentTarget.transform.position;
         agent.SetDestination(ctpos);
@@ -103,7 +103,7 @@ public class Enemy : Entity
         animator.SetFloat("IdleTime", 0);
         animator.SetTrigger("Attack");
         agent.isStopped = true;
-        currentBehaviour = td => updateAttack(td);
+        currentBehaviour = updateAttack;
 
         if (nextAttack <= 0.0f)
         {
@@ -118,9 +118,9 @@ public class Enemy : Entity
         }
     }
 
-    private void updateAttack(float timeDifference)
+    private void updateAttack()
     {
-        nextAttack -= timeDifference;
+        nextAttack -= Time.deltaTime;
         if (Vector3.Distance(transform.position, currentTarget.transform.position) > (enemyInfo.AttackRange + 0.25f)) chase();
         else
         {

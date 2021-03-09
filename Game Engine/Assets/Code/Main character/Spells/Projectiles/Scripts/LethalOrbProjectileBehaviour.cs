@@ -7,6 +7,7 @@ public class LethalOrbProjectileBehaviour : IProjectileBehaviour
     [Header("Attributes")]
     [SerializeField] [Tooltip("Damage of the projectile when detonation occurs")] private int projectileDamage = 0;
     [SerializeField] [Tooltip("Damage of the projectile when detonation occurs")] private float projectileRadius = 0.0f;
+    [SerializeField] [Tooltip("Force of the projectile when pushing the collided entities")] private float pushForce = 0.0f;
 
     [Header("References")]
     [SerializeField] private GameObject model;
@@ -53,7 +54,11 @@ public class LethalOrbProjectileBehaviour : IProjectileBehaviour
         {
             if (col.gameObject.CompareTag("Player") || col.gameObject.CompareTag("Item")) continue;
             Entity e = col.gameObject.GetComponent<Entity>();
-            if (e) e.ReceiveDamage(projectileDamage);
+            if (e)
+            {
+                col.GetComponent<Rigidbody>().AddForce((col.transform.position - transform.position).normalized * pushForce);
+                e.ReceiveDamage(projectileDamage);
+            }
         }
     }
 
