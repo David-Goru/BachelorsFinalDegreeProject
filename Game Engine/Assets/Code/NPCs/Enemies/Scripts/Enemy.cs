@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 public class Enemy : Entity
 {
@@ -19,7 +20,7 @@ public class Enemy : Entity
     [SerializeField] private Vector3 nextPoint;
     [SerializeField] private NavMeshAgent agent;
     
-    private System.Action currentBehaviour = null;
+    private Action currentBehaviour = null;
 
     public void StartEnemy(EnemySpawn spawner, EnemyInfo enemyInfo)
     {
@@ -46,17 +47,13 @@ public class Enemy : Entity
         animator.SetFloat("IdleTime", 0);
         agent.isStopped = true;
         currentBehaviour = updateIdle;
-        nextBehaviour = Random.Range(enemyInfo.MinTimeBetweenBehaviours, enemyInfo.MaxTimeBetweenBehaviours);
+        nextBehaviour = UnityEngine.Random.Range(enemyInfo.MinTimeBetweenBehaviours, enemyInfo.MaxTimeBetweenBehaviours);
     }
 
     private void updateIdle()
     {
         nextBehaviour -= Time.deltaTime;
-        if (nextBehaviour <= 0.0f)
-        {
-            if (getRandomPoint()) walk();
-            else idle();
-        }
+        if (nextBehaviour <= 0.0f) selector(getRandomPoint, walk, idle)();
         else animator.SetFloat("IdleTime", animator.GetFloat("IdleTime") + Time.deltaTime);
     }
 
@@ -153,12 +150,12 @@ public class Enemy : Entity
 
     private bool getRandomPoint()
     {
-        nextPoint = new Vector3(transform.position.x + Random.Range(-enemyInfo.WanderingArea, enemyInfo.WanderingArea), transform.position.y, transform.position.z + Random.Range(-enemyInfo.WanderingArea, enemyInfo.WanderingArea));
+        nextPoint = new Vector3(transform.position.x + UnityEngine.Random.Range(-enemyInfo.WanderingArea, enemyInfo.WanderingArea), transform.position.y, transform.position.z + UnityEngine.Random.Range(-enemyInfo.WanderingArea, enemyInfo.WanderingArea));
 
         int checks = 0;
         while (checks < 100 && Physics.CheckSphere(nextPoint, 0.5f, spawner.CheckLayers) || Physics.Linecast(transform.position, nextPoint, spawner.CheckLayers))
         {
-            nextPoint = new Vector3(transform.position.x + Random.Range(-enemyInfo.WanderingArea, enemyInfo.WanderingArea), transform.position.y, transform.position.z + Random.Range(-enemyInfo.WanderingArea, enemyInfo.WanderingArea));
+            nextPoint = new Vector3(transform.position.x + UnityEngine.Random.Range(-enemyInfo.WanderingArea, enemyInfo.WanderingArea), transform.position.y, transform.position.z + UnityEngine.Random.Range(-enemyInfo.WanderingArea, enemyInfo.WanderingArea));
             checks++;
         }
 
@@ -188,9 +185,9 @@ public class Enemy : Entity
         {
             foreach (Item loot in lootPool.Items)
             {
-                if (Random.Range(0.0f, 1.0f) < spawnProb)
+                if (UnityEngine.Random.Range(0.0f, 1.0f) < spawnProb)
                 {
-                    Instantiate(loot.ItemModel, transform.position + Vector3.right * Random.Range(-1.5f, 1.5f) + Vector3.forward * Random.Range(-1.5f, 1.5f), Quaternion.Euler(0, Random.Range(0, 360), 0)).GetComponent<ItemOnWorld>().Initialize(loot);
+                    Instantiate(loot.ItemModel, transform.position + Vector3.right * UnityEngine.Random.Range(-1.5f, 1.5f) + Vector3.forward * UnityEngine.Random.Range(-1.5f, 1.5f), Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0)).GetComponent<ItemOnWorld>().Initialize(loot);
                     spawnProb = spawnProb * 2.0f / 3.0f; // Reduce a bit the prob for next items
                 }
             }
@@ -204,4 +201,6 @@ public class Enemy : Entity
         animator.ResetTrigger("Run");
         animator.ResetTrigger("Attack");
     }
+
+    private Action selector(Func<bool> condition, Action ifTrue, Action ifFalse) { return condition() ? ifTrue : ifFalse; }
 }

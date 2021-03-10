@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Lethal orb
   m_EditorClassIdentifier: 
   projectile: {fileID: 11400000, guid: 6443354e3bc896446bece32188bcbd47, type: 2}
+  isSkillshot: 0
   inputSequence:
-  - buttonName: Space
+  - buttonName: Q
     animationID: 7
     requiresTime: 1
     timeAmount: 1
@@ -22,7 +23,7 @@ MonoBehaviour:
     nextProjectileState: 0
     detonateProjectile: 0
     conditions:
-    - {fileID: 11400000, guid: b3d5f9359b99d3140a4dc575676603d7, type: 2}
+    - {fileID: 11400000, guid: 62e4280152d1a1349a509b3ab61ce6d3, type: 2}
     actions: []
   - buttonName: E
     animationID: 8

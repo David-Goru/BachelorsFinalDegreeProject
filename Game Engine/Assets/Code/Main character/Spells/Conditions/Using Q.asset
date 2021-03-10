@@ -10,7 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ea874d84871b874d8a57c2d66a888f7, type: 3}
-  m_Name: Using shift
+  m_Name: Using Q
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 11400000, guid: fc30f136eaf5cef44b86da31d550e995, type: 2}
-  buttonName: Shift
+  buttonName: Q
