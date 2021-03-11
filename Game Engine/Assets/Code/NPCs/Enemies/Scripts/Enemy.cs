@@ -40,6 +40,28 @@ public class Enemy : Entity
         if (currentBehaviour != null) currentBehaviour();
     }
 
+    public void UpdateTarget(GameObject target)
+    {
+        if (!agent.isOnNavMesh) return;
+
+        currentTarget = target;
+        chase();
+    }
+
+    public override void ReceiveDamage(int damageAmount)
+    {
+        if (currentHealth <= 0) return;
+
+        currentHealth -= damageAmount;
+        if (currentHealth <= 0) StartCoroutine(kill());
+        else
+        {
+            // do something? update ui? hit effect? sound?
+
+            //if (onHitParticles) Instantiate(onHitParticles, transform);
+        }
+    }
+
     private void idle()
     {
         resetAllTriggers();
@@ -123,28 +145,6 @@ public class Enemy : Entity
         {
             transform.LookAt(currentTarget.transform.position); 
             if (nextAttack <= 0) attack();
-        }
-    }
-
-    public void UpdateTarget(GameObject target)
-    {
-        if (!agent.isOnNavMesh) return;
-
-        currentTarget = target;
-        chase();        
-    }
-
-    public override void ReceiveDamage(int damageAmount)
-    {
-        if (currentHealth <= 0) return;
-
-        currentHealth -= damageAmount;
-        if (currentHealth <= 0) StartCoroutine(kill());
-        else
-        {
-            // do something? update ui? hit effect? sound?
-
-            //if (onHitParticles) Instantiate(onHitParticles, transform);
         }
     }
 

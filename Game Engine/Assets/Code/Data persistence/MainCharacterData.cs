@@ -10,20 +10,23 @@ public class MainCharacterData
     [SerializeField] private float yPosition;
     [SerializeField] private float zPosition;
     [SerializeField] private float yRotation;
+    [SerializeField] private int currentHealth;
 
-    public MainCharacterData(Vector3 position, Vector3 rotation)
+    public MainCharacterData(Vector3 position, Vector3 rotation, int currentHealth)
     {
         xPosition = position.x;
         yPosition = position.y;
         zPosition = position.z;
         yRotation = rotation.y;
+        this.currentHealth = currentHealth;
     }
 
     public bool Load()
     {
         try
         {
-            GameObject enemy = MonoBehaviour.Instantiate(LoadGame.Instance.Models.Find(x => x.name == "Main character"), new Vector3(xPosition, yPosition, zPosition), Quaternion.Euler(0.0f, yRotation, 0.0f));
+            GameObject mainCharacter = MonoBehaviour.Instantiate(LoadGame.Instance.Models.Find(x => x.name == "Main character"), new Vector3(xPosition, yPosition, zPosition), Quaternion.Euler(0.0f, yRotation, 0.0f));
+            mainCharacter.GetComponent<MainCharacter>().CurrentHealth = currentHealth;
         }
         catch (Exception e)
         {

@@ -22,6 +22,7 @@ public class MainCharacter : Entity
     public MainCharacterMovement Movement { get => movement; }
 
     // Getters and setters
+    public int CurrentHealth { get => currentHealth; set => currentHealth = value; }
     public MainCharacterState CurrentState { get => currentState; set => currentState = value; }
 
     private void Start()
@@ -48,8 +49,6 @@ public class MainCharacter : Entity
         noise.SetNoise(newState);
     }
 
-
-    // Currently not used
     public override void ReceiveDamage(int damageAmount)
     {
         if (PlayerAndEnemiesPlaytesting.Instance != null)

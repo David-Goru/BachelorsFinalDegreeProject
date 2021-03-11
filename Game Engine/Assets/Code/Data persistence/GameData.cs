@@ -6,15 +6,12 @@ using UnityEngine;
 public class GameData
 {
     private MainCharacterData mainCharacterData;
-    private List<EnemyData> enemyDataList;
 
     // Getters
     public MainCharacterData MainCharacterData { get => mainCharacterData; }
-    public List<EnemyData> EnemyDataList { get => enemyDataList; }
 
-    public GameData(MainCharacterData mainCharacterData, List<EnemyData> enemyDataList)
+    public GameData(MainCharacterData mainCharacterData)
     {
         this.mainCharacterData = mainCharacterData;
-        this.enemyDataList = enemyDataList;
     }
 }

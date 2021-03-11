@@ -34,13 +34,6 @@ public class LoadGame : MonoBehaviour
         setText("main character");
         yield return new WaitUntil(() => gameData.MainCharacterData.Load());
         yield return new WaitForSeconds(0.05f);
-
-        setText("enemies");
-        foreach (EnemyData enemyData in gameData.EnemyDataList)
-        {
-            yield return new WaitUntil(() => enemyData.Load());
-        }
-        yield return new WaitForSeconds(0.05f);
     }
 
     private void setText(string loadingData)
