@@ -23,9 +23,27 @@ public class SaveGame : MonoBehaviour
     {
         yield return new WaitForSeconds(nextSave);
 
-        // if in fight: nextSave = 5? and StartCoroutine(saveTimer()); 
-        // else Save();
-        save();
+        bool inFight = false;
+
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacter>().IsInFight()) inFight = true;
+        else
+        {
+            foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                if (enemy.GetComponent<Enemy>().IsOnFight())
+                {
+                    inFight = true;
+                    break;
+                }
+            }
+        }
+
+        if (inFight)
+        {
+            nextSave = 5;
+            StartCoroutine(saveTimer());
+        }
+        else save();
     }
 
     private void save()

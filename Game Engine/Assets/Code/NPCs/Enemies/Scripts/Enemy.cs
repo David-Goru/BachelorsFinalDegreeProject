@@ -62,6 +62,11 @@ public class Enemy : Entity
         }
     }
 
+    public bool IsOnFight()
+    {
+        return currentTarget != null;
+    }
+
     private void idle()
     {
         resetAllTriggers();
@@ -113,7 +118,11 @@ public class Enemy : Entity
         transform.LookAt(currentTarget.transform.position);
 
         if (Vector3.Distance(transform.position, ctpos) < enemyInfo.AttackRange) attack();
-        else if (Vector3.Distance(transform.position, ctpos) > enemyInfo.ForgetRange) idle();
+        else if (Vector3.Distance(transform.position, ctpos) > enemyInfo.ForgetRange)
+        {
+            currentTarget = null;
+            idle();
+        }
     }
 
     private void attack()

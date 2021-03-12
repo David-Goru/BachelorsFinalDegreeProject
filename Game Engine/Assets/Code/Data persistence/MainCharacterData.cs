@@ -25,7 +25,9 @@ public class MainCharacterData
     {
         try
         {
-            GameObject mainCharacter = MonoBehaviour.Instantiate(LoadGame.Instance.Models.Find(x => x.name == "Main character"), new Vector3(xPosition, yPosition, zPosition), Quaternion.Euler(0.0f, yRotation, 0.0f));
+            GameObject mainCharacter = GameObject.FindGameObjectWithTag("Player");
+            mainCharacter.transform.position = new Vector3(xPosition, yPosition, zPosition);
+            mainCharacter.transform.rotation = Quaternion.Euler(0.0f, yRotation, 0.0f);
             mainCharacter.GetComponent<MainCharacter>().CurrentHealth = currentHealth;
         }
         catch (Exception e)

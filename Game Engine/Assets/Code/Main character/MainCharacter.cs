@@ -68,6 +68,11 @@ public class MainCharacter : Entity
         }
     }
 
+    public bool IsInFight()
+    {
+        return !movement.enabled;
+    }
+
     private IEnumerator kill()
     {
         movement.enabled = false;
