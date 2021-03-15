@@ -16,7 +16,15 @@ public class MainCharacterNoise : MonoBehaviour
 
     private void Start()
     {
-        noiseCollider = gameObject.GetComponent<SphereCollider>();
+        try
+        {
+            noiseCollider = gameObject.GetComponent<SphereCollider>();
+        }
+        catch (UnityException e)
+        {
+            Debug.Log("MainCharacterNoise references not found. Disabling script. Error: " + e);
+            enabled = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

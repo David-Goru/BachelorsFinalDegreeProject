@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
 using System.IO;
+using System;
 
 public class SaveGame : MonoBehaviour
 {
@@ -48,6 +47,12 @@ public class SaveGame : MonoBehaviour
 
     private void save()
     {
+        string savedGamesPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "\\The Final Spell\\Saves\\";
+        if (Menu.GameName == "Null") Menu.GameName = string.Format("Game ({0})", DateTime.Now).Replace("/", "-").Replace(":", ".");
+
+        // Create path if doesn't exist
+        if (!Directory.Exists(savedGamesPath)) Directory.CreateDirectory(savedGamesPath);
+
         // Main character
         Transform mainCharacter = GameObject.FindGameObjectWithTag("Player").transform;
         MainCharacterData mainCharacterData = new MainCharacterData(mainCharacter.position, mainCharacter.eulerAngles, mainCharacter.GetComponent<MainCharacter>().CurrentHealth);
@@ -56,7 +61,7 @@ public class SaveGame : MonoBehaviour
 
         // Create file
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(string.Format("{0}/The Final Spell/Saves/{1}.save", System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "Test")); // Test should be replaced with something else (Data creation?)
+        FileStream file = File.Create(string.Format("{0}{1}.save", savedGamesPath, Menu.GameName));
         bf.Serialize(file, gameData);
         file.Close();
 

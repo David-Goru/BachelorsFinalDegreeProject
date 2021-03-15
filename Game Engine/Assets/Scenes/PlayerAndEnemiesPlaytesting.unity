@@ -123,6 +123,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 1f962eeedc3f8d04c9a4ebe574193e5c, type: 2}
+--- !u!1 &85373679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 85373681}
+  - component: {fileID: 85373680}
+  m_Layer: 0
+  m_Name: World scripts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &85373680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85373679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d622b267e368904ba47d5dbd9b68934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBetweenSaves: 2
+  nextSave: 0
+--- !u!4 &85373681
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85373679}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &92043980
 GameObject:
   m_ObjectHideFlags: 0
@@ -2100,18 +2145,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1577262153, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577262153, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577262153, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 465665912330594629, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2164,97 +2197,13 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 11400000, guid: fc30f136eaf5cef44b86da31d550e995, type: 2}
-    - target: {fileID: 2510023554637463281, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: mainCharacter
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2510023554637463281, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: characterModel
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2510023554637463281, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: spells.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2510023554637463281, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: cameraSkillshotPoint
-      value: 
-      objectReference: {fileID: 813448965}
-    - target: {fileID: 2510023554637463281, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: spells.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: e0612f6564cf76349adadddb4636cf83, type: 2}
-    - target: {fileID: 2510023554637463281, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: spells.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 25c0b4fcd58105a4ab71db132be8c840, type: 2}
-    - target: {fileID: 2851720648956925641, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: noise
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2851720648956925641, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2851720648956925641, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: movement
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2851720648956925641, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: animations
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4347619716028286229, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: rotationSpeed
-      value: 175
-      objectReference: {fileID: 0}
-    - target: {fileID: 4347619716028286229, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: characterCameraComponent
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4631880213517836787, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
       propertyPath: rigidBody
       value: 
       objectReference: {fileID: 527255031}
-    - target: {fileID: 4631880213517836787, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: viewPoint
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4631880213517836787, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: mainCharacter
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4631880213517836787, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: characterModel
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4631880213517836787, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: crouchingCenter
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4631880213517836787, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: crouchingHeight
-      value: 1.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4631880213517836787, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: characterCollider
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4631880213517836787, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: crouchLayer.m_Bits
-      value: 192
-      objectReference: {fileID: 0}
-    - target: {fileID: 4631880213517836787, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: characterCameraComponent
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4668886627598584813, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
       propertyPath: m_TagString
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6022732348574597017, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
-      propertyPath: mainCharacter
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6022732348574597017, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
       propertyPath: mainCharacterSpells
@@ -3448,7 +3397,7 @@ GameObject:
   - component: {fileID: 813448965}
   m_Layer: 0
   m_Name: Skillshot target
-  m_TagString: Untagged
+  m_TagString: SkillshotTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5799,7 +5748,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395292497}
-  m_LocalRotation: {x: -0.01818949, y: -0.000000036150233, z: 0.000000040943632, w: 0.9998346}
+  m_LocalRotation: {x: -0.01818949, y: -0.0000000039393253, z: 0.0000000044616675, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

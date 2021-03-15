@@ -28,10 +28,18 @@ public class MainCharacter : Entity
     private void Start()
     {
         // Get components
-        animator = transform.Find("Main character").GetComponent<Animator>();
-        noise = transform.Find("Noise area").GetComponent<MainCharacterNoise>();
-        movement = gameObject.GetComponent<MainCharacterMovement>();
-        animations = gameObject.GetComponent<MainCharacterAnimations>();
+        try
+        {
+            animator = transform.Find("Main character").GetComponent<Animator>();
+            noise = transform.Find("Noise area").GetComponent<MainCharacterNoise>();
+            movement = gameObject.GetComponent<MainCharacterMovement>();
+            animations = gameObject.GetComponent<MainCharacterAnimations>();
+        }
+        catch (UnityException e) 
+        { 
+            Debug.Log("MainCharacter references not found. Disabling script. Error: " + e);
+            enabled = false;
+        }
 
         // Set base stats
         currentHealth = maxHealth;

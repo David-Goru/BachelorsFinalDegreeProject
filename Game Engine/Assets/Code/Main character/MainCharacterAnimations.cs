@@ -10,7 +10,15 @@ public class MainCharacterAnimations : MonoBehaviour
 
     private void Start()
     {
-        mainCharacter = gameObject.GetComponent<MainCharacter>();
+        try
+        {
+            mainCharacter = gameObject.GetComponent<MainCharacter>();
+        }
+        catch (UnityException e)
+        {
+            Debug.Log("MainCharacterAnimations references not found. Disabling script. Error: " + e);
+            enabled = false;
+        }
     }
 
     private void Update()

@@ -12,7 +12,15 @@ public class MainCharacterCamera : MonoBehaviour
 
     private void Awake()
     {
-        characterCameraComponent = GameObject.FindGameObjectWithTag("FreeLookCamera").GetComponent<CinemachineFreeLook>();
+        try
+        {
+            characterCameraComponent = GameObject.FindGameObjectWithTag("FreeLookCamera").GetComponent<CinemachineFreeLook>();
+        }
+        catch (UnityException e)
+        {
+            Debug.Log("MainCharacterCamera references not found. Disabling script. Error: " + e);
+            enabled = false;
+        }
     }
 
     private void OnEnable()

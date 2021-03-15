@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 [System.Serializable]
 public class MainCharacterData
@@ -30,7 +27,7 @@ public class MainCharacterData
             mainCharacter.transform.rotation = Quaternion.Euler(0.0f, yRotation, 0.0f);
             mainCharacter.GetComponent<MainCharacter>().CurrentHealth = currentHealth;
         }
-        catch (Exception e)
+        catch (UnityException e)
         {
             // Add to text file?
             Debug.Log("Main character data error: " + e);

@@ -192,10 +192,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  animator: {fileID: 6072499812974244785}
+  animator: {fileID: 0}
   noise: {fileID: 0}
-  movement: {fileID: 4631880213517836787}
-  animations: {fileID: 6022732348574597017}
+  movement: {fileID: 0}
+  animations: {fileID: 0}
   currentHealth: 0
   currentState: 0
 --- !u!114 &4631880213517836787
@@ -214,17 +214,17 @@ MonoBehaviour:
   crouchSpeed: 1
   runSpeed: 8
   defaultCenter: 1
-  crouchingCenter: 0.6
+  crouchingCenter: 0.7
   defaultHeight: 2
-  crouchingHeight: 1.2
+  crouchingHeight: 1.4
   crouchLayer:
     serializedVersion: 2
     m_Bits: 192
-  mainCharacter: {fileID: 2851720648956925641}
+  mainCharacter: {fileID: 0}
   characterCameraComponent: {fileID: 0}
   characterCollider: {fileID: 0}
-  characterModel: {fileID: 7724986088402890567}
-  viewPoint: {fileID: 990481585}
+  characterModel: {fileID: 0}
+  viewPoint: {fileID: 0}
   speed: 0
   xMovementLastFrame: 0
   zMovementLastFrame: 0
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3768a79c0491f094d8c18a2986c6e3c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCharacter: {fileID: 2851720648956925641}
+  mainCharacter: {fileID: 0}
 --- !u!114 &4347619716028286229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26fa74790cedced41a885f0c41244ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 250
+  rotationSpeed: 175
   zoomSpeed: 10
   characterCameraComponent: {fileID: 0}
 --- !u!114 &2510023554637463281
@@ -268,11 +268,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b145b06bb546054db1a823b64905999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCharacter: {fileID: 2851720648956925641}
-  characterModel: {fileID: 6953409698563814909}
+  mainCharacter: {fileID: 0}
+  characterModel: {fileID: 0}
+  cameraSkillshotPoint: {fileID: 0}
   spells:
   - {fileID: 11400000, guid: 5ab479e1e86bbd94d95aa692bb9514d5, type: 2}
-  cameraSkillshotPoint: {fileID: 0}
+  - {fileID: 11400000, guid: e0612f6564cf76349adadddb4636cf83, type: 2}
+  - {fileID: 11400000, guid: 25c0b4fcd58105a4ab71db132be8c840, type: 2}
   runningSpells: []
   currentStep: 0
   currentStepTime: 0

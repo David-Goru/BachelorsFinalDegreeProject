@@ -8,6 +8,7 @@ TagManager:
   - Item
   - PlayerItemGatherArea
   - FreeLookCamera
+  - SkillshotTarget
   layers:
   - Default
   - TransparentFX

@@ -29,11 +29,19 @@ public class MainCharacterMovement : MonoBehaviour
     private void Start()
     {
         // Get components
-        characterCameraComponent = GameObject.FindGameObjectWithTag("FreeLookCamera").GetComponent<CinemachineFreeLook>();
-        mainCharacter = gameObject.GetComponent<MainCharacter>();
-        characterCollider = gameObject.GetComponent<BoxCollider>();
-        characterModel = transform.Find("Main character").gameObject;
-        viewPoint = transform.Find("View point");
+        try
+        {
+            characterCameraComponent = GameObject.FindGameObjectWithTag("FreeLookCamera").GetComponent<CinemachineFreeLook>();
+            mainCharacter = gameObject.GetComponent<MainCharacter>();
+            characterCollider = gameObject.GetComponent<BoxCollider>();
+            characterModel = transform.Find("Main character").gameObject;
+            viewPoint = transform.Find("View point");
+        }
+        catch (UnityException e)
+        {
+            Debug.Log("MainCharacterMovement references not found. Disabling script. Error: " + e);
+            enabled = false;
+        }
 
         // Set base stats
         speed = walkSpeed;

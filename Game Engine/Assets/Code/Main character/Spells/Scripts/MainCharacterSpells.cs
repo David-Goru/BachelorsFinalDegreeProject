@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class MainCharacterSpells : MonoBehaviour
@@ -7,8 +7,8 @@ public class MainCharacterSpells : MonoBehaviour
     [Header("References")]
     [SerializeField] private MainCharacter mainCharacter = null;
     [SerializeField] private Transform characterModel = null;
-    [SerializeField] private List<Spell> spells;
     [SerializeField] private Transform cameraSkillshotPoint = null;
+    [SerializeField] private List<Spell> spells;
 
     [Header("Debug")]
     [SerializeField] private List<Spell> runningSpells = null;
@@ -18,8 +18,23 @@ public class MainCharacterSpells : MonoBehaviour
     private void Start()
     {
         // Get components
-        mainCharacter = gameObject.GetComponent<MainCharacter>();
-        characterModel = transform.Find("Main character");
+        try
+        {
+            mainCharacter = gameObject.GetComponent<MainCharacter>();
+            characterModel = transform.Find("Main character");
+            cameraSkillshotPoint = GameObject.FindGameObjectWithTag("SkillshotTarget").transform;
+        }
+        catch (UnityException e)
+        {
+            Debug.Log("MainCharacterSpells references not found. Disabling script. Error: " + e);
+            enabled = false;
+        }
+
+        if (spells.Count == 0)
+        {
+            Debug.Log("Empty spells list. Disabling MainCharacterSpells.");
+            enabled = false;
+        }
 
         // Set base stats
         runningSpells = new List<Spell>();
