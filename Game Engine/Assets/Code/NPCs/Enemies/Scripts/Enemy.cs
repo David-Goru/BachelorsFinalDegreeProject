@@ -196,7 +196,7 @@ public class Enemy : Entity
             {
                 if (UnityEngine.Random.Range(0.0f, 1.0f) < spawnProb)
                 {
-                    Instantiate(loot.ItemModel, transform.position + Vector3.right * UnityEngine.Random.Range(-1.5f, 1.5f) + Vector3.forward * UnityEngine.Random.Range(-1.5f, 1.5f), Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0)).GetComponent<ItemOnWorld>().Initialize(loot);
+                    Instantiate(loot.ItemModel, transform.position + Vector3.up, Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0)).GetComponent<ItemOnWorld>().Initialize(loot);
                     spawnProb = spawnProb * 2.0f / 3.0f; // Reduce a bit the prob for next items
                 }
             }
