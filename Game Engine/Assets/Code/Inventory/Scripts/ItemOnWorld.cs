@@ -8,12 +8,21 @@ public class ItemOnWorld : MonoBehaviour
     [SerializeField] private Item item = null;
     [SerializeField] private bool ignoreCollisions = false;
 
+    // Getters
+    public string ItemName { get => item.name; }
+
     public void Initialize(Item item)
     {
         this.item = item;
         ignoreCollisions = false;
 
         GetComponent<Rigidbody>().AddForce(Vector3.right * Random.Range(-2.5f, 2.5f) + Vector3.forward * Random.Range(-2.5f, 2.5f), ForceMode.Impulse);
+    }
+
+    public void Load(Item item)
+    {
+        this.item = item;
+        ignoreCollisions = false;
     }
 
     private void OnTriggerEnter(Collider col)

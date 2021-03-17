@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
@@ -57,7 +58,14 @@ public class SaveGame : MonoBehaviour
         Transform mainCharacter = GameObject.FindGameObjectWithTag("Player").transform;
         MainCharacterData mainCharacterData = new MainCharacterData(mainCharacter.position, mainCharacter.eulerAngles, mainCharacter.GetComponent<MainCharacter>().CurrentHealth);
 
-        GameData gameData = new GameData(mainCharacterData);
+        // Items on world
+        List<ItemOnWorldData> itemsOnWorldData = new List<ItemOnWorldData>();
+        foreach (GameObject item in GameObject.FindGameObjectsWithTag("Item"))
+        {
+            itemsOnWorldData.Add(new ItemOnWorldData(item.transform.position, item.transform.eulerAngles, item.GetComponent<ItemOnWorld>().ItemName));
+        }
+
+        GameData gameData = new GameData(mainCharacterData, itemsOnWorldData);
 
         // Create file
         BinaryFormatter bf = new BinaryFormatter();

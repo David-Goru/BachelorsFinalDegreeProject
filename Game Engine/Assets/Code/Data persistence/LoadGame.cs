@@ -6,26 +6,28 @@ using System.IO;
 
 public class LoadGame : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> models;
+    [SerializeField] private List<Item> items;
 
     // Getters
-    public List<GameObject> Models { get => models; }
+    public List<Item> Items { get => items; }
 
     // Singleton
     public static LoadGame Instance;
 
     private void Start()
     {
-        Instance = this;
+        if (!Menu.LoadingGame) return;
 
-        //StartCoroutine(loadGame());
+        Instance = this;
+        StartCoroutine(loadGame());
     }
 
     private IEnumerator loadGame()
     {
         setText("game data file");
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Open(string.Format("{0}/The Final Spell/Saves/{1}.save", System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "Test"), FileMode.Open);
+        string savedGamePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "\\The Final Spell\\Saves\\";
+        FileStream file = File.Open(string.Format("{0}{1}.save", savedGamePath, Menu.GameName), FileMode.Open);
         GameData gameData = (GameData)bf.Deserialize(file);
         file.Close();
         yield return new WaitForSeconds(0.05f);
@@ -33,6 +35,13 @@ public class LoadGame : MonoBehaviour
         setText("main character");
         yield return new WaitUntil(() => gameData.MainCharacterData.Load());
         yield return new WaitForSeconds(0.05f);
+
+        for (int i = 0; i < gameData.ItemsOnWorldData.Count; i++)
+        {
+            setText(string.Format("items on floor ({0}/{1})", i, gameData.ItemsOnWorldData.Count));
+            yield return new WaitUntil(() => gameData.ItemsOnWorldData[i].Load());
+            yield return new WaitForSeconds(0.025f);
+        }
     }
 
     private void setText(string loadingData)
