@@ -71,7 +71,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 2
+  m_Radius: 1
   m_Height: 2.2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -192,10 +192,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  pickUpRange: 2
   animator: {fileID: 0}
   noise: {fileID: 0}
   movement: {fileID: 0}
   animations: {fileID: 0}
+  characterCamera: {fileID: 0}
+  itemGatherArea: {fileID: 0}
   currentHealth: 0
   currentState: 0
 --- !u!114 &4631880213517836787
@@ -268,13 +271,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b145b06bb546054db1a823b64905999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCharacter: {fileID: 0}
-  characterModel: {fileID: 0}
-  cameraSkillshotPoint: {fileID: 0}
   spells:
   - {fileID: 11400000, guid: 5ab479e1e86bbd94d95aa692bb9514d5, type: 2}
   - {fileID: 11400000, guid: e0612f6564cf76349adadddb4636cf83, type: 2}
   - {fileID: 11400000, guid: 25c0b4fcd58105a4ab71db132be8c840, type: 2}
+  mainCharacter: {fileID: 0}
+  characterModel: {fileID: 0}
+  cameraSkillshotPoint: {fileID: 0}
   runningSpells: []
   currentStep: 0
   currentStepTime: 0

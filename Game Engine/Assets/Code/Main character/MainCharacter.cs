@@ -6,12 +6,15 @@ public class MainCharacter : Entity
 {
     [Header("Attributes")]
     [SerializeField] [Tooltip("Health the main character has when spawning")] private int maxHealth = 0;
+    [SerializeField] [Tooltip("Range the main character has for picking up items from the floor")] private float pickUpRange = 0.0f;
 
     [Header("References")]
     [SerializeField] private Animator animator = null;
     [SerializeField] private MainCharacterNoise noise = null;
     [SerializeField] private MainCharacterMovement movement = null;
     [SerializeField] private MainCharacterAnimations animations = null;
+    [SerializeField] private MainCharacterCamera characterCamera = null;
+    [SerializeField] private CapsuleCollider itemGatherArea = null;
 
     [Header("Debug")]
     [SerializeField] private int currentHealth =  0;
@@ -22,18 +25,20 @@ public class MainCharacter : Entity
     public MainCharacterMovement Movement { get => movement; }
 
     // Getters and setters
-    public int CurrentHealth { get => currentHealth; set => currentHealth = value; }
-    public MainCharacterState CurrentState { get => currentState; set => currentState = value; }
+    public int CurrentHealth { get => currentHealth; }
+    public MainCharacterState CurrentState { get => currentState; }
 
     private void Start()
     {
         // Get components
         try
         {
-            animator = transform.Find("Main character").GetComponent<Animator>();
             noise = transform.Find("Noise area").GetComponent<MainCharacterNoise>();
             movement = gameObject.GetComponent<MainCharacterMovement>();
             animations = gameObject.GetComponent<MainCharacterAnimations>();
+            characterCamera = gameObject.GetComponent<MainCharacterCamera>();
+            animator = transform.Find("Main character").GetComponent<Animator>();
+            itemGatherArea = transform.Find("Item gather area").GetComponent<CapsuleCollider>();
         }
         catch (UnityException e) 
         { 
@@ -41,9 +46,23 @@ public class MainCharacter : Entity
             enabled = false;
         }
 
-        // Set base stats
-        currentHealth = maxHealth;
+        if (maxHealth == 0) Debug.Log("Main character max health has not been defined.");
+        if (pickUpRange == 0.0f) Debug.Log("Main character pick up range has not been defined.");
+
+        // Set base info
         currentState = MainCharacterState.IDLE;
+        itemGatherArea.radius = pickUpRange;
+
+        // Set stats if new game
+        if (!Menu.LoadingGame)
+        {
+            currentHealth = maxHealth;
+        }
+    }
+
+    public void Load(int currentHealth)
+    {
+        this.currentHealth = currentHealth;
     }
 
     public void SetState(MainCharacterState newState)

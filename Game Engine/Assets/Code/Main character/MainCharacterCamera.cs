@@ -4,8 +4,8 @@ using Cinemachine;
 public class MainCharacterCamera : MonoBehaviour
 {
     [Header("Attributes")]
-    [SerializeField] [Tooltip("Speed for camera rotation")] [Range(0, 500)] private float rotationSpeed = 0f;    
-    [SerializeField] [Tooltip("Speed for camera zoom")] [Range(0, 25)] private float zoomSpeed = 0f;
+    [SerializeField] [Tooltip("Speed for camera rotation")] [Range(0, 500)] private float rotationSpeed = 0.0f;    
+    [SerializeField] [Tooltip("Speed for camera zoom")] [Range(0, 25)] private float zoomSpeed = 0.0f;
 
     [Header("References")]
     [SerializeField] private CinemachineFreeLook characterCameraComponent = null;

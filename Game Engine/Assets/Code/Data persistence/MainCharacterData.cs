@@ -25,7 +25,7 @@ public class MainCharacterData
             GameObject mainCharacter = GameObject.FindGameObjectWithTag("Player");
             mainCharacter.transform.position = new Vector3(xPosition, yPosition, zPosition);
             mainCharacter.transform.rotation = Quaternion.Euler(0.0f, yRotation, 0.0f);
-            mainCharacter.GetComponent<MainCharacter>().CurrentHealth = currentHealth;
+            mainCharacter.GetComponent<MainCharacter>().Load(currentHealth);
         }
         catch (UnityException e)
         {

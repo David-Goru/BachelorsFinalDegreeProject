@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class MainCharacterSpells : MonoBehaviour
 {
+    [Header("Attributes")]
+    [SerializeField] private List<Spell> spells;
+
     [Header("References")]
     [SerializeField] private MainCharacter mainCharacter = null;
     [SerializeField] private Transform characterModel = null;
     [SerializeField] private Transform cameraSkillshotPoint = null;
-    [SerializeField] private List<Spell> spells;
 
     [Header("Debug")]
     [SerializeField] private List<Spell> runningSpells = null;
