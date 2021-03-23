@@ -133,6 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 85373681}
   - component: {fileID: 85373680}
+  - component: {fileID: 85373683}
+  - component: {fileID: 85373682}
   m_Layer: 0
   m_Name: World scripts
   m_TagString: Untagged
@@ -168,6 +170,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &85373682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85373679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4fd9c4d8da9994ca8ddd10ec9bbdd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: []
+  achievements:
+  - {fileID: 11400000, guid: 030debb94671b524f9df6e4466790e16, type: 2}
+--- !u!114 &85373683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85373679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04b3a74561e7c34193f8d5600430c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  achievements:
+  - {fileID: 11400000, guid: 030debb94671b524f9df6e4466790e16, type: 2}
 --- !u!1 &92043980
 GameObject:
   m_ObjectHideFlags: 0
@@ -5748,7 +5779,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395292497}
-  m_LocalRotation: {x: -0.01818949, y: -0.00000003615023, z: 0.000000040943632, w: 0.9998346}
+  m_LocalRotation: {x: -0.01818949, y: -0.0000000039393253, z: 0.0000000044616675, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

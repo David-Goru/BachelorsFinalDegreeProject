@@ -6,6 +6,7 @@ using System.IO;
 
 public class LoadGame : MonoBehaviour
 {
+    [Header("Lists")]
     [SerializeField] private List<Item> items;
 
     // Getters
@@ -16,10 +17,9 @@ public class LoadGame : MonoBehaviour
 
     private void Start()
     {
-        if (!Menu.LoadingGame) return;
-
         Instance = this;
-        StartCoroutine(loadGame());
+
+        if (Menu.LoadingGame) StartCoroutine(loadGame());
     }
 
     private IEnumerator loadGame()
@@ -42,10 +42,18 @@ public class LoadGame : MonoBehaviour
             yield return new WaitUntil(() => gameData.ItemsOnWorldData[i].Load());
             yield return new WaitForSeconds(0.025f);
         }
+
+        for (int i = 0; i < gameData.AchievementsData.Count; i++)
+        {
+            setText(string.Format("achievements ({0}/{1})", i, gameData.AchievementsData.Count));
+            yield return new WaitUntil(() => gameData.AchievementsData[i].Load());
+            yield return new WaitForSeconds(0.025f);
+        }
     }
 
     private void setText(string loadingData)
     {
+        Debug.Log(string.Format("Loading {0}...", loadingData));
         //loadingText.text = string.Format("Loading {0}...", loadingData);
     }
 }

@@ -65,7 +65,14 @@ public class SaveGame : MonoBehaviour
             itemsOnWorldData.Add(new ItemOnWorldData(item.transform.position, item.transform.eulerAngles, item.GetComponent<ItemOnWorld>().ItemName));
         }
 
-        GameData gameData = new GameData(mainCharacterData, itemsOnWorldData);
+        // Achievements
+        List<AchievementData> achievementsData = new List<AchievementData>();
+        foreach (Achievement achievement in Achievements.Instance.AchievementsList)
+        {
+            achievementsData.Add(new AchievementData(achievement.name, achievement.Completed));
+        }
+
+        GameData gameData = new GameData(mainCharacterData, itemsOnWorldData, achievementsData);
 
         // Create file
         BinaryFormatter bf = new BinaryFormatter();

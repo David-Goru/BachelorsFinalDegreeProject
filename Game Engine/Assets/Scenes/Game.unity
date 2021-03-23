@@ -4342,6 +4342,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1974128036}
+  - component: {fileID: 1974128037}
   - component: {fileID: 1974128035}
   - component: {fileID: 1974128034}
   m_Layer: 0
@@ -4397,6 +4398,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1974128037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974128033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04b3a74561e7c34193f8d5600430c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  achievements:
+  - {fileID: 11400000, guid: 030debb94671b524f9df6e4466790e16, type: 2}
 --- !u!1 &1985658938
 GameObject:
   m_ObjectHideFlags: 3
@@ -4547,7 +4562,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2085573164}
-  m_LocalRotation: {x: 0.000000029802322, y: -0.000000019628514, z: 0.000000023063503, w: 1}
+  m_LocalRotation: {x: -0, y: -0.000000033756955, z: 0.000000039664414, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
