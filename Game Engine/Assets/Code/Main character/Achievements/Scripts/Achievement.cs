@@ -12,14 +12,20 @@ public class Achievement : ScriptableObject
     // Getters
     public bool Completed { get => completed; }
 
+    public void AssignBooks(GameObject books)
+    {
+        this.books = books;
+    }
+
     public void SetState(bool state)
     {
         completed = state;
 
-        if (state)
-        {
-            if (books == null) Debug.Log("Achievement books have not been defined.");
-            //else books.SetActive(true);
-        }
+        if (books != null) UpdateBooksState();
+    }
+
+    public void UpdateBooksState()
+    {
+        books.SetActive(completed);
     }
 }
