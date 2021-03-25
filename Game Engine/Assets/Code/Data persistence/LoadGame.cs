@@ -32,21 +32,10 @@ public class LoadGame : MonoBehaviour
         file.Close();
         yield return new WaitForSeconds(0.05f);
 
-        setText("main character");
-        yield return new WaitUntil(() => gameData.MainCharacterData.Load());
-        yield return new WaitForSeconds(0.05f);
-
-        for (int i = 0; i < gameData.ItemsOnWorldData.Count; i++)
+        foreach(SaveElement element in gameData.SaveElements)
         {
-            setText(string.Format("items on floor ({0}/{1})", i, gameData.ItemsOnWorldData.Count));
-            yield return new WaitUntil(() => gameData.ItemsOnWorldData[i].Load());
-            yield return new WaitForSeconds(0.025f);
-        }
-
-        for (int i = 0; i < gameData.AchievementsData.Count; i++)
-        {
-            setText(string.Format("achievements ({0}/{1})", i, gameData.AchievementsData.Count));
-            yield return new WaitUntil(() => gameData.AchievementsData[i].Load());
+            setText(string.Format(element.Name));
+            yield return new WaitUntil(() => element.Load());
             yield return new WaitForSeconds(0.025f);
         }
     }

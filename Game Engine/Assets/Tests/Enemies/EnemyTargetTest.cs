@@ -14,8 +14,8 @@ public class EnemyTargetTest : MonoBehaviour
         if (nextProjectile <= 0)
         {
             nextProjectile = timeBetweenProjectiles;
-            IProjectileBehaviour pb = Instantiate(projectileTest, transform).GetComponent<IProjectileBehaviour>();
-            pb.NextState();
+            IProjectile pb = Instantiate(projectileTest, transform).GetComponent<IProjectile>();
+            //pb.NextState();
             pb.Detonate();
         }
     }

@@ -3,19 +3,17 @@ using System.Collections.Generic;
 [System.Serializable]
 public class GameData
 {
-    private MainCharacterData mainCharacterData;
-    private List<ItemOnWorldData> itemsOnWorldData;
-    private List<AchievementData> achievementsData;
+    private List<SaveElement> saveElements;
 
     // Getters
-    public MainCharacterData MainCharacterData { get => mainCharacterData; }
-    public List<ItemOnWorldData> ItemsOnWorldData { get => itemsOnWorldData; }
-    public List<AchievementData> AchievementsData { get => achievementsData; }
+    public List<SaveElement> SaveElements { get => saveElements; set => saveElements = value; }
 
-    public GameData(MainCharacterData mainCharacterData, List<ItemOnWorldData> itemsOnWorldData, List<AchievementData> achievementsData)
+    public GameData()
     {
-        this.mainCharacterData = mainCharacterData;
-        this.itemsOnWorldData = itemsOnWorldData;
-        this.achievementsData = achievementsData;
+        saveElements = new List<SaveElement>();
+    }
+    public GameData(List<SaveElement> saveElements)
+    {
+        this.saveElements = saveElements;
     }
 }

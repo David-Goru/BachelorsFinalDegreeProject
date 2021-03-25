@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System;
 
-public class Enemy : Entity
+public class Enemy : MonoBehaviour, IEntity
 {
     [Header("References")]
     [SerializeField] private Transform projectileSpawner = null;
@@ -48,7 +48,7 @@ public class Enemy : Entity
         chase();
     }
 
-    public override void ReceiveDamage(int damageAmount)
+    public void ReceiveDamage(int damageAmount)
     {
         if (currentHealth <= 0) return;
 
@@ -140,8 +140,8 @@ public class Enemy : Entity
             if (enemyInfo.Projectile != null) Instantiate(enemyInfo.Projectile, projectileSpawner.position, Quaternion.identity).GetComponent<EnemyProjectile>().StartProjectile(enemyInfo.Damage, currentTarget.transform);
             else
             {
-                Entity e = currentTarget.transform.parent.GetComponent<Entity>();
-                if (e) e.ReceiveDamage(enemyInfo.Damage);
+                IEntity e = currentTarget.transform.parent.GetComponent<IEntity>();
+                if (e != null) e.ReceiveDamage(enemyInfo.Damage);
             }
         }
     }
@@ -196,7 +196,7 @@ public class Enemy : Entity
             {
                 if (UnityEngine.Random.Range(0.0f, 1.0f) < spawnProb)
                 {
-                    Instantiate(loot.ItemModel, transform.position + Vector3.up, Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0)).GetComponent<ItemOnWorld>().Initialize(loot);
+                    Instantiate(loot.ItemModel, transform.position + Vector3.up, Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0)).GetComponent<ItemOnWorld>().Spawn(loot);
                     spawnProb = spawnProb * 2.0f / 3.0f; // Reduce a bit the prob for next items
                 }
             }

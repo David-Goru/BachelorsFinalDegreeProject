@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class LethalOrbProjectileBehaviour : IProjectileBehaviour
+public class LethalOrbProjectileBehaviour : MonoBehaviour, IProjectileWithStart
 {
     [Header("Attributes")]
     [SerializeField] [Tooltip("Damage of the projectile when detonation occurs")] private int projectileDamage = 0;
@@ -14,22 +13,23 @@ public class LethalOrbProjectileBehaviour : IProjectileBehaviour
     [SerializeField] private GameObject explosionParticles;
     [SerializeField] private Material detonatedMaterial;
 
-    public override void StartProjectile()
+    public void StartProjectile()
     {
         StartCoroutine(startProjectile());
     }
+
     private IEnumerator startProjectile()
     {
         yield return new WaitForSeconds(0.25f);
         model.SetActive(true);
     }
 
-    public override void Stop()
+    public void Stop()
     {
         Destroy(gameObject);
     }
 
-    public override void Detonate()
+    public void Detonate()
     {
         StartCoroutine(startDetonation());
     }
@@ -52,9 +52,9 @@ public class LethalOrbProjectileBehaviour : IProjectileBehaviour
     {
         foreach (Collider col in Physics.OverlapSphere(transform.position, projectileRadius))
         {
-            if (col.gameObject.CompareTag("Player") || col.gameObject.CompareTag("Item")) continue;
-            Entity e = col.gameObject.GetComponent<Entity>();
-            if (e)
+            if (col.gameObject.CompareTag("Player")) continue;
+            IEntity e = col.gameObject.GetComponent<IEntity>();
+            if (e != null)
             {
                 col.GetComponent<Rigidbody>().AddForce((col.transform.position - transform.position).normalized * pushForce);
                 e.ReceiveDamage(projectileDamage);

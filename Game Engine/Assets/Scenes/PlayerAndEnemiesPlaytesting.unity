@@ -155,6 +155,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenSaves: 2
+  saveElements:
+  - MainCharacterData
+  - AchievementsData
+  - ItemsOnWorldData
   nextSave: 0
 --- !u!4 &85373681
 Transform:
@@ -183,8 +187,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
-  achievements:
-  - {fileID: 11400000, guid: 030debb94671b524f9df6e4466790e16, type: 2}
 --- !u!114 &85373683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5779,7 +5781,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395292497}
-  m_LocalRotation: {x: -0.01818949, y: -0.0000000039393253, z: 0.0000000044616675, w: 0.9998346}
+  m_LocalRotation: {x: -0.01818949, y: -0.000000036150233, z: 0.000000040943632, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class MainCharacterData
+public class MainCharacterData : SaveElement
 {
     [SerializeField] private float xPosition;
     [SerializeField] private float yPosition;
@@ -9,16 +9,20 @@ public class MainCharacterData
     [SerializeField] private float yRotation;
     [SerializeField] private int currentHealth;
 
-    public MainCharacterData(Vector3 position, Vector3 rotation, int currentHealth)
+    public override SaveElement Save()
     {
-        xPosition = position.x;
-        yPosition = position.y;
-        zPosition = position.z;
-        yRotation = rotation.y;
-        this.currentHealth = currentHealth;
+        Name = "Main Character";
+        Transform mainCharacter = GameObject.FindGameObjectWithTag("Player").transform;
+        xPosition = mainCharacter.position.x;
+        yPosition = mainCharacter.position.y;
+        zPosition = mainCharacter.position.z;
+        yRotation = mainCharacter.eulerAngles.y;
+        currentHealth = mainCharacter.GetComponent<MainCharacter>().CurrentHealth;
+
+        return this;
     }
 
-    public bool Load()
+    public override bool Load()
     {
         try
         {

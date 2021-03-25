@@ -9,6 +9,7 @@ public class SaveGame : MonoBehaviour
 {
     [Header("Attributes")]
     [SerializeField] private int timeBetweenSaves = 0;
+    [SerializeField] private List<string> saveElements;
 
     [Header("Debug")]
     [SerializeField] private int nextSave = 0;
@@ -54,25 +55,14 @@ public class SaveGame : MonoBehaviour
         // Create path if doesn't exist
         if (!Directory.Exists(savedGamesPath)) Directory.CreateDirectory(savedGamesPath);
 
-        // Main character
-        Transform mainCharacter = GameObject.FindGameObjectWithTag("Player").transform;
-        MainCharacterData mainCharacterData = new MainCharacterData(mainCharacter.position, mainCharacter.eulerAngles, mainCharacter.GetComponent<MainCharacter>().CurrentHealth);
+        // Create game data object
+        GameData gameData = new GameData();
 
-        // Items on world
-        List<ItemOnWorldData> itemsOnWorldData = new List<ItemOnWorldData>();
-        foreach (GameObject item in GameObject.FindGameObjectsWithTag("Item"))
+        // Save elements
+        foreach (string element in saveElements)
         {
-            itemsOnWorldData.Add(new ItemOnWorldData(item.transform.position, item.transform.eulerAngles, item.GetComponent<ItemOnWorld>().ItemName));
+            gameData.SaveElements.Add(((SaveElement)Activator.CreateInstance(Type.GetType(element))).Save());
         }
-
-        // Achievements
-        List<AchievementData> achievementsData = new List<AchievementData>();
-        foreach (Achievement achievement in Achievements.Instance.AchievementsList)
-        {
-            achievementsData.Add(new AchievementData(achievement.name, achievement.Completed));
-        }
-
-        GameData gameData = new GameData(mainCharacterData, itemsOnWorldData, achievementsData);
 
         // Create file
         BinaryFormatter bf = new BinaryFormatter();

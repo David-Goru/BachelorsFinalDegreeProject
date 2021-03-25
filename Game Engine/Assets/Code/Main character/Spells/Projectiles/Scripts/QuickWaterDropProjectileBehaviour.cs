@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuickWaterDropProjectileBehaviour : IProjectileBehaviour
+public class QuickWaterDropProjectileBehaviour : MonoBehaviour, IProjectile
 {
     [Header("Attributes")]
     [SerializeField] [Tooltip("Damage of the projectile when detonation occurs")] private int projectileDamage = 0;
@@ -13,7 +13,7 @@ public class QuickWaterDropProjectileBehaviour : IProjectileBehaviour
     [SerializeField] private bool isDetonating = false;
     [SerializeField] private float timeDetonating = 0.0f;
 
-    public override void Stop()
+    public void Stop()
     {
         Destroy(gameObject);
     }
@@ -27,7 +27,7 @@ public class QuickWaterDropProjectileBehaviour : IProjectileBehaviour
         if (timeDetonating >= detonationDuration) endDetonation();
     }
 
-    public override void Detonate()
+    public void Detonate()
     {
         isDetonating = true;
 
@@ -40,8 +40,8 @@ public class QuickWaterDropProjectileBehaviour : IProjectileBehaviour
     {
         if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("PlayerItemGatherArea") || collision.gameObject.CompareTag("Item")) return;
         
-        Entity e = collision.gameObject.GetComponent<Entity>();
-        if (e) e.ReceiveDamage(projectileDamage);
+        IEntity e = collision.gameObject.GetComponent<IEntity>();
+        if (e != null) e.ReceiveDamage(projectileDamage);
 
         endDetonation();
     }

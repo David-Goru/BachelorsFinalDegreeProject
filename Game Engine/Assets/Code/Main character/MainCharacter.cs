@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainCharacter : Entity
+public class MainCharacter : MonoBehaviour, IEntity
 {
     [Header("Attributes")]
     [SerializeField] [Tooltip("Health the main character has when spawning")] private int maxHealth = 0;
@@ -76,7 +76,7 @@ public class MainCharacter : Entity
         noise.SetNoise(newState);
     }
 
-    public override void ReceiveDamage(int damageAmount)
+    public void ReceiveDamage(int damageAmount)
     {
         if (PlayerAndEnemiesPlaytesting.Instance != null)
         {

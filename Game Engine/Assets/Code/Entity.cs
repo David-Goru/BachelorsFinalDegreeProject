@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public interface IEntity
 {
-    public virtual void ReceiveDamage(int damageAmount) { }
+    public void ReceiveDamage(int damageAmount);
 }

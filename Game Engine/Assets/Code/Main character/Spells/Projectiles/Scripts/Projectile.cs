@@ -13,14 +13,14 @@ public class Projectile : ScriptableObject
     [SerializeField] private GameObject projectilePrefab = null;
 
     [Header("Debug")]
-    [SerializeField] private IProjectileBehaviour currentProjectile = null;
+    [SerializeField] private IProjectile currentProjectile = null;
 
     public void Spawn(Transform spawnPoint) 
     {
         if (currentProjectile != null) return;
 
-        currentProjectile = MonoBehaviour.Instantiate<GameObject>(projectilePrefab, spawnPoint.position + spawnPoint.forward * forwardOffset + spawnPoint.right * rightOffset, spawnPoint.rotation).GetComponent<IProjectileBehaviour>();
-        currentProjectile.StartProjectile();
+        currentProjectile = MonoBehaviour.Instantiate<GameObject>(projectilePrefab, spawnPoint.position + spawnPoint.forward * forwardOffset + spawnPoint.right * rightOffset, spawnPoint.rotation).GetComponent<IProjectile>();
+        if (currentProjectile is IProjectileWithStart) ((IProjectileWithStart)currentProjectile).StartProjectile();
     }
 
     public void NextState()
@@ -31,7 +31,7 @@ public class Projectile : ScriptableObject
             return;
         }
 
-        currentProjectile.NextState();
+        if (currentProjectile is IProjectileWithStates) ((IProjectileWithStates)currentProjectile).NextState();
     }
 
     public void Detonate()

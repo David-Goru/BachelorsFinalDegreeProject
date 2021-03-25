@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloralFlameProjectileBehaviour : IProjectileBehaviour
+public class FloralFlameProjectileBehaviour : MonoBehaviour, IProjectileWithStates
 {
     [Header("Attributes")]
     [SerializeField] [Tooltip("Damage of the projectile when detonation occurs")] private int projectileDamage = 0;
@@ -14,7 +14,7 @@ public class FloralFlameProjectileBehaviour : IProjectileBehaviour
     [Header("Debug")]
     [SerializeField] private int currentState = 0;
 
-    public override void Stop()
+    public void Stop()
     {
         if (currentState == 1) StartCoroutine(unExtend());
         else Destroy(gameObject);
@@ -28,14 +28,14 @@ public class FloralFlameProjectileBehaviour : IProjectileBehaviour
         Destroy(gameObject);
     }
 
-    public override void NextState()
+    public void NextState()
     {
         currentState++;
 
         if (currentState == 1) animator.SetTrigger("Extend");
     }
 
-    public override void Detonate()
+    public void Detonate()
     {
         StartCoroutine(startDetonation());
     }
@@ -53,8 +53,8 @@ public class FloralFlameProjectileBehaviour : IProjectileBehaviour
         foreach (Collider col in Physics.OverlapSphere(transform.position, projectileRadius))
         {
             if (col.gameObject.CompareTag("Player") || col.gameObject.CompareTag("Item")) continue;
-            Entity e = col.gameObject.GetComponent<Entity>();
-            if (e) e.ReceiveDamage(projectileDamage);
+            IEntity e = col.gameObject.GetComponent<IEntity>();
+            if (e != null) e.ReceiveDamage(projectileDamage);
         }
     }
 

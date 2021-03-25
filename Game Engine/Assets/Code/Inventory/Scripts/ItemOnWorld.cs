@@ -2,26 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemOnWorld : MonoBehaviour
+public class ItemOnWorld : MonoBehaviour, IEntity
 {
     [Header("Debug")]
     [SerializeField] private Item item = null;
     [SerializeField] private bool ignoreCollisions = false;
 
-    // Getters
-    public string ItemName { get => item.name; }
+    public void Spawn(Item item)
+    {
+        GetComponent<Rigidbody>().AddForce(Vector3.right * Random.Range(-2.5f, 2.5f) + Vector3.forward * Random.Range(-2.5f, 2.5f), ForceMode.Impulse);
+        Initialize(item);
+    }
 
     public void Initialize(Item item)
     {
         this.item = item;
-        ignoreCollisions = false;
-
-        GetComponent<Rigidbody>().AddForce(Vector3.right * Random.Range(-2.5f, 2.5f) + Vector3.forward * Random.Range(-2.5f, 2.5f), ForceMode.Impulse);
-    }
-
-    public void Load(Item item)
-    {
-        this.item = item;
+        gameObject.name = item.name;
         ignoreCollisions = false;
     }
 
@@ -41,9 +37,13 @@ public class ItemOnWorld : MonoBehaviour
 
     private bool magnetToPlayer(Vector3 playerPosition)
     {
-        Debug.Log(transform.position + ", " + playerPosition);
         transform.position = Vector3.MoveTowards(transform.position, playerPosition, Time.deltaTime * 10.0f);        
 
         return Vector3.Distance(transform.position, playerPosition) < 1;
+    }
+
+    public void ReceiveDamage(int damageAmount)
+    {
+        // Nothing
     }
 }

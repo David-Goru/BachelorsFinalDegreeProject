@@ -29,8 +29,8 @@ public class EnemyProjectile : MonoBehaviour
 
         if (Vector3.Distance(transform.position, projectileTarget.position + Vector3.up) < 0.5f)
         {
-            Entity e = projectileTarget.transform.parent.GetComponent<Entity>();
-            if (e) e.ReceiveDamage(projectileDamage);
+            IEntity e = projectileTarget.transform.parent.GetComponent<IEntity>();
+            if (e != null) e.ReceiveDamage(projectileDamage);
             endDetonation();
         }
     }
