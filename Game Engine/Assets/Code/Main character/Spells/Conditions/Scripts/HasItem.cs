@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "HasItem", menuName = "Spells/Conditions/HasItem", order = 0)]
 public class HasItem : ICondition
 {
-    [SerializeField] private string itemName;
-    [SerializeField] private int amount;
+    [SerializeField] private string itemName = "";
+    [SerializeField] private int amount = 0;
 
     public override bool MeetsCondition()
     {

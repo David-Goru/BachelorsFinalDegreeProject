@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "IsUsingButton", menuName = "Spells/Conditions/IsUsingButton", order = 0)]
 public class IsUsingButton : ICondition
 {
-    [SerializeField] private string buttonName;
+    [SerializeField] private string buttonName = "";
 
     public override bool MeetsCondition()
     {        

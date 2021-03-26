@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FloralFlameProjectileBehaviour : MonoBehaviour, IProjectileWithStates
@@ -13,6 +12,18 @@ public class FloralFlameProjectileBehaviour : MonoBehaviour, IProjectileWithStat
 
     [Header("Debug")]
     [SerializeField] private int currentState = 0;
+
+    public void NextState()
+    {
+        currentState++;
+
+        if (currentState == 1) animator.SetTrigger("Extend");
+    }
+
+    public void Detonate()
+    {
+        StartCoroutine(startDetonation());
+    }
 
     public void Stop()
     {
@@ -28,18 +39,6 @@ public class FloralFlameProjectileBehaviour : MonoBehaviour, IProjectileWithStat
         Destroy(gameObject);
     }
 
-    public void NextState()
-    {
-        currentState++;
-
-        if (currentState == 1) animator.SetTrigger("Extend");
-    }
-
-    public void Detonate()
-    {
-        StartCoroutine(startDetonation());
-    }
-
     private IEnumerator startDetonation()
     {
         animator.SetTrigger("Raise");
@@ -52,7 +51,7 @@ public class FloralFlameProjectileBehaviour : MonoBehaviour, IProjectileWithStat
     {
         foreach (Collider col in Physics.OverlapSphere(transform.position, projectileRadius))
         {
-            if (col.gameObject.CompareTag("Player") || col.gameObject.CompareTag("Item")) continue;
+            if (col.gameObject.CompareTag("Player")) continue;
             IEntity e = col.gameObject.GetComponent<IEntity>();
             if (e != null) e.ReceiveDamage(projectileDamage);
         }

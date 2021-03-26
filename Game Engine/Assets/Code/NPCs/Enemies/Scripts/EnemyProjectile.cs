@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
@@ -18,7 +16,7 @@ public class EnemyProjectile : MonoBehaviour
         projectileDamage = damage;
         projectileTarget = target;
 
-        this.enabled = true;
+        enabled = true;
     }
 
     private void Update()

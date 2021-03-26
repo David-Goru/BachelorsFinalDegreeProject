@@ -18,10 +18,9 @@ public class LethalOrbProjectileBehaviour : MonoBehaviour, IProjectileWithStart
         StartCoroutine(startProjectile());
     }
 
-    private IEnumerator startProjectile()
+    public void Detonate()
     {
-        yield return new WaitForSeconds(0.25f);
-        model.SetActive(true);
+        StartCoroutine(startDetonation());
     }
 
     public void Stop()
@@ -29,9 +28,10 @@ public class LethalOrbProjectileBehaviour : MonoBehaviour, IProjectileWithStart
         Destroy(gameObject);
     }
 
-    public void Detonate()
+    private IEnumerator startProjectile()
     {
-        StartCoroutine(startDetonation());
+        yield return new WaitForSeconds(0.25f);
+        model.SetActive(true);
     }
 
     private IEnumerator startDetonation()

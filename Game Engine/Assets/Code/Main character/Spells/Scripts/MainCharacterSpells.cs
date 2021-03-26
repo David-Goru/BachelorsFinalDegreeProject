@@ -19,6 +19,12 @@ public class MainCharacterSpells : MonoBehaviour
 
     private void Start()
     {
+        if (spells.Count == 0)
+        {
+            Debug.Log("Empty spells list. Disabling MainCharacterSpells.");
+            enabled = false;
+        }
+
         // Get components
         try
         {
@@ -29,12 +35,6 @@ public class MainCharacterSpells : MonoBehaviour
         catch (UnityException e)
         {
             Debug.Log("MainCharacterSpells references not found. Disabling script. Error: " + e);
-            enabled = false;
-        }
-
-        if (spells.Count == 0)
-        {
-            Debug.Log("Empty spells list. Disabling MainCharacterSpells.");
             enabled = false;
         }
 
