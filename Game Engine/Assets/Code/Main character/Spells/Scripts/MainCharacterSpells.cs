@@ -109,6 +109,18 @@ public class MainCharacterSpells : MonoBehaviour
         }
     }
 
+    public void BlockSpells()
+    {
+        resetSpells();
+        enabled = false;
+    }
+
+    public void UnblockSpells()
+    {
+        resetSpells();
+        enabled = true;
+    }
+
     private void checkIfCanStart(Spell spell)
     {
         PlayerInput firstInput = spell.GetInputAtStep(0);
