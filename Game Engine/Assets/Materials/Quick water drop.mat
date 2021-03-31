@@ -10,7 +10,7 @@ Material:
   m_Name: Quick water drop
   m_Shader: {fileID: -6465566751694194690, guid: 5432c268b4c49bb4f8d158a496afb4e4, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -49,12 +49,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_02ffffc354c949afb5bbb93ec0f49dd5: 5
-    - Vector1_06742c9e6f024f568253f76d9d634625: 0.5
+    - Vector1_06742c9e6f024f568253f76d9d634625: 7.96
     - Vector1_0d7b150f0a7a4d9a8a43593c5e0c0b44: 3
     - Vector1_abb841c3a11546728cd6ebfc5c91833e: 0.1
     - Vector1_ec176967c752445497e646797f91bfa7: 1
     m_Colors:
     - Color_286c6bab234f4deb86891dfeb4a20c88: {r: 0, g: 0.5512939, b: 0.639, a: 0}
     - Color_afa22bdcf1a34ce8ab0380c447e5ac26: {r: 1, g: 1, b: 1, a: 0}
-    - Color_f9fd033872974677b603fb29e474bbd8: {r: 0.18654324, g: 0.3773585, b: 0.34189728, a: 0}
+    - Color_f9fd033872974677b603fb29e474bbd8: {r: 0.30400002, g: 0.8607998, b: 1, a: 0}
   m_BuildTextureStacks: []
