@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Consume 1 of water
   m_EditorClassIdentifier: 
   waterAmount: 1
+  areaRange: 35

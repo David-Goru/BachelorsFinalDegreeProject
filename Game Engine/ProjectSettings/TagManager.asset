@@ -9,6 +9,7 @@ TagManager:
   - PlayerItemGatherArea
   - FreeLookCamera
   - SkillshotTarget
+  - WaterResource
   layers:
   - Default
   - TransparentFX

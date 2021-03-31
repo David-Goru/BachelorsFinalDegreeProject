@@ -4,9 +4,14 @@ using UnityEngine;
 public class ConsumeWater : IAction
 {
     [SerializeField] private int waterAmount = 0;
+    [SerializeField] private float areaRange = 0.0f;
 
     public override void DoAction()
     {
-        Debug.Log("Consuming " + waterAmount + " units of water");
+        foreach (GameObject waterResource in GameObject.FindGameObjectsWithTag("WaterResource"))
+        {
+            if (Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, waterResource.transform.position) <= areaRange
+                && waterResource.GetComponent<WaterResource>().ConsumeWater(waterAmount)) break;
+        }
     }
 }
