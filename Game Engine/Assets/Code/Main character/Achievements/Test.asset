@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Test
   m_EditorClassIdentifier: 
   books: {fileID: 0}
-  completed: 0
+  completed: 1

@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3565577714860993914}
   - component: {fileID: 975088873025402820}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Item gather area
   m_TagString: PlayerItemGatherArea
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 2234502390179404061}
   - component: {fileID: 6415642311413891807}
   - component: {fileID: 6495280105390083071}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Noise area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 2510023554637463281}
   - component: {fileID: 2719691991261616789}
   - component: {fileID: 1577262153}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Main character
   m_TagString: Player
   m_Icon: {fileID: 0}

@@ -6,6 +6,7 @@ public class EnemySpawn : MonoBehaviour
 {
     [Header("Attributes")]
     [SerializeField] [Tooltip("Maximum enemies spawned at the same time")] private int maxEnemies = 0;
+    [SerializeField] [Tooltip("Spawn all enemies on start")] private bool spawnOnStart = false;
     [SerializeField] [Tooltip("Enemies per minute")] private float spawnRatio = 0.0f;
     [SerializeField] [Tooltip("X and Y area where the enemies can spawn")] private float spawnRadius = 0.0f;
     [SerializeField] [Tooltip("Layers to avoid")] private LayerMask checkLayers;
@@ -25,8 +26,14 @@ public class EnemySpawn : MonoBehaviour
         {
             Debug.Log("Attributes not set. Disabling spawn");
             enabled = false;
+            return;
         }
-        else nextSpawn = Random.Range(0, 60 / spawnRatio);
+        
+        nextSpawn = Random.Range(0, 60 / spawnRatio);
+        if (spawnOnStart)
+        {
+            for (int i = 0; i < maxEnemies; i++) { spawnEnemy(); }
+        }
     }
 
     private void Update()

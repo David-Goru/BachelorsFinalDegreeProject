@@ -10,4 +10,9 @@ public class Books : MonoBehaviour
         achievement.AssignBooks(gameObject);
         achievement.UpdateBooksState();
     }
+
+    private void OnMouseDown()
+    {
+        UI.Instance.ReadAchievement(achievement.name);
+    }
 }

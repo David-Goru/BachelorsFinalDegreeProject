@@ -9,6 +9,10 @@ public class BurnFlora : IAction
 
     public override void DoAction()
     {
-        Debug.Log("Burning flora behind player within " + area + " meters");
+        foreach (Collider plant in Physics.OverlapSphere(GameObject.FindGameObjectWithTag("Player").transform.position, area, 1 << LayerMask.NameToLayer("Flora")))
+        {
+            // Burn animation?
+            Destroy(plant.gameObject);
+        }
     }
 }

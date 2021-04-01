@@ -28,4 +28,9 @@ public class Achievement : ScriptableObject
     {
         books.SetActive(completed);
     }
+
+    public void UnlockAchievement()
+    {
+        SetState(true);
+    }
 }
