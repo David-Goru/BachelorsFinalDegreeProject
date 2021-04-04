@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Floral flame
   m_EditorClassIdentifier: 
   projectile: {fileID: 11400000, guid: 2f1702f2aba196b4c81ec36ac266bd87, type: 2}
+  isSkillshot: 0
   inputSequence:
   - buttonName: Right click
     animationID: 1
@@ -41,6 +42,7 @@ MonoBehaviour:
     detonateProjectile: 0
     conditions:
     - {fileID: 11400000, guid: 90c18fd607a94ae49867f392b3bdfef9, type: 2}
+    - {fileID: 11400000, guid: e2438e7c2c7a84a4cbfe963b814567b7, type: 2}
     actions: []
   - buttonName: Left click
     animationID: 5
