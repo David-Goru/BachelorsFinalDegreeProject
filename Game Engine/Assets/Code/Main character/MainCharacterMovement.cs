@@ -17,7 +17,7 @@ public class MainCharacterMovement : MonoBehaviour
     [Header("References")]
     [SerializeField] private MainCharacter mainCharacter = null;
     [SerializeField] private CinemachineFreeLook characterCameraComponent = null;
-    [SerializeField] private BoxCollider characterCollider = null;
+    [SerializeField] private CapsuleCollider characterCollider = null;
     [SerializeField] private GameObject characterModel = null;
     [SerializeField] private Transform viewPoint = null;
 
@@ -33,7 +33,7 @@ public class MainCharacterMovement : MonoBehaviour
         {
             characterCameraComponent = GameObject.FindGameObjectWithTag("FreeLookCamera").GetComponent<CinemachineFreeLook>();
             mainCharacter = gameObject.GetComponent<MainCharacter>();
-            characterCollider = gameObject.GetComponent<BoxCollider>();
+            characterCollider = gameObject.GetComponent<CapsuleCollider>();
             characterModel = transform.Find("Main character").gameObject;
             viewPoint = transform.Find("View point");
         }
@@ -101,7 +101,7 @@ public class MainCharacterMovement : MonoBehaviour
         else changeState(MainCharacterState.CROUCH);
 
         characterCollider.center = new Vector3(0, crouchingCenter, 0);
-        characterCollider.size = new Vector3(1, crouchingHeight, 1);
+        characterCollider.height = crouchingHeight;
     }
 
     private bool stopCrouching()
@@ -111,7 +111,7 @@ public class MainCharacterMovement : MonoBehaviour
         speed = walkSpeed;
 
         characterCollider.center = new Vector3(0, defaultCenter, 0);
-        characterCollider.size = new Vector3(1, defaultHeight, 1);
+        characterCollider.height = defaultHeight;
         return true;
     }
 

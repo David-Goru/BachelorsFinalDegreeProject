@@ -9,6 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8860778507064525503}
+  - component: {fileID: 318690751422414057}
+  - component: {fileID: 8775121109079795131}
+  - component: {fileID: 9217386523019478927}
+  - component: {fileID: 1821427337239113777}
   m_Layer: 0
   m_Name: Diagonal intersection tile
   m_TagString: Untagged
@@ -31,6 +35,58 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+--- !u!65 &318690751422414057
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566336135289850194}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 0.25, z: 4}
+  m_Center: {x: 0, y: 0.1, z: 0}
+--- !u!65 &8775121109079795131
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566336135289850194}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 0.1, z: 0.4}
+  m_Center: {x: 0, y: 0.25, z: 1.8}
+--- !u!65 &9217386523019478927
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566336135289850194}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.35, y: 0.1, z: 0.35}
+  m_Center: {x: -1.82, y: 0.25, z: -1.82}
+--- !u!65 &1821427337239113777
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566336135289850194}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.35, y: 0.1, z: 0.35}
+  m_Center: {x: 1.82, y: 0.25, z: -1.82}
 --- !u!1001 &3579547740092913816
 PrefabInstance:
   m_ObjectHideFlags: 0
