@@ -94,6 +94,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6078001238266813169}
     m_Modifications:
+    - target: {fileID: -8800951724726838390, guid: 0de9066abcc545946b6bfd253d6e0d91, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3513eedfa387e2e43a37c5a30af96a80, type: 2}
     - target: {fileID: -8679921383154817045, guid: 0de9066abcc545946b6bfd253d6e0d91, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -138,6 +142,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5295842322156712065, guid: 0de9066abcc545946b6bfd253d6e0d91, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3513eedfa387e2e43a37c5a30af96a80, type: 2}
+    - target: {fileID: -1806680513116206669, guid: 0de9066abcc545946b6bfd253d6e0d91, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3513eedfa387e2e43a37c5a30af96a80, type: 2}
     - target: {fileID: 919132149155446097, guid: 0de9066abcc545946b6bfd253d6e0d91, type: 3}
       propertyPath: m_Name
       value: Model

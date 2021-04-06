@@ -211,10 +211,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4683669308469848369, guid: e94825734a18ba34eb26f8d168631266, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3513eedfa387e2e43a37c5a30af96a80, type: 2}
+    - target: {fileID: -3195828791156449804, guid: e94825734a18ba34eb26f8d168631266, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3513eedfa387e2e43a37c5a30af96a80, type: 2}
+    - target: {fileID: -1120989108687609925, guid: e94825734a18ba34eb26f8d168631266, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3513eedfa387e2e43a37c5a30af96a80, type: 2}
+    - target: {fileID: -804731622281664130, guid: e94825734a18ba34eb26f8d168631266, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3513eedfa387e2e43a37c5a30af96a80, type: 2}
     - target: {fileID: 919132149155446097, guid: e94825734a18ba34eb26f8d168631266, type: 3}
       propertyPath: m_Name
       value: Bridge 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2355982399387309400, guid: e94825734a18ba34eb26f8d168631266, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3513eedfa387e2e43a37c5a30af96a80, type: 2}
+    - target: {fileID: 4321514657177891973, guid: e94825734a18ba34eb26f8d168631266, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3513eedfa387e2e43a37c5a30af96a80, type: 2}
+    - target: {fileID: 8567717000986892130, guid: e94825734a18ba34eb26f8d168631266, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3513eedfa387e2e43a37c5a30af96a80, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e94825734a18ba34eb26f8d168631266, type: 3}
 --- !u!4 &9017708437337759162 stripped
