@@ -7,6 +7,7 @@ public class EnemySpawn : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] [Tooltip("Maximum enemies spawned at the same time")] private int maxEnemies = 0;
     [SerializeField] [Tooltip("Spawn all enemies on start")] private bool spawnOnStart = false;
+    [SerializeField] [Tooltip("Spawn all enemies only on trigger")] private bool spawnOnTrigger = false;
     [SerializeField] [Tooltip("Enemies per minute")] private float spawnRatio = 0.0f;
     [SerializeField] [Tooltip("X and Y area where the enemies can spawn")] private float spawnRadius = 0.0f;
     [SerializeField] [Tooltip("Layers to avoid")] private LayerMask checkLayers;
@@ -30,7 +31,7 @@ public class EnemySpawn : MonoBehaviour
         }
         
         nextSpawn = Random.Range(0, 60 / spawnRatio);
-        if (spawnOnStart)
+        if (spawnOnStart && !spawnOnTrigger)
         {
             for (int i = 0; i < maxEnemies; i++) { spawnEnemy(); }
         }
@@ -42,6 +43,8 @@ public class EnemySpawn : MonoBehaviour
         {
             enemy.UpdateState();
         }
+
+        if (spawnOnTrigger) return;
 
         if (enemiesCache.Count >= maxEnemies) return;
         if (nextSpawn > 0) nextSpawn -= Time.deltaTime;
@@ -72,6 +75,11 @@ public class EnemySpawn : MonoBehaviour
             enemy.StartEnemy(this, enemyInfo);
             nextSpawn = 60 / spawnRatio;
         }
+    }
+    
+    public void SpawnEnemies()
+    {
+        for (int i = 0; i < maxEnemies; i++) { spawnEnemy(); }
     }
 
     public void RemoveCache(Enemy enemy)

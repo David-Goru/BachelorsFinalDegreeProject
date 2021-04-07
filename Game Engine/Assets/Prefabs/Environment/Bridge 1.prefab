@@ -44,10 +44,6 @@ GameObject:
   - component: {fileID: 4306146477291331958}
   - component: {fileID: 2255375266143473242}
   - component: {fileID: 5388946393001594447}
-  - component: {fileID: 3950561194331550503}
-  - component: {fileID: 3047270698974445182}
-  - component: {fileID: 1521204726725899308}
-  - component: {fileID: 6715124480331862004}
   m_Layer: 0
   m_Name: Colliders
   m_TagString: Untagged
@@ -93,8 +89,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 8}
-  m_Center: {x: 2.7, y: 13.5, z: -0.1}
+  m_Size: {x: 2, y: 4, z: 8}
+  m_Center: {x: 2.7, y: 14.5, z: -0.1}
 --- !u!65 &5388946393001594447
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -106,60 +102,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 8}
-  m_Center: {x: -4.8, y: 13.5, z: -0.1}
---- !u!65 &3950561194331550503
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4033286181541003297}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.5, z: 1}
-  m_Center: {x: 2.7, y: 15, z: 3.45}
---- !u!65 &3047270698974445182
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4033286181541003297}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.5, z: 1}
-  m_Center: {x: -4.8, y: 15, z: 3.45}
---- !u!65 &1521204726725899308
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4033286181541003297}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.5, z: 1}
-  m_Center: {x: 2.7, y: 15, z: -3.65}
---- !u!65 &6715124480331862004
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4033286181541003297}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.5, z: 1}
-  m_Center: {x: -4.8, y: 15, z: -3.65}
+  m_Size: {x: 2, y: 4, z: 8}
+  m_Center: {x: -4.8, y: 14.5, z: -0.1}
 --- !u!1001 &8840547886878046801
 PrefabInstance:
   m_ObjectHideFlags: 0
