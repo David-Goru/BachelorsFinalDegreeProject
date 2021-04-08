@@ -152,8 +152,8 @@ GameObject:
   - component: {fileID: 6022732348574597017}
   - component: {fileID: 4347619716028286229}
   - component: {fileID: 2510023554637463281}
-  - component: {fileID: 1577262153}
-  - component: {fileID: 5781960037692921245}
+  - component: {fileID: 9106125027077960516}
+  - component: {fileID: 8763222452230279466}
   m_Layer: 2
   m_Name: Main character
   m_TagString: Player
@@ -226,6 +226,7 @@ MonoBehaviour:
   mainCharacter: {fileID: 0}
   characterCameraComponent: {fileID: 0}
   characterCollider: {fileID: 0}
+  characterRigidbody: {fileID: 0}
   characterModel: {fileID: 0}
   viewPoint: {fileID: 0}
   speed: 0
@@ -281,7 +282,7 @@ MonoBehaviour:
   runningSpells: []
   currentStep: 0
   currentStepTime: 0
---- !u!54 &1577262153
+--- !u!54 &9106125027077960516
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -296,8 +297,8 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 3
---- !u!136 &5781960037692921245
+  m_CollisionDetection: 0
+--- !u!136 &8763222452230279466
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

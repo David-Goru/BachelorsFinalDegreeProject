@@ -18,6 +18,7 @@ public class MainCharacterMovement : MonoBehaviour
     [SerializeField] private MainCharacter mainCharacter = null;
     [SerializeField] private CinemachineFreeLook characterCameraComponent = null;
     [SerializeField] private CapsuleCollider characterCollider = null;
+    [SerializeField] private Rigidbody characterRigidbody = null;
     [SerializeField] private GameObject characterModel = null;
     [SerializeField] private Transform viewPoint = null;
 
@@ -34,6 +35,7 @@ public class MainCharacterMovement : MonoBehaviour
             characterCameraComponent = GameObject.FindGameObjectWithTag("FreeLookCamera").GetComponent<CinemachineFreeLook>();
             mainCharacter = gameObject.GetComponent<MainCharacter>();
             characterCollider = gameObject.GetComponent<CapsuleCollider>();
+            characterRigidbody = gameObject.GetComponent<Rigidbody>();
             characterModel = transform.Find("Main character").gameObject;
             viewPoint = transform.Find("View point");
         }
@@ -54,7 +56,7 @@ public class MainCharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (xMovementLastFrame != 0 || zMovementLastFrame != 0) UpdatePosition();
+        UpdatePosition();
     }
 
     public void GetCurrentState()
@@ -73,10 +75,11 @@ public class MainCharacterMovement : MonoBehaviour
 
     public void UpdatePosition()
     {
+        Vector3 velocity = new Vector3(xMovementLastFrame, 0, zMovementLastFrame).normalized * speed * Time.fixedDeltaTime;
         transform.eulerAngles = new Vector3(0, characterCameraComponent.m_XAxis.Value, 0);
-        transform.Translate(new Vector3(xMovementLastFrame, 0, zMovementLastFrame).normalized * speed * Time.fixedDeltaTime);
+        characterRigidbody.AddRelativeForce(velocity * 800);
         viewPoint.position = transform.position;
-        viewPoint.Translate(new Vector3(xMovementLastFrame, 0, zMovementLastFrame).normalized * speed * 10 * Time.fixedDeltaTime);
+        viewPoint.Translate(velocity * 10);
         characterModel.transform.LookAt(viewPoint);
     }
 
