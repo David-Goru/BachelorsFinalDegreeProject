@@ -41,7 +41,9 @@ public class Enemy : MonoBehaviour, IEntity
 
     public void UpdateTarget(GameObject target)
     {
-        if (!agent.isOnNavMesh) return;
+        if (!agent.isOnNavMesh || currentTarget != null) return;
+
+        if (target.transform.parent.GetComponent<MainCharacter>() != null) target.transform.parent.GetComponent<MainCharacter>().StartFighting();
 
         currentTarget = target;
         chase();
@@ -119,6 +121,7 @@ public class Enemy : MonoBehaviour, IEntity
         if (Vector3.Distance(transform.position, ctpos) < enemyInfo.AttackRange) attack();
         else if (Vector3.Distance(transform.position, ctpos) > enemyInfo.ForgetRange)
         {
+            if (currentTarget.transform.parent.GetComponent<MainCharacter>() != null) currentTarget.transform.parent.GetComponent<MainCharacter>().StopFighting();
             currentTarget = null;
             idle();
         }
@@ -182,6 +185,7 @@ public class Enemy : MonoBehaviour, IEntity
         spawnLoot();
         if (PlayerAndEnemiesPlaytesting.Instance != null) PlayerAndEnemiesPlaytesting.Instance.UpdateStat(enemyInfo.name, 1);
 
+        if (currentTarget.transform.parent.GetComponent<MainCharacter>() != null) currentTarget.transform.parent.GetComponent<MainCharacter>().StopFighting();
         spawner.RemoveCache(this);
         Destroy(gameObject);
     }

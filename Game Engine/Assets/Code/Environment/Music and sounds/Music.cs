@@ -30,24 +30,37 @@ public class Music : MonoBehaviour
 
     public void StartSong(string type)
     {
-        if (enabled) StartCoroutine(startSong(type));
+        if (enabled)
+        {
+            StopAllCoroutines();
+            StartCoroutine(startSong(type));
+        }
     }
 
     private IEnumerator startSong(string type)
     {
         AudioClip songSelected = type == "default" ? defaultSong : battleSong;
+        float fadeInSpeed = type == "default" ? 0.1f : 0.01f;
+        float fadeOutSpeed = type == "default" ? 0.005f : 0.01f;
+        float idleTime = type == "default" ? 2.5f : 0.0f;
 
         while (audioSource.volume > 0)
         {
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(fadeOutSpeed);
             audioSource.volume -= 0.01f;
         }
 
-        audioSource.clip = songSelected;
+        if (audioSource.clip != songSelected)
+        {
+            audioSource.clip = songSelected;
+            audioSource.Play();
+        }
+
+        yield return new WaitForSeconds(idleTime);
 
         while (audioSource.volume < 1) // 1 should be replaced wwith max music volume by player options
         {
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(fadeInSpeed);
             audioSource.volume += 0.01f;
         }
     }

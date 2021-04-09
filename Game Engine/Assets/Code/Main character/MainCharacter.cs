@@ -18,10 +18,12 @@ public class MainCharacter : MonoBehaviour, IEntity
     [Header("Debug")]
     [SerializeField] private int currentHealth =  0;
     [SerializeField] private MainCharacterState currentState;
+    [SerializeField] private int enemiesFighting = 0;
 
     // Getters
     public Animator Animator { get => animator; }
     public MainCharacterMovement Movement { get => movement; }
+    public bool IsFighting { get => enemiesFighting > 0; }
 
     // Getters and setters
     public int CurrentHealth { get => currentHealth; }
@@ -94,9 +96,24 @@ public class MainCharacter : MonoBehaviour, IEntity
         }
     }
 
-    public bool IsInFight()
+    public void StartFighting()
     {
-        return !movement.enabled;
+        if (enemiesFighting == 0)
+        {
+            Music.Instance.StartSong("battle");
+        }
+
+        enemiesFighting++;
+    }
+
+    public void StopFighting()
+    {
+        enemiesFighting--;
+
+        if (enemiesFighting == 0)
+        {
+            Music.Instance.StartSong("default");
+        }
     }
 
     private IEnumerator kill()

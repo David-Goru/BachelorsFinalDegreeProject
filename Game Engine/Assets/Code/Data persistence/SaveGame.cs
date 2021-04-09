@@ -24,22 +24,7 @@ public class SaveGame : MonoBehaviour
     {
         yield return new WaitForSeconds(nextSave);
 
-        bool inFight = false;
-
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacter>().IsInFight()) inFight = true;
-        else
-        {
-            foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
-            {
-                if (enemy.GetComponent<Enemy>().IsOnFight())
-                {
-                    inFight = true;
-                    break;
-                }
-            }
-        }
-
-        if (inFight)
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacter>().IsFighting)
         {
             nextSave = 5;
             StartCoroutine(saveTimer());
