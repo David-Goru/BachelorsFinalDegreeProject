@@ -5,15 +5,14 @@ public class MainCharacter : MonoBehaviour, IEntity
 {
     [Header("Attributes")]
     [SerializeField] [Tooltip("Health the main character has when spawning")] private int maxHealth = 0;
-    [SerializeField] [Tooltip("Range the main character has for picking up items from the floor")] private float pickUpRange = 0.0f;
 
     [Header("References")]
-    [SerializeField] private Animator animator = null;
+    [SerializeField] private Transform model = null;
     [SerializeField] private MainCharacterNoise noise = null;
     [SerializeField] private MainCharacterMovement movement = null;
     [SerializeField] private MainCharacterAnimations animations = null;
     [SerializeField] private MainCharacterCamera characterCamera = null;
-    [SerializeField] private CapsuleCollider itemGatherArea = null;
+    [SerializeField] private MainCharacterGatherer gatherer = null;
 
     [Header("Debug")]
     [SerializeField] private int currentHealth =  0;
@@ -21,8 +20,9 @@ public class MainCharacter : MonoBehaviour, IEntity
     [SerializeField] private int enemiesFighting = 0;
 
     // Getters
-    public Animator Animator { get => animator; }
+    public Transform Model { get => model; }
     public MainCharacterMovement Movement { get => movement; }
+    public MainCharacterAnimations Animations { get => animations; }
     public bool IsFighting { get => enemiesFighting > 0; }
 
     // Getters and setters
@@ -34,12 +34,12 @@ public class MainCharacter : MonoBehaviour, IEntity
         // Get components
         try
         {
+            model = transform.Find("Model");
             noise = transform.Find("Noise area").GetComponent<MainCharacterNoise>();
-            movement = gameObject.GetComponent<MainCharacterMovement>();
-            animations = gameObject.GetComponent<MainCharacterAnimations>();
-            characterCamera = gameObject.GetComponent<MainCharacterCamera>();
-            animator = transform.Find("Main character").GetComponent<Animator>();
-            itemGatherArea = transform.Find("Item gather area").GetComponent<CapsuleCollider>();
+            movement = transform.GetComponent<MainCharacterMovement>();
+            animations = transform.GetComponent<MainCharacterAnimations>();
+            characterCamera = transform.GetComponent<MainCharacterCamera>();
+            gatherer = transform.Find("Item gather area").GetComponent<MainCharacterGatherer>();
         }
         catch (UnityException e) 
         { 
@@ -48,17 +48,12 @@ public class MainCharacter : MonoBehaviour, IEntity
         }
 
         if (maxHealth == 0) Debug.Log("Main character max health has not been defined.");
-        if (pickUpRange == 0.0f) Debug.Log("Main character pick up range has not been defined.");
 
         // Set base info
         currentState = MainCharacterState.IDLE;
-        itemGatherArea.radius = pickUpRange;
 
         // Set stats if new game
-        if (!Menu.LoadingGame)
-        {
-            currentHealth = maxHealth;
-        }
+        if (!Menu.LoadingGame) currentHealth = maxHealth;
     }
 
     public void Load(int currentHealth)
@@ -120,7 +115,7 @@ public class MainCharacter : MonoBehaviour, IEntity
     {
         movement.enabled = false;
         SetState(MainCharacterState.DIE);
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Dead"));
+        yield return new WaitUntil(() => animations.DieAnimFinished());
 
         // End screen?
     }

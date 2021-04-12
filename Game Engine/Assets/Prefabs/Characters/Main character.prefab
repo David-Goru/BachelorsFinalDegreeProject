@@ -39,6 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3565577714860993914}
+  - component: {fileID: 3972104331401137957}
   - component: {fileID: 975088873025402820}
   m_Layer: 2
   m_Name: Item gather area
@@ -61,6 +62,20 @@ Transform:
   m_Father: {fileID: 465665912330594629}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3972104331401137957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060680929052884329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7bdbaaa27571b54f9c1a5a0008f871d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUpRange: 0
+  itemGatherArea: {fileID: 0}
 --- !u!136 &975088873025402820
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -267,7 +282,8 @@ MonoBehaviour:
   runningRadius: 4
   crouchingRadius: 2.5
   spellsRadius: 5
-  noiseCollider: {fileID: 6495280105390083071}
+  noiseCollider: {fileID: 0}
+  currentNoiseRadius: 0
 --- !u!135 &6495280105390083071
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -336,13 +352,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  pickUpRange: 2
-  animator: {fileID: 0}
+  model: {fileID: 0}
   noise: {fileID: 0}
   movement: {fileID: 0}
   animations: {fileID: 0}
   characterCamera: {fileID: 0}
-  itemGatherArea: {fileID: 0}
+  gatherer: {fileID: 0}
   currentHealth: 0
   currentState: 0
   enemiesFighting: 0
@@ -372,7 +387,6 @@ MonoBehaviour:
   characterCameraComponent: {fileID: 0}
   characterCollider: {fileID: 0}
   characterRigidbody: {fileID: 0}
-  characterModel: {fileID: 0}
   viewPoint: {fileID: 0}
   speed: 0
   xMovementLastFrame: 0
@@ -390,6 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCharacter: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!114 &4347619716028286229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,7 +437,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e0612f6564cf76349adadddb4636cf83, type: 2}
   - {fileID: 11400000, guid: 25c0b4fcd58105a4ab71db132be8c840, type: 2}
   mainCharacter: {fileID: 0}
-  characterModel: {fileID: 0}
   cameraSkillshotPoint: {fileID: 0}
   runningSpells: []
   currentStep: 0
@@ -533,7 +547,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3513eedfa387e2e43a37c5a30af96a80, type: 2}
     - target: {fileID: 919132149155446097, guid: c9b299546ca5d3043b1282508a17e00e, type: 3}
       propertyPath: m_Name
-      value: Main character
+      value: Model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9b299546ca5d3043b1282508a17e00e, type: 3}

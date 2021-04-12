@@ -9,7 +9,6 @@ public class MainCharacterSpells : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private MainCharacter mainCharacter = null;
-    [SerializeField] private Transform characterModel = null;
     [SerializeField] private Transform cameraSkillshotPoint = null;
 
     [Header("Debug")]
@@ -29,7 +28,6 @@ public class MainCharacterSpells : MonoBehaviour
         try
         {
             mainCharacter = gameObject.GetComponent<MainCharacter>();
-            characterModel = transform.Find("Main character");
             cameraSkillshotPoint = GameObject.FindGameObjectWithTag("SkillshotTarget").transform;
         }
         catch (UnityException e)
@@ -134,14 +132,13 @@ public class MainCharacterSpells : MonoBehaviour
         mainCharacter.SetState(MainCharacterState.USINGSPELLS);
 
         // If skillshot, make character look at player target
-        if (spell.IsSkillshot) characterModel.transform.LookAt(new Vector3(cameraSkillshotPoint.position.x, characterModel.transform.position.y, cameraSkillshotPoint.position.z));
+        if (spell.IsSkillshot) mainCharacter.Model.transform.LookAt(new Vector3(cameraSkillshotPoint.position.x, mainCharacter.Model.transform.position.y, cameraSkillshotPoint.position.z));
 
         // Start animation
-        mainCharacter.Animator.SetTrigger("StartSpells");
-        mainCharacter.Animator.SetInteger("SpellAnimID", firstInput.AnimationID);
+        mainCharacter.Animations.SpellAnimation(firstInput.AnimationID, true);
 
         // Spawn projectile if needed
-        if (firstInput.SpawnProjectile) spell.Projectile.Spawn(characterModel);
+        if (firstInput.SpawnProjectile) spell.Projectile.Spawn(mainCharacter.Model);
     }
 
     private void resetSpells()
@@ -152,9 +149,8 @@ public class MainCharacterSpells : MonoBehaviour
         currentStep = 0;
         currentStepTime = 0;
 
-        // Animations
-        mainCharacter.Animator.SetInteger("SpellAnimID", 0);
-        mainCharacter.Animator.SetTrigger("StopSpells");
+        // Stop animation
+        mainCharacter.Animations.SpellAnimation(0);
 
         // Remove any possible projectile spawned
         foreach (Spell s in spells)
@@ -177,9 +173,9 @@ public class MainCharacterSpells : MonoBehaviour
         // Steps
         currentStep = 0;
         currentStepTime = 0;
-
-        // Animations
-        mainCharacter.Animator.SetInteger("SpellAnimID", 0);
+        
+        // Stop animation
+        mainCharacter.Animations.SpellAnimation(0);
 
         // Spells list
         runningSpells.Clear();
@@ -199,12 +195,12 @@ public class MainCharacterSpells : MonoBehaviour
         currentInput = spell.GetInputAtStep(currentStep);
 
         // Projectiles
-        if (currentInput.SpawnProjectile) spell.Projectile.Spawn(characterModel);
+        if (currentInput.SpawnProjectile) spell.Projectile.Spawn(mainCharacter.Model);
         if (currentInput.NextProjectileState) spell.Projectile.NextState();
         if (currentInput.DetonateProjectile) spell.Projectile.Detonate();
 
         // Animations
-        mainCharacter.Animator.SetInteger("SpellAnimID", currentInput.AnimationID);
+        mainCharacter.Animations.SpellAnimation(currentInput.AnimationID);
 
         // Check recently added running spells and see if they can go to the next step
         foreach (Spell s in runningSpells.ToArray())
@@ -223,7 +219,7 @@ public class MainCharacterSpells : MonoBehaviour
     private IEnumerator unsetRunningSpells()
     {
         mainCharacter.SetState(MainCharacterState.IDLE);
-        yield return new WaitUntil(() => mainCharacter.Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle 1"));
+        yield return new WaitUntil(() => mainCharacter.Animations.SpellsFinished());
         
         yield return new WaitForSeconds(0.05f);
         mainCharacter.Movement.enabled = true;

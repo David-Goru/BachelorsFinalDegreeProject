@@ -14,11 +14,15 @@ public class MainCharacterNoise : MonoBehaviour
     [Header("References")]
     [SerializeField] private SphereCollider noiseCollider;
 
+    [Header("Debug")]
+    [SerializeField] private float currentNoiseRadius = 0.0f;
+
     private void Start()
     {
         try
         {
             noiseCollider = gameObject.GetComponent<SphereCollider>();
+            SetNoise(MainCharacterState.IDLE);
         }
         catch (UnityException e)
         {
@@ -37,28 +41,28 @@ public class MainCharacterNoise : MonoBehaviour
 
     public void SetNoise(MainCharacterState state)
     {
-        float newNoiseRadius = 0.0f;
+        currentNoiseRadius = 0.0f;
 
         switch (state)
         {
             case MainCharacterState.IDLE:
             case MainCharacterState.CROUCH:
-                newNoiseRadius = idleRadius;
+                currentNoiseRadius = idleRadius;
                 break;
             case MainCharacterState.WALK:
-                newNoiseRadius = walkingRadius;
+                currentNoiseRadius = walkingRadius;
                 break;
             case MainCharacterState.WALKCROUCH:
-                newNoiseRadius = crouchingRadius;
+                currentNoiseRadius = crouchingRadius;
                 break;
             case MainCharacterState.RUN:
-                newNoiseRadius = runningRadius;
+                currentNoiseRadius = runningRadius;
                 break;
             case MainCharacterState.USINGSPELLS:
-                newNoiseRadius = spellsRadius;
+                currentNoiseRadius = spellsRadius;
                 break;
         }
 
-        noiseCollider.radius = newNoiseRadius;
+        noiseCollider.radius = currentNoiseRadius;
     }
 }

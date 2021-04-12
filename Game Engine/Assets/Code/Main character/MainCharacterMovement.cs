@@ -19,7 +19,6 @@ public class MainCharacterMovement : MonoBehaviour
     [SerializeField] private CinemachineFreeLook characterCameraComponent = null;
     [SerializeField] private CapsuleCollider characterCollider = null;
     [SerializeField] private Rigidbody characterRigidbody = null;
-    [SerializeField] private GameObject characterModel = null;
     [SerializeField] private Transform viewPoint = null;
 
     [Header("Debug")]
@@ -36,7 +35,6 @@ public class MainCharacterMovement : MonoBehaviour
             mainCharacter = gameObject.GetComponent<MainCharacter>();
             characterCollider = gameObject.GetComponent<CapsuleCollider>();
             characterRigidbody = gameObject.GetComponent<Rigidbody>();
-            characterModel = transform.Find("Main character").gameObject;
             viewPoint = transform.Find("View point");
         }
         catch (UnityException e)
@@ -80,7 +78,7 @@ public class MainCharacterMovement : MonoBehaviour
         characterRigidbody.AddRelativeForce(velocity * 800);
         viewPoint.position = transform.position;
         viewPoint.Translate(velocity * 10);
-        characterModel.transform.LookAt(viewPoint);
+        mainCharacter.Model.transform.LookAt(viewPoint);
     }
 
     private void idle()
