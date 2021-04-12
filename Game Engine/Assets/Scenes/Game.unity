@@ -65665,6 +65665,10 @@ PrefabInstance:
       propertyPath: Loop
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3972104331401137957, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
+      propertyPath: pickUpRange
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4631880213517836787, guid: 2044b169052d94c4db39b0fef9ebde33, type: 3}
       propertyPath: rigidBody
       value: 
