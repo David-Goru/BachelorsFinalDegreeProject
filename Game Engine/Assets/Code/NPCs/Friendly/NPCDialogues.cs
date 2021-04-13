@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class NPC : MonoBehaviour
+public class NPCDialogues : MonoBehaviour
 {
     [Header("Attributes")]
     [SerializeField] [Tooltip("Dialogues that the NPC can say, ordered by importance")] private Dialogue[] dialogues;
@@ -14,6 +12,8 @@ public class NPC : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) > 3.5f) return;
+
         StartTalking();
     }
 }

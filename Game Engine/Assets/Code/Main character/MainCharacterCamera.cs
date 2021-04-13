@@ -35,7 +35,6 @@ public class MainCharacterCamera : MonoBehaviour
 
     private void Update()
     {
-        // Zoom
         if (Input.mouseScrollDelta.y != 0) characterCameraComponent.m_YAxis.m_MaxSpeed = zoomSpeed;
     }
 }
