@@ -14,7 +14,7 @@ public class NPC : MonoBehaviour, IEntity
     public NPCAnimations NpcAnimations { get => animations; }
     public NPCState CurrentState { get => currentState; }
 
-    private void Start()
+    private void Awake()
     {
         try
         {

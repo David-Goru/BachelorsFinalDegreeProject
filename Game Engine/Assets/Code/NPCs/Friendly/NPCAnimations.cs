@@ -7,7 +7,7 @@ public class NPCAnimations : MonoBehaviour
     [SerializeField] private NPC npc = null;
     [SerializeField] private Animator animator = null;
 
-    private void Start()
+    private void Awake()
     {
         try
         {

@@ -26,6 +26,8 @@ public class NPCWaypoints : MonoBehaviour
         try
         {
             npc = transform.GetComponent<NPC>();
+            npc.SetState(NPCState.WALK);
+            StartCoroutine(moveToWaypoint());
         }
         catch (UnityException e)
         {
@@ -33,9 +35,6 @@ public class NPCWaypoints : MonoBehaviour
             enabled = false;
             return;
         }
-
-        npc.SetState(NPCState.WALK);
-        StartCoroutine(moveToWaypoint());
     }
 
     private IEnumerator moveToWaypoint()
