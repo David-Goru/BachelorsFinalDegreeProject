@@ -8,6 +8,9 @@ public class NPCWaypoints : MonoBehaviour
     [SerializeField] [Tooltip("List of waypoints ordered of the NPC route")] private Waypoint[] waypoints;
     [SerializeField] [Tooltip("Speed at which the NPC moves")] private float speed = 0.0f;
 
+    [Header("References")]
+    [SerializeField] private NPC npc = null;
+
     [Header("Debug")]
     [SerializeField] private int currentWaypoint = 0;
 
@@ -17,13 +20,22 @@ public class NPCWaypoints : MonoBehaviour
         {
             Debug.Log("NPCWaypoints not defined for " + name);
             enabled = false;
+            return;
         }
-        else
-        {
-            // Set walk animation
 
-            StartCoroutine(moveToWaypoint());
+        try
+        {
+            npc = transform.GetComponent<NPC>();
         }
+        catch (UnityException e)
+        {
+            Debug.Log("NPCWaypoints references not found. Disabling script. Error: " + e);
+            enabled = false;
+            return;
+        }
+
+        npc.SetState(NPCState.WALK);
+        StartCoroutine(moveToWaypoint());
     }
 
     private IEnumerator moveToWaypoint()
@@ -33,12 +45,13 @@ public class NPCWaypoints : MonoBehaviour
 
         if (waypoints[currentWaypoint].MaxTime > 0)
         {
-            // Set idle animation
+            npc.SetState(NPCState.IDLE);
 
             float randomTime = Random.Range(waypoints[currentWaypoint].MinTime, waypoints[currentWaypoint].MaxTime);            
             yield return new WaitForSeconds(randomTime);
+            yield return new WaitUntil(() => npc.CurrentState == NPCState.IDLE);
 
-            // Set walk animation
+            npc.SetState(NPCState.WALK);
         }
 
         currentWaypoint++;
@@ -48,6 +61,8 @@ public class NPCWaypoints : MonoBehaviour
 
     private bool move()
     {
+        if (npc.CurrentState != NPCState.WALK) return false;
+
         transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypoint].PointInWorld.position, Time.deltaTime * speed);
         return Vector3.Distance(transform.position, waypoints[currentWaypoint].PointInWorld.position) < 0.25f;
     }

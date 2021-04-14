@@ -10,6 +10,7 @@ TagManager:
   - FreeLookCamera
   - SkillshotTarget
   - WaterResource
+  - NPC
   layers:
   - Default
   - TransparentFX

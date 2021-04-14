@@ -51,7 +51,7 @@ public class FloralFlameProjectileBehaviour : MonoBehaviour, IProjectileWithStat
     {
         foreach (Collider col in Physics.OverlapSphere(transform.position, projectileRadius))
         {
-            if (col.gameObject.CompareTag("Player")) continue;
+            if (col.gameObject.CompareTag("Player") || col.gameObject.CompareTag("NPC")) continue;
             IEntity e = col.gameObject.GetComponent<IEntity>();
             if (e != null) e.ReceiveDamage(projectileDamage);
         }

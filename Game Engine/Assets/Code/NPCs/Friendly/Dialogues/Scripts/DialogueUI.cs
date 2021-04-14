@@ -8,22 +8,35 @@ public class DialogueUI : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] [Tooltip("UI object with dialogue panel")] private GameObject dialoguePanel;
 
+    [Header("References")]
+    [SerializeField] private Transform mainCharacterTransform;
+
     [Header("Debug")]
     [SerializeField] private Dialogue currentDialogue;
     [SerializeField] private int currentDialogueLine = 0;
+    [SerializeField] private NPCDialogues npcDialogues = null;
 
     public static DialogueUI Instance;
 
     private void Start()
     {
         Instance = this;
+        mainCharacterTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        enabled = false;
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    private void Update()
+    {
+        if (Vector3.Distance(mainCharacterTransform.position, npcDialogues.transform.position) > 4) StopTalking();
+    }
+
+    public void StartDialogue(Dialogue dialogue, NPCDialogues npcDialogues)
     {
         currentDialogueLine = -1;
         currentDialogue = dialogue;
+        this.npcDialogues = npcDialogues;
         ContinueTalking();
+        enabled = true;
     }
 
     public void DisplayLine(string line)
@@ -42,5 +55,7 @@ public class DialogueUI : MonoBehaviour
     public void StopTalking()
     {
         dialoguePanel.SetActive(false);
+        npcDialogues.StopTalking();
+        enabled = false;
     }
 }
