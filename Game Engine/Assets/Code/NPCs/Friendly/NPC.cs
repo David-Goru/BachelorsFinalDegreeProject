@@ -6,19 +6,22 @@ public class NPC : MonoBehaviour, IEntity
 {
     [Header("References")]
     [SerializeField] private NPCAnimations animations = null;
+    [SerializeField] private NPCQuests quests = null;
 
     [Header("Debug")]
     [SerializeField] private NPCState currentState;
     [SerializeField] private NPCState lastState;
 
     public NPCAnimations NpcAnimations { get => animations; }
+    public NPCQuests Quests { get => quests; }
     public NPCState CurrentState { get => currentState; }
 
     private void Awake()
     {
         try
         {
-            animations = transform.GetComponent<NPCAnimations>();
+            animations = GetComponent<NPCAnimations>();
+            quests = GetComponent<NPCQuests>();
         }
         catch (UnityException e)
         {

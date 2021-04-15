@@ -23,14 +23,39 @@ public class NPCDialogues : MonoBehaviour
 
     public void StartTalking()
     {
-        // Get dialogue still WIP
-        DialogueUI.Instance.StartDialogue(dialogues[0], this);
-        npc.SetState(NPCState.TALK);
+        Dialogue nextDialogue = getNextDialogue();
+
+        if (nextDialogue != null)
+        {
+            DialogueUI.Instance.StartDialogue(getNextDialogue(), this);
+            npc.SetState(NPCState.TALK);
+        }
     }
 
     public void StopTalking()
     {
         npc.ResumeState();
+    }
+
+    private Dialogue getNextDialogue()
+    {
+        if (npc.Quests != null)
+        {
+            Dialogue nextDialogue = npc.Quests.GetQuestDialogue();
+
+            if (nextDialogue != null) return nextDialogue;
+        }
+
+        for (int i = 0; i < dialogues.Length; i++)
+        {
+            if (dialogues[i].Available)
+            {
+                if (!dialogues[i].Recurrent) dialogues[i].Available = false;
+                return dialogues[i];
+            }
+        }
+
+        return null;
     }
 
     private void OnMouseDown()
