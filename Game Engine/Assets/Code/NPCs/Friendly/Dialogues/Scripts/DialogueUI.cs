@@ -49,7 +49,11 @@ public class DialogueUI : MonoBehaviour
     {
         currentDialogueLine++;
         if (currentDialogue.Lines.Length == currentDialogueLine) StopTalking();
-        else DisplayLine(currentDialogue.Lines[currentDialogueLine]);
+        else
+        {
+            DisplayLine(currentDialogue.Lines[currentDialogueLine]);
+            npcDialogues.ContinueTalking();
+        }
     }
 
     public void StopTalking()

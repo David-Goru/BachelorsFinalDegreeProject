@@ -39,7 +39,6 @@ public class NPCWaypoints : MonoBehaviour
 
     private IEnumerator moveToWaypoint()
     {
-        transform.LookAt(waypoints[currentWaypoint].PointInWorld.position);
         yield return new WaitUntil(() => move());
 
         if (waypoints[currentWaypoint].MaxTime > 0)
@@ -62,6 +61,7 @@ public class NPCWaypoints : MonoBehaviour
     {
         if (npc.CurrentState != NPCState.WALK) return false;
 
+        transform.LookAt(waypoints[currentWaypoint].PointInWorld.position);
         transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypoint].PointInWorld.position, Time.deltaTime * speed);
         return Vector3.Distance(transform.position, waypoints[currentWaypoint].PointInWorld.position) < 0.25f;
     }

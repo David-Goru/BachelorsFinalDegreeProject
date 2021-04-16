@@ -35,10 +35,12 @@ public class NPC : MonoBehaviour, IEntity
 
     public void SetState(NPCState newState)
     {
-        if (currentState == newState) return;
+        if (currentState != newState)
+        {
+            lastState = currentState;
+            currentState = newState;
+        }
 
-        lastState = currentState;
-        currentState = newState;
         animations.UpdateAnimation();
     }
 

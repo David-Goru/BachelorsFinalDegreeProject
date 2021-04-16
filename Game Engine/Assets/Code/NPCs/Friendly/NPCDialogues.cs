@@ -8,6 +8,9 @@ public class NPCDialogues : MonoBehaviour
     [Header("References")]
     [SerializeField] private NPC npc = null;
 
+    [Header("Debug")]
+    [SerializeField] private Transform listener = null;
+
     private void Start()
     {
         try
@@ -25,15 +28,18 @@ public class NPCDialogues : MonoBehaviour
     {
         Dialogue nextDialogue = getNextDialogue();
 
-        if (nextDialogue != null)
-        {
-            DialogueUI.Instance.StartDialogue(getNextDialogue(), this);
-            npc.SetState(NPCState.TALK);
-        }
+        if (nextDialogue != null) DialogueUI.Instance.StartDialogue(getNextDialogue(), this);
+    }
+
+    public void ContinueTalking()
+    {
+        if (listener != null) transform.LookAt(listener.position);
+        npc.SetState(NPCState.TALK);
     }
 
     public void StopTalking()
     {
+        listener = null;
         npc.ResumeState();
     }
 
@@ -60,7 +66,9 @@ public class NPCDialogues : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) > 3.5f) return;
+        listener = GameObject.FindGameObjectWithTag("Player").transform;
+
+        if (Vector3.Distance(transform.position, listener.position) > 3.5f) return;
 
         StartTalking();
     }

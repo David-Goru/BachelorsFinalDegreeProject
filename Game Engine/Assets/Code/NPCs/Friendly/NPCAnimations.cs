@@ -24,6 +24,7 @@ public class NPCAnimations : MonoBehaviour
     public void UpdateAnimation()
     {
         ResetAllTriggers();
+        animator.SetInteger("Random", UnityEngine.Random.Range(0, 101));
         animator.SetTrigger(npc.CurrentState.ToString());
     }
 
