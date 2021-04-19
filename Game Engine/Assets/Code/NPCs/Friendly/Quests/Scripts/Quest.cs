@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Quest", menuName = "NPCs/Quest", order = 0)]
-public class Quest : ScriptableObject
+[System.Serializable]
+public class Quest
 {
     [Header("Attributes")]
     [SerializeField] [Tooltip("If the quest can be started")] private bool available = false;
@@ -9,6 +9,7 @@ public class Quest : ScriptableObject
     [SerializeField] [Tooltip("Dialogue that shows when main character talks with the quest completed")] private Dialogue onCompleted;
     [SerializeField] [Tooltip("Dialogue that shows if the quest is started but not completed")] private Dialogue hint;
     [SerializeField] [Tooltip("Conditions to complete the quest")] private IQuestCondition[] conditions;
+    [SerializeField] [Tooltip("Events that will happen when the quest is completed")] private IEvent[] onCompleteEvents;
 
     [Header("Debug")]
     [SerializeField] private bool started = false;
@@ -21,12 +22,15 @@ public class Quest : ScriptableObject
         if (MeetsAllConditions())
         {
             finished = true;
+            runEvents(onCompleteEvents);
+
             return onCompleted;
         }
 
         if (started) return hint;
 
         // Add to UI?
+
         started = true;
         return onStart;
     }
@@ -38,5 +42,13 @@ public class Quest : ScriptableObject
             if (!condition.MeetsCondition) return false;
         }
         return true;
+    }
+
+    private void runEvents(IEvent[] events)
+    {
+        foreach (IEvent e in events)
+        {
+            e.Run();
+        }
     }
 }

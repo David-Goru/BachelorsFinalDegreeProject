@@ -7,6 +7,7 @@ public class NPCDialogues : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private NPC npc = null;
+    [SerializeField] private NPCQuests npcQuests = null;
 
     [Header("Debug")]
     [SerializeField] private Transform listener = null;
@@ -16,6 +17,7 @@ public class NPCDialogues : MonoBehaviour
         try
         {
             npc = transform.GetComponent<NPC>();
+            if (transform.GetComponent<NPCQuests>() != null) npcQuests = transform.GetComponent<NPCQuests>();
         }
         catch (UnityException e)
         {
@@ -28,7 +30,7 @@ public class NPCDialogues : MonoBehaviour
     {
         Dialogue nextDialogue = getNextDialogue();
 
-        if (nextDialogue != null) DialogueUI.Instance.StartDialogue(getNextDialogue(), this);
+        if (nextDialogue != null) DialogueUI.Instance.StartDialogue(nextDialogue, this);
     }
 
     public void ContinueTalking()
@@ -45,9 +47,9 @@ public class NPCDialogues : MonoBehaviour
 
     private Dialogue getNextDialogue()
     {
-        if (npc.Quests != null)
+        if (npcQuests != null)
         {
-            Dialogue nextDialogue = npc.Quests.GetQuestDialogue();
+            Dialogue nextDialogue = npcQuests.GetQuestDialogue();
 
             if (nextDialogue != null) return nextDialogue;
         }

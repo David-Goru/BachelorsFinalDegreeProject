@@ -20,6 +20,7 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] private List<Enemy> enemiesCache;
 
     public LayerMask CheckLayers { get => checkLayers; set => checkLayers = value; }
+    public bool EnemiesOnSpawn { get => enemiesCache.Count > 0; }
 
     private void Start()
     {
