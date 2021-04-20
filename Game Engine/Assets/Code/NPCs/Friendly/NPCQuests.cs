@@ -13,4 +13,15 @@ public class NPCQuests : MonoBehaviour
         }
         return null;
     }
+
+    public void ActivateQuest(int questNumber)
+    {
+        if (questNumber >= quests.Length)
+        {
+            Debug.Log("Wrong quest id");
+            return;
+        }
+
+        quests[questNumber].Activate();
+    }
 }

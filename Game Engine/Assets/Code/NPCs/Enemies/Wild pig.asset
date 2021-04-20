@@ -27,3 +27,4 @@ MonoBehaviour:
   lootPools:
   - {fileID: 11400000, guid: ba510db2947ee9e4091375ad60e87a9f, type: 2}
   - {fileID: 11400000, guid: 7566f83a3a2de7e4e8f116b2a53beb23, type: 2}
+  amountKilled: 0

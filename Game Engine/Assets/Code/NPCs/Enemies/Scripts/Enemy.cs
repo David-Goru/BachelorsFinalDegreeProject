@@ -185,8 +185,9 @@ public class Enemy : MonoBehaviour, IEntity
         spawnLoot();
         if (PlayerAndEnemiesPlaytesting.Instance != null) PlayerAndEnemiesPlaytesting.Instance.UpdateStat(enemyInfo.name, 1);
 
-        if (currentTarget.transform.parent.GetComponent<MainCharacter>() != null) currentTarget.transform.parent.GetComponent<MainCharacter>().StopFighting();
+        if (currentTarget != null && currentTarget.transform.parent.GetComponent<MainCharacter>() != null) currentTarget.transform.parent.GetComponent<MainCharacter>().StopFighting();
         spawner.RemoveCache(this);
+        enemyInfo.AmountKilled++;
         Destroy(gameObject);
     }
 

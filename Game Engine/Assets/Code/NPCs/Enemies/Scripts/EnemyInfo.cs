@@ -21,6 +21,9 @@ public class EnemyInfo : ScriptableObject
     [SerializeField] private GameObject model;
     [SerializeField] private List<ItemPool> lootPools;
 
+    [Header("Debug")]
+    [SerializeField] private int amountKilled = 0;
+
     // Getters
     public int MaxHealth { get => maxHealth; }
     public int Damage { get => damage; }
@@ -35,4 +38,7 @@ public class EnemyInfo : ScriptableObject
     public float MaxTimeBetweenBehaviours { get => maxTimeBetweenBehaviours; }
     public GameObject Projectile { get => projectile; }
     public List<ItemPool> LootPools { get => lootPools; }
+
+    // Getters and setters
+    public int AmountKilled { get => amountKilled; set => amountKilled = value; }
 }

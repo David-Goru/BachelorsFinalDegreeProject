@@ -35,6 +35,11 @@ public class Quest
         return onStart;
     }
 
+    public void Activate() 
+    { 
+        available = true;
+    }
+
     public bool MeetsAllConditions()
     {
         foreach (IQuestCondition condition in conditions)
