@@ -6,6 +6,7 @@ public class SpellsBook : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject bookUI;
+    [SerializeField] private GameObject openButton;
 
     [Header("Debug")]
     [SerializeField] private Dictionary<int, GameObject> pages;
@@ -23,6 +24,18 @@ public class SpellsBook : MonoBehaviour
             pages.Add(int.Parse(page.name), page.gameObject);
         }
         unlockedSpells = new List<int>();
+        enabled = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Spells book")) OpenSpellsBook();
+    }
+
+    public void EnableSpellsBook()
+    {
+        enabled = true;
+        openButton.SetActive(true);
     }
 
     public void ChangeSpellsBookState()

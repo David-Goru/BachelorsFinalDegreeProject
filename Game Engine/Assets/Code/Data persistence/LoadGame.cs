@@ -8,6 +8,7 @@ public class LoadGame : MonoBehaviour
 {
     [Header("Lists")]
     [SerializeField] private List<Item> items;
+    [SerializeField] private List<EnemyInfo> enemiesInfo;
 
     // Getters
     public List<Item> Items { get => items; }
@@ -20,6 +21,7 @@ public class LoadGame : MonoBehaviour
         Instance = this;
 
         if (Menu.LoadingGame) StartCoroutine(loadGame());
+        else setDefaultValues();
     }
 
     private IEnumerator loadGame()
@@ -44,5 +46,14 @@ public class LoadGame : MonoBehaviour
     {
         Debug.Log(string.Format("Loading {0}...", loadingData));
         //loadingText.text = string.Format("Loading {0}...", loadingData);
+    }
+
+    private void setDefaultValues()
+    {
+        // Restart enemies counters
+        foreach (EnemyInfo enemyInfo in enemiesInfo)
+        {
+            enemyInfo.AmountKilled = 0;
+        }
     }
 }
