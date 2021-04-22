@@ -298,6 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d3e71766e8a964bb04611c429a8edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHitParticles: {fileID: 5369499374428512540, guid: 6231a0ef15ac46648bdb50e85cc47b89, type: 3}
   projectileSpawner: {fileID: 0}
   currentHealth: 0
   nextBehaviour: 0

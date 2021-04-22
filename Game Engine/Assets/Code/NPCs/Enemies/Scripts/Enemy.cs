@@ -5,6 +5,9 @@ using System;
 
 public class Enemy : MonoBehaviour, IEntity
 {
+    [Header("Attributes")]
+    [SerializeField] [Tooltip("Partciles that will be spawned when receiving a hit. Null for no particles.")] private GameObject onHitParticles = null;
+
     [Header("References")]
     [SerializeField] private Transform projectileSpawner = null;
 
@@ -57,9 +60,9 @@ public class Enemy : MonoBehaviour, IEntity
         if (currentHealth <= 0) StartCoroutine(kill());
         else
         {
-            // do something? update ui? hit effect? sound?
+            // do something? update ui? sound?
 
-            //if (onHitParticles) Instantiate(onHitParticles, transform);
+            if (onHitParticles) Instantiate(onHitParticles, transform);
         }
     }
 
