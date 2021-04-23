@@ -57,5 +57,6 @@ public enum NPCState
 {
     IDLE,
     WALK,
-    TALK
+    TALK,
+    ATTACK
 }

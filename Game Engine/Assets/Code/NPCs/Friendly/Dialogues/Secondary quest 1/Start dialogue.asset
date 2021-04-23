@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Start dialogue
   m_EditorClassIdentifier: 
   lines:
-  - Start dialogue
+  - Please, help us!
+  - We were playing when all those monsters appeared.
+  - And now, my friend is surrounded by them. He can't leave!
+  - I'll give you something if you help, please!
   recurrent: 0
   available: 0

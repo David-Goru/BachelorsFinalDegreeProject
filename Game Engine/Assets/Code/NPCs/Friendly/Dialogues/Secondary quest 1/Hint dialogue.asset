@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Hint dialogue
   m_EditorClassIdentifier: 
   lines:
-  - Hint dialogue
+  - Please!
+  - Killing the monsters will work.
   recurrent: 0
   available: 0

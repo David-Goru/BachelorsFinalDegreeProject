@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Completed dialogue
   m_EditorClassIdentifier: 
   lines:
-  - Completed dialogue
+  - Thank you! You're awesome!
+  - Here, take it. We found them while playing.
   recurrent: 0
   available: 0
