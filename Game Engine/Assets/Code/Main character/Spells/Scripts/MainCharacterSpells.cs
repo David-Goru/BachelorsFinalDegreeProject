@@ -10,6 +10,7 @@ public class MainCharacterSpells : MonoBehaviour
     [Header("References")]
     [SerializeField] private MainCharacter mainCharacter = null;
     [SerializeField] private Transform cameraSkillshotPoint = null;
+    [SerializeField] private SpellsBook spellsBook = null;
 
     [Header("Debug")]
     [SerializeField] private List<Spell> runningSpells = null;
@@ -169,6 +170,9 @@ public class MainCharacterSpells : MonoBehaviour
     {
         PlayerInput currentInput = spell.GetInputAtStep(currentStep);
         currentInput.DoAllActions();
+
+        // Unlock on spells book
+        spellsBook.UnlockSpellInfo(spells.IndexOf(spell) + 1);
 
         // Steps
         currentStep = 0;
