@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour, IEntity
 
     public void UpdateTarget(GameObject target)
     {
-        if (!agent.isOnNavMesh || currentTarget != null) return;
+        if (!agent.isOnNavMesh || currentTarget != null || Physics.CheckSphere(transform.position, 1.25f, 1 << LayerMask.NameToLayer("EnemyLimit"))) return;
 
         if (target.transform.parent.GetComponent<MainCharacter>() != null) target.transform.parent.GetComponent<MainCharacter>().StartFighting();
 
@@ -122,6 +122,12 @@ public class Enemy : MonoBehaviour, IEntity
         transform.LookAt(currentTarget.transform.position);
 
         if (Vector3.Distance(transform.position, ctpos) < enemyInfo.AttackRange) attack();
+        else if (Physics.CheckSphere(transform.position, 1.25f, 1 << LayerMask.NameToLayer("EnemyLimit")))
+        {
+            if (currentTarget.transform.parent.GetComponent<MainCharacter>() != null) currentTarget.transform.parent.GetComponent<MainCharacter>().StopFighting();
+            currentTarget = null;
+            walk();
+        }
         else if (Vector3.Distance(transform.position, ctpos) > enemyInfo.ForgetRange)
         {
             if (currentTarget.transform.parent.GetComponent<MainCharacter>() != null) currentTarget.transform.parent.GetComponent<MainCharacter>().StopFighting();
