@@ -101,6 +101,11 @@ public class MainCharacterSpells : MonoBehaviour
                 nextStep(spell);
                 return;
             }
+            else if (Input.GetButtonDown(nextInput.ButtonName) && !nextInput.MeetsAllConditions())
+            {
+                mainCharacter.Messages.ShowMessage(MessageType.NOTRESOURCES);
+                return;
+            }
             else if (currentInput.MeetsAllConditions())
             {
                 if (!currentInput.RequiresTime || (currentInput.RequiresTime && Input.GetButton(currentInput.ButtonName))) runningSpells.Add(spell);

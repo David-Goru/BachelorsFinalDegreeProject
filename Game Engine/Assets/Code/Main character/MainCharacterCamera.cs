@@ -37,4 +37,9 @@ public class MainCharacterCamera : MonoBehaviour
     {
         if (Input.mouseScrollDelta.y != 0) characterCameraComponent.m_YAxis.m_MaxSpeed = zoomSpeed;
     }
+
+    public void ChangeState(bool newState)
+    {
+        enabled = newState;
+    }
 }

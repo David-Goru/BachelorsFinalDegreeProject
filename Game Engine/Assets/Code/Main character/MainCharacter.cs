@@ -14,6 +14,7 @@ public class MainCharacter : MonoBehaviour, IEntity
     [SerializeField] private MainCharacterAnimations animations = null;
     [SerializeField] private MainCharacterCamera characterCamera = null;
     [SerializeField] private MainCharacterGatherer gatherer = null;
+    [SerializeField] private MainCharacterMessages messages = null;
 
     [Header("Debug")]
     [SerializeField] private int currentHealth =  0;
@@ -24,6 +25,8 @@ public class MainCharacter : MonoBehaviour, IEntity
     public Transform Model { get => model; }
     public MainCharacterMovement Movement { get => movement; }
     public MainCharacterAnimations Animations { get => animations; }
+    public MainCharacterCamera CharacterCamera { get => characterCamera; }
+    public MainCharacterMessages Messages { get => messages; }
     public bool IsFighting { get => enemiesFighting > 0; }
 
     // Getters and setters
@@ -41,6 +44,7 @@ public class MainCharacter : MonoBehaviour, IEntity
             animations = transform.GetComponent<MainCharacterAnimations>();
             characterCamera = transform.GetComponent<MainCharacterCamera>();
             gatherer = transform.Find("Item gather area").GetComponent<MainCharacterGatherer>();
+            messages = transform.GetComponent<MainCharacterMessages>();
         }
         catch (UnityException e) 
         { 
@@ -82,7 +86,10 @@ public class MainCharacter : MonoBehaviour, IEntity
         else
         {
             currentHealth -= damageAmount;
-            if (currentHealth <= 0) StartCoroutine(kill());
+            if (currentHealth <= 0)
+            {
+                if (currentState != MainCharacterState.DIE) StartCoroutine(kill());
+            }
             else
             {
                 // do something? update ui? hit effect? sound?
@@ -118,7 +125,15 @@ public class MainCharacter : MonoBehaviour, IEntity
         SetState(MainCharacterState.DIE);
         yield return new WaitUntil(() => animations.DieAnimFinished());
 
-        // End screen?
+        messages.ShowMessage(MessageType.DEAD);
+
+        yield return new WaitForSeconds(2.0f);
+
+        // Reset info
+        SetState(MainCharacterState.IDLE);
+        currentHealth = maxHealth;
+        transform.position = new Vector3(0, 0.651f, 0);
+        movement.enabled = true;
     }
 }
 
