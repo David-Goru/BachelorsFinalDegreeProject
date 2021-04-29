@@ -34,7 +34,7 @@ public class SaveGame : MonoBehaviour
 
     private void save()
     {
-        string savedGamesPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "\\The Final Spell\\Saves\\";
+        string savedGamesPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\The Final Spell\\Saves\\";
         if (Menu.GameName == "Null") Menu.GameName = string.Format("Game ({0})", DateTime.Now).Replace("/", "-").Replace(":", ".");
 
         // Create path if doesn't exist
