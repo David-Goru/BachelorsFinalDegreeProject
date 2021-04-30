@@ -10,7 +10,7 @@ public class ItemOnWorld : MonoBehaviour, IEntity
 
     public void Spawn(Item item)
     {
-        GetComponent<Rigidbody>().AddForce(Vector3.right * Random.Range(-2.5f, 2.5f) + Vector3.forward * Random.Range(-2.5f, 2.5f), ForceMode.Impulse);
+        GetComponent<Rigidbody>().AddForce(Vector3.right * Random.Range(-5f, 5f) + Vector3.forward * Random.Range(-5f, 5f), ForceMode.Impulse);
         Initialize(item);
     }
 

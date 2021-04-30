@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Achievement", menuName = "Achievement", order = 0)]
 public class Achievement : ScriptableObject
 {
-    [Header("Attributes")]
+    [Header("References")]
     [SerializeField] private GameObject books;
 
     [Header("Debug")]
