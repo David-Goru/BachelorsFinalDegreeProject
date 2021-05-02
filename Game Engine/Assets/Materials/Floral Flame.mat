@@ -7,10 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Floral Flame
+  m_Name: Floral flame
   m_Shader: {fileID: -6465566751694194690, guid: 0073d47f84e8c6649a19550c152bc452, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -40,6 +40,7 @@ Material:
     - Vector1_80f7b7416d2c4c9f8aed690bd9d0300a: 8
     - Vector1_a4b13828bb7c4bbeb635c217996d2735: 0.25
     m_Colors:
-    - Color_1c74365aad6147ceb05d3a795691ead2: {r: 47.18214, g: 0.8314034, b: 0.4157017, a: 0}
+    - Color_1c74365aad6147ceb05d3a795691ead2: {r: 4.569997, g: 0.2470269, b: 0.1235134, a: 0}
+    - Color_78eb7b5a64084e3b8a627ef97dbe0852: {r: 1, g: 0.7797597, b: 0.15499997, a: 0}
     - Vector2_e50630c308ff47f2876677c9e1eeae47: {r: -0.2, g: -0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
