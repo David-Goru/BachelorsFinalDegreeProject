@@ -29,7 +29,7 @@ public class SpellsBook : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Spells book")) OpenSpellsBook();
+        if (Input.GetButtonDown("Spells book")) ChangeSpellsBookState();
     }
 
     public void EnableSpellsBook()

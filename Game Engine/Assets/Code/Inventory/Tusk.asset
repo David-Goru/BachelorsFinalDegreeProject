@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Tusk
   m_EditorClassIdentifier: 
   itemModel: {fileID: 6054549044538550735, guid: cabc2883ec2cab045b4b48ebb6633364, type: 3}
+  itemIcon: {fileID: 21300000, guid: c325c6cb6696b484a95d2279f2631442, type: 3}

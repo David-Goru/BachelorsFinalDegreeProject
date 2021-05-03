@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Slime liquid
   m_EditorClassIdentifier: 
   itemModel: {fileID: 2211573814960535404, guid: 3fb66f735c4a43e408a6265209e5397a, type: 3}
+  itemIcon: {fileID: 21300000, guid: 37cfdbda091afc14bbe13091abcf2c4f, type: 3}

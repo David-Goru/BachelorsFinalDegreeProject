@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Dark essence
   m_EditorClassIdentifier: 
   itemModel: {fileID: 4685844639150200941, guid: c3808dbaeff7c0d459f23efa02b9e583, type: 3}
+  itemIcon: {fileID: 21300000, guid: b47cfa82d9dd176489bcb7f45ae3059f, type: 3}

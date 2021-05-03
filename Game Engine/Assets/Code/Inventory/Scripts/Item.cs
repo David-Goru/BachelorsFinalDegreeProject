@@ -6,6 +6,8 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     [SerializeField] private GameObject itemModel = null;
+    [SerializeField] private Sprite itemIcon = null;
 
     public GameObject ItemModel { get => itemModel; set => itemModel = value; }
+    public Sprite ItemIcon { get => itemIcon; set => itemIcon = value; }
 }

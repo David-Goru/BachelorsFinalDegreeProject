@@ -23,15 +23,15 @@ public class ItemOnWorld : MonoBehaviour, IEntity
 
     private void OnTriggerEnter(Collider col)
     {
-        if (!ignoreCollisions && col.gameObject.CompareTag("PlayerItemGatherArea")) StartCoroutine(addToInventory(col.transform.position));
+        if (!ignoreCollisions && col.gameObject.CompareTag("PlayerItemGatherArea")) StartCoroutine(addToInventory(col.transform));
     }
 
-    private IEnumerator addToInventory(Vector3 playerPosition)
+    private IEnumerator addToInventory(Transform character)
     {
         ignoreCollisions = true;
-        yield return new WaitUntil(() => magnetToPlayer(playerPosition));
+        yield return new WaitUntil(() => magnetToPlayer(character.position));
 
-        if (PlayerAndEnemiesPlaytesting.Instance != null) PlayerAndEnemiesPlaytesting.Instance.UpdateStat(item.name, 1);
+        character.parent.GetComponent<MainCharacterInventory>().AddItem(item, 1);
         Destroy(gameObject);
     }
 

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Floral flame
+  m_Name: Floral Flame
   m_Shader: {fileID: -6465566751694194690, guid: 0073d47f84e8c6649a19550c152bc452, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4

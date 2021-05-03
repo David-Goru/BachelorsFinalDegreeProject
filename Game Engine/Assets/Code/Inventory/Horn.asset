@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Horn
   m_EditorClassIdentifier: 
   itemModel: {fileID: 6895918664229661808, guid: d2152139988af3544aee80d4f6b1395a, type: 3}
+  itemIcon: {fileID: 21300000, guid: 08830734f99add74ca399065f2617a19, type: 3}

@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Butterfly wing
   m_EditorClassIdentifier: 
   itemModel: {fileID: 8260635993651653178, guid: 134d50a5fd8c2f34da46b78da5727128, type: 3}
+  itemIcon: {fileID: 21300000, guid: 6e9c64fe91496414a9fbfb6dcdcd3b98, type: 3}
