@@ -5,12 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "HasItem", menuName = "Spells/Conditions/HasItem", order = 0)]
 public class HasItem : ICondition
 {
-    [SerializeField] private string itemName = "";
+    [SerializeField] private Item item = null;
     [SerializeField] private int amount = 0;
 
     public override bool MeetsCondition()
     {
-        Debug.Log("Checking for " + amount + " units of " + itemName);
-        return true;
+        return GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterInventory>().MainCharacterItems.Exists(x => x.Item == item && x.Amount >= amount);
     }
 }

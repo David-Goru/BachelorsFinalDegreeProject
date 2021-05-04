@@ -87,7 +87,11 @@ public class MainCharacterInventory : MonoBehaviour
         if (characterItem != null)
         {
             bool removed = characterItem.RemoveAmount(amount);
-            if (removed && characterItem.Amount == 0) characterItem.RemoveFromUI(inventoryUI);
+            if (removed && characterItem.Amount == 0)
+            {
+                characterItem.RemoveFromUI(inventoryUI);
+                mainCharacterItems.Remove(characterItem);
+            }
 
             return removed;
         }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a2cc66a0c6761342b2602abe0dcf96d, type: 3}
   m_Name: 1 of geranium
   m_EditorClassIdentifier: 
-  itemName: Geranium
+  item: {fileID: 11400000, guid: df929224a949f2d46b6a7a22fb7c76a4, type: 2}
   amount: 1

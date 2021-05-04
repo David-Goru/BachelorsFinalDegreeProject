@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Geranium
   m_EditorClassIdentifier: 
   itemModel: {fileID: 4285685799143871086, guid: aac68316619736d4bb7d41797ce7fcc8, type: 3}
+  itemIcon: {fileID: 21300000, guid: c3b971133b00b5f40a98c6021ec741f4, type: 3}

@@ -8,7 +8,6 @@ public class AddItem : IEvent
 
     public override void Run()
     {
-        // Add item to inventory
-        Debug.Log("Adding " + amount + "x" + item.name + " to inventory");
+        GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacterInventory>().AddItem(item, amount);
     }
 }

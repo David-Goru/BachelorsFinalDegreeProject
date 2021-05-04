@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "BurnFlora", menuName = "Spells/Actions/BurnFlora", order = 0)]
 public class BurnFlora : IAction
@@ -11,8 +12,7 @@ public class BurnFlora : IAction
     {
         foreach (Collider plant in Physics.OverlapSphere(GameObject.FindGameObjectWithTag("Player").transform.position, area, 1 << LayerMask.NameToLayer("Flora")))
         {
-            // Burn animation?
-            Destroy(plant.gameObject);
+            plant.GetComponent<Flora>().Burn();
         }
     }
 }
