@@ -92,6 +92,7 @@ public class MainCharacterInventory : MonoBehaviour
                 characterItem.RemoveFromUI(inventoryUI);
                 mainCharacterItems.Remove(characterItem);
             }
+            else characterItem.UpdateUI(inventoryUI);
 
             return removed;
         }

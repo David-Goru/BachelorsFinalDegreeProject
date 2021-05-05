@@ -7,6 +7,7 @@ public class MainCharacterData : SaveElement
     [SerializeField] private float yPosition;
     [SerializeField] private float zPosition;
     [SerializeField] private float yRotation;
+    [SerializeField] private int gold;
     [SerializeField] private int currentHealth;
 
     public override SaveElement Save()
@@ -17,6 +18,7 @@ public class MainCharacterData : SaveElement
         yPosition = mainCharacter.position.y;
         zPosition = mainCharacter.position.z;
         yRotation = mainCharacter.eulerAngles.y;
+        gold = mainCharacter.GetComponent<MainCharacter>().Gold;
         currentHealth = mainCharacter.GetComponent<MainCharacter>().CurrentHealth;
 
         return this;
@@ -29,7 +31,7 @@ public class MainCharacterData : SaveElement
             GameObject mainCharacter = GameObject.FindGameObjectWithTag("Player");
             mainCharacter.transform.position = new Vector3(xPosition, yPosition, zPosition);
             mainCharacter.transform.rotation = Quaternion.Euler(0.0f, yRotation, 0.0f);
-            mainCharacter.GetComponent<MainCharacter>().Load(currentHealth);
+            mainCharacter.GetComponent<MainCharacter>().Load(currentHealth, gold);
         }
         catch (UnityException e)
         {

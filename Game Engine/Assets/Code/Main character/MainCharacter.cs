@@ -6,6 +6,7 @@ public class MainCharacter : MonoBehaviour, IEntity
 {
     [Header("Attributes")]
     [SerializeField] [Tooltip("Health the main character has when spawning")] private int maxHealth = 0;
+    [SerializeField] [Tooltip("Player gold to be used on the merchant")] private int gold = 0;
 
     [Header("References")]
     [SerializeField] private Transform model = null;
@@ -30,6 +31,7 @@ public class MainCharacter : MonoBehaviour, IEntity
     public bool IsFighting { get => enemiesFighting > 0; }
 
     // Getters and setters
+    public int Gold { get => gold; set => gold = value; }
     public int CurrentHealth { get => currentHealth; }
     public MainCharacterState CurrentState { get => currentState; }
 
@@ -61,9 +63,10 @@ public class MainCharacter : MonoBehaviour, IEntity
         if (!Menu.LoadingGame) currentHealth = maxHealth;
     }
 
-    public void Load(int currentHealth)
+    public void Load(int currentHealth, int gold)
     {
         this.currentHealth = currentHealth;
+        this.gold = gold;
     }
 
     public void SetState(MainCharacterState newState)
