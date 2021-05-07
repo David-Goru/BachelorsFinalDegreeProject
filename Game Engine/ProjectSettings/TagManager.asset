@@ -11,6 +11,7 @@ TagManager:
   - SkillshotTarget
   - WaterResource
   - NPC
+  - PlayerNoise
   layers:
   - Default
   - TransparentFX

@@ -34,6 +34,7 @@ public class MainCharacterInventory : MonoBehaviour
     private void Update()
     {
         if (Input.GetButtonDown("Inventory")) ChangeInventoryState();
+        else if (Input.GetButtonDown("Close UI")) CloseInventory();
     }
 
     private IEnumerator setUpDataLoaded()
@@ -55,6 +56,8 @@ public class MainCharacterInventory : MonoBehaviour
 
     public void OpenInventory()
     {
+        if (open) return;
+        transform.GetComponent<MainCharacter>().CharacterCamera.ChangeState(false);
         Time.timeScale = 0;
         open = true;
         inventoryUI.parent.parent.parent.gameObject.SetActive(true);
@@ -62,6 +65,8 @@ public class MainCharacterInventory : MonoBehaviour
 
     public void CloseInventory()
     {
+        if (!open) return;
+        transform.GetComponent<MainCharacter>().CharacterCamera.ChangeState(true);
         Time.timeScale = 1;
         open = false;
         inventoryUI.parent.parent.parent.gameObject.SetActive(false);

@@ -69,6 +69,7 @@ public class NPCMerchant : MonoBehaviour
 
     public void Open()
     {
+        player.transform.GetComponent<MainCharacter>().CharacterCamera.ChangeState(false);
         List<MainCharacterItem> playerItems = player.GetComponent<MainCharacterInventory>().MainCharacterItems;
         sellGold = 0; 
         sellAllGold = 0;
@@ -98,10 +99,12 @@ public class NPCMerchant : MonoBehaviour
         merchantUI.gameObject.SetActive(true);
 
         merchantUI.Find("Sell all").Find("Text").GetComponent<Text>().text = sellAllGold == 0 ? "SELL ALL" : "SELL ALL (" + sellAllGold + "g)";
+        merchantUI.Find("Money").Find("Text").GetComponent<Text>().text = player.GetComponent<MainCharacter>().Gold + "g";
     }
 
     public void Close()
     {
+        player.transform.GetComponent<MainCharacter>().CharacterCamera.ChangeState(true);
         merchantUI.gameObject.SetActive(false);
     }
 
@@ -119,7 +122,8 @@ public class NPCMerchant : MonoBehaviour
             }
         }
 
-        player.GetComponent<MainCharacter>().Gold += sellAllGold;
+        player.GetComponent<MainCharacter>().Gold -= buyGold;
+        merchantUI.Find("Money").Find("Text").GetComponent<Text>().text = player.GetComponent<MainCharacter>().Gold + "g";
 
         buyGold = 0;
         merchantUI.Find("Buy").Find("Text").GetComponent<Text>().text = "BUY";
@@ -150,11 +154,20 @@ public class NPCMerchant : MonoBehaviour
         }
 
         player.GetComponent<MainCharacter>().Gold += sellGold;
+        merchantUI.Find("Money").Find("Text").GetComponent<Text>().text = player.GetComponent<MainCharacter>().Gold + "g";
 
         sellGold = 0;
         merchantUI.Find("Sell selected").Find("Text").GetComponent<Text>().text = "SELL SELECTED";
+
         sellAllGold = 0;
-        merchantUI.Find("Sell all").Find("Text").GetComponent<Text>().text = "SELL ALL";
+        foreach (MerchantItem item in items)
+        {
+            if (item.Buying) continue;
+
+            MainCharacterItem playerItem = playerItems.Find(x => x.Item == item.Item);
+            if (playerItem != null) sellAllGold += playerItem.Amount * item.Price;
+        }
+        merchantUI.Find("Sell all").Find("Text").GetComponent<Text>().text = sellAllGold == 0 ? "SELL ALL" : "SELL ALL (" + sellAllGold + "g)";
     }
 
     private void sellAll()
@@ -170,6 +183,7 @@ public class NPCMerchant : MonoBehaviour
         }
 
         player.GetComponent<MainCharacter>().Gold += sellAllGold;
+        merchantUI.Find("Money").Find("Text").GetComponent<Text>().text = player.GetComponent<MainCharacter>().Gold + "g";
 
         sellAllGold = 0;
         merchantUI.Find("Sell all").Find("Text").GetComponent<Text>().text = "SELL ALL";

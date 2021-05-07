@@ -52,7 +52,7 @@ public class LethalOrbProjectileBehaviour : MonoBehaviour, IProjectileWithStart
     {
         foreach (Collider col in Physics.OverlapSphere(transform.position, projectileRadius))
         {
-            if (col.gameObject.CompareTag("Player") || col.gameObject.CompareTag("NPC")) continue;
+            if (col.gameObject.CompareTag("PlayerNoise") || col.gameObject.CompareTag("Player") || col.gameObject.CompareTag("NPC")) continue;
             IEntity e = col.gameObject.GetComponent<IEntity>();
             if (e != null)
             {

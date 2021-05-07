@@ -36,7 +36,7 @@ public class QuickWaterDropProjectileBehaviour : MonoBehaviour, IProjectile
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("PlayerItemGatherArea") || collision.gameObject.CompareTag("Item")) return;
+        if (collision.gameObject.CompareTag("PlayerNoise") || collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("PlayerItemGatherArea") || collision.gameObject.CompareTag("Item")) return;
         
         IEntity e = collision.gameObject.GetComponent<IEntity>();
         if (e != null) e.ReceiveDamage(projectileDamage);

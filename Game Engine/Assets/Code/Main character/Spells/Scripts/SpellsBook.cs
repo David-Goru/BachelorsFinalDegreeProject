@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +14,8 @@ public class SpellsBook : MonoBehaviour
     [SerializeField] private List<int> unlockedSpells;
 
     public bool Open { get => open; set => open = value; }
+    public int[] UnlockedSpells { get => unlockedSpells.ToArray(); }
+    public bool IsUnlocked { get => openButton.activeSelf; }
 
     private void Awake()
     {
@@ -46,6 +47,7 @@ public class SpellsBook : MonoBehaviour
 
     public void OpenSpellsBook()
     {
+        GameObject.FindGameObjectWithTag("Player").transform.GetComponent<MainCharacter>().CharacterCamera.ChangeState(false);
         Time.timeScale = 0;
         setPage(0);
         open = true;
@@ -54,6 +56,7 @@ public class SpellsBook : MonoBehaviour
 
     public void CloseSpellsBook()
     {
+        GameObject.FindGameObjectWithTag("Player").transform.GetComponent<MainCharacter>().CharacterCamera.ChangeState(true);
         Time.timeScale = 1;
         bookUI.SetActive(false);
         open = false;
@@ -82,5 +85,6 @@ public class SpellsBook : MonoBehaviour
         if (unlockedSpells.Contains(spellNumber)) return;
         unlockedSpells.Add(spellNumber);
         pages[spellNumber].transform.Find("Info").gameObject.SetActive(true);
+        pages[spellNumber].transform.Find("Locked").gameObject.SetActive(false);
     }
 }

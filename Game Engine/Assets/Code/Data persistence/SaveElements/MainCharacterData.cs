@@ -9,6 +9,8 @@ public class MainCharacterData : SaveElement
     [SerializeField] private float yRotation;
     [SerializeField] private int gold;
     [SerializeField] private int currentHealth;
+    [SerializeField] private int[] spellsUnlocked;
+    [SerializeField] private bool spellsBookUnlocked;
 
     public override SaveElement Save()
     {
@@ -20,6 +22,8 @@ public class MainCharacterData : SaveElement
         yRotation = mainCharacter.eulerAngles.y;
         gold = mainCharacter.GetComponent<MainCharacter>().Gold;
         currentHealth = mainCharacter.GetComponent<MainCharacter>().CurrentHealth;
+        spellsUnlocked = GameObject.Find("UI scripts").GetComponent<SpellsBook>().UnlockedSpells;
+        spellsBookUnlocked = GameObject.Find("UI scripts").GetComponent<SpellsBook>().IsUnlocked;
 
         return this;
     }
@@ -32,6 +36,12 @@ public class MainCharacterData : SaveElement
             mainCharacter.transform.position = new Vector3(xPosition, yPosition, zPosition);
             mainCharacter.transform.rotation = Quaternion.Euler(0.0f, yRotation, 0.0f);
             mainCharacter.GetComponent<MainCharacter>().Load(currentHealth, gold);
+            SpellsBook spellsBook = GameObject.Find("UI scripts").GetComponent<SpellsBook>();
+            foreach (int spell in spellsUnlocked)
+            {
+                spellsBook.UnlockSpellInfo(spell);
+            }
+            if (spellsBookUnlocked) GameObject.Find("UI scripts").GetComponent<SpellsBook>().EnableSpellsBook();
         }
         catch (UnityException e)
         {
