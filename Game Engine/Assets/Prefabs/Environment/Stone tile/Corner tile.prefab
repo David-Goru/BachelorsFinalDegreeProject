@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2282749374125016847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2913945719057751286}
+  - component: {fileID: 2831458094115678267}
+  m_Layer: 0
+  m_Name: Ramp (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2913945719057751286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282749374125016847}
+  m_LocalRotation: {x: 0.12218163, y: 0.60107917, z: 0.15732464, w: 0.7739668}
+  m_LocalPosition: {x: -0.464, y: 0.13, z: 1.544}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5693939893659683265}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 75.667, z: 22.98}
+--- !u!65 &2831458094115678267
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282749374125016847}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.36, y: 0.2, z: 1.9}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2860491542801323457
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,6 +131,7 @@ Transform:
   m_Children:
   - {fileID: 7617065499890539423}
   - {fileID: 1033956866512899552}
+  - {fileID: 2913945719057751286}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
