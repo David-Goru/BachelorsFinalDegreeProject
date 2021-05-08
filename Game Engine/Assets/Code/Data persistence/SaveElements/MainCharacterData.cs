@@ -36,6 +36,7 @@ public class MainCharacterData : SaveElement
             mainCharacter.transform.position = new Vector3(xPosition, yPosition, zPosition);
             mainCharacter.transform.rotation = Quaternion.Euler(0.0f, yRotation, 0.0f);
             mainCharacter.GetComponent<MainCharacter>().Load(currentHealth, gold);
+            mainCharacter.GetComponent<MainCharacter>().Heal(0);
             SpellsBook spellsBook = GameObject.Find("UI scripts").GetComponent<SpellsBook>();
             foreach (int spell in spellsUnlocked)
             {

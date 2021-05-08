@@ -61,6 +61,7 @@ public class MainCharacterInventory : MonoBehaviour
         Time.timeScale = 0;
         open = true;
         inventoryUI.parent.parent.parent.gameObject.SetActive(true);
+        UI.Instance.UnlockMouse();
     }
 
     public void CloseInventory()
@@ -70,6 +71,7 @@ public class MainCharacterInventory : MonoBehaviour
         Time.timeScale = 1;
         open = false;
         inventoryUI.parent.parent.parent.gameObject.SetActive(false);
+        UI.Instance.LockMouse();
     }
 
     public void AddItem(Item item, int amount)

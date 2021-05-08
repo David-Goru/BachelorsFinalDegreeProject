@@ -1,6 +1,7 @@
 
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainCharacter : MonoBehaviour, IEntity
 {
@@ -16,11 +17,13 @@ public class MainCharacter : MonoBehaviour, IEntity
     [SerializeField] private MainCharacterCamera characterCamera = null;
     [SerializeField] private MainCharacterGatherer gatherer = null;
     [SerializeField] private MainCharacterMessages messages = null;
+    [SerializeField] private RectTransform healthBar = null;
 
     [Header("Debug")]
     [SerializeField] private int currentHealth =  0;
     [SerializeField] private MainCharacterState currentState;
     [SerializeField] private int enemiesFighting = 0;
+    [SerializeField] private bool dead = false;
 
     // Getters
     public Transform Model { get => model; }
@@ -47,6 +50,7 @@ public class MainCharacter : MonoBehaviour, IEntity
             characterCamera = transform.GetComponent<MainCharacterCamera>();
             gatherer = transform.Find("Item gather area").GetComponent<MainCharacterGatherer>();
             messages = transform.GetComponent<MainCharacterMessages>();
+            healthBar = GameObject.Find("UI").transform.Find("Health bar").Find("Fill").GetComponent<RectTransform>();
         }
         catch (UnityException e) 
         { 
@@ -82,24 +86,22 @@ public class MainCharacter : MonoBehaviour, IEntity
 
     public void ReceiveDamage(int damageAmount)
     {
-        if (PlayerAndEnemiesPlaytesting.Instance != null)
-        {
-            PlayerAndEnemiesPlaytesting.Instance.ChangeHealth(-damageAmount);
-        }
-        else
-        {
-            currentHealth -= damageAmount;
-            if (currentHealth <= 0)
-            {
-                if (currentState != MainCharacterState.DIE) StartCoroutine(kill());
-            }
-            else
-            {
-                // do something? update ui? hit effect? sound?
+        currentHealth -= damageAmount;
 
-                //if (onHitParticles) Instantiate(onHitParticles, transform);
-            }
+        float barFill = 220.0f / maxHealth * currentHealth;
+        healthBar.sizeDelta = new Vector2(barFill, healthBar.sizeDelta.y);
+        if (currentHealth <= 0)
+        {
+            if (!dead) StartCoroutine(kill());
         }
+    }
+
+    public void Heal(int amount)
+    {
+        currentHealth += amount;
+
+        float barFill = 220.0f / maxHealth * currentHealth;
+        healthBar.sizeDelta = new Vector2(barFill, healthBar.sizeDelta.y);
     }
 
     public void StartFighting()
@@ -122,8 +124,25 @@ public class MainCharacter : MonoBehaviour, IEntity
         }
     }
 
+    public void Pet()
+    {
+        if (movement.enabled) StartCoroutine(pet());
+    }
+
+    private IEnumerator pet()
+    {
+        movement.enabled = false;
+        SetState(MainCharacterState.PET);
+        yield return new WaitForSeconds(1.0f);
+        SetState(MainCharacterState.IDLE);
+        movement.enabled = true;
+
+        NPCPet.PetTimes++;
+    }
+
     private IEnumerator kill()
     {
+        dead = true;
         movement.enabled = false;
         SetState(MainCharacterState.DIE);
         yield return new WaitUntil(() => animations.DieAnimFinished());
@@ -136,7 +155,9 @@ public class MainCharacter : MonoBehaviour, IEntity
         SetState(MainCharacterState.IDLE);
         currentHealth = maxHealth;
         transform.position = new Vector3(0, 0.651f, 0);
+        Heal(0);
         movement.enabled = true;
+        dead = false;
     }
 }
 
@@ -148,5 +169,6 @@ public enum MainCharacterState
     CROUCH,
     WALKCROUCH,
     DIE,
+    PET,
     USINGSPELLS
 }

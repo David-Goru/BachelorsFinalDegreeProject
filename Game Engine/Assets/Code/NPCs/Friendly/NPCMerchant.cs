@@ -100,12 +100,14 @@ public class NPCMerchant : MonoBehaviour
 
         merchantUI.Find("Sell all").Find("Text").GetComponent<Text>().text = sellAllGold == 0 ? "SELL ALL" : "SELL ALL (" + sellAllGold + "g)";
         merchantUI.Find("Money").Find("Text").GetComponent<Text>().text = player.GetComponent<MainCharacter>().Gold + "g";
+        UI.Instance.UnlockMouse();
     }
 
     public void Close()
     {
         player.transform.GetComponent<MainCharacter>().CharacterCamera.ChangeState(true);
-        merchantUI.gameObject.SetActive(false);
+        merchantUI.gameObject.SetActive(false); 
+        UI.Instance.LockMouse();
     }
 
     private void buy()
@@ -235,8 +237,8 @@ public class NPCMerchant : MonoBehaviour
         merchantUI.Find("Buy").Find("Text").GetComponent<Text>().text = "BUY (" + buyGold + "g)";
     }
 
-    private void OnMouseDown()
+    private void OnTriggerStay(Collider other)
     {
-        Open();
+        if (other.gameObject.CompareTag("PlayerInteraction") && Input.GetButton("R") && !merchantUI.gameObject.activeSelf) Open();
     }
 }

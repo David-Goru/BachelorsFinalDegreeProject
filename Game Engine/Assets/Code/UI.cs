@@ -9,27 +9,40 @@ public class UI : MonoBehaviour
     private void Start()
     {
         Instance = this;
+        LockMouse();
+    }
+
+    public void LockMouse()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void UnlockMouse()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 
     public void ReadAchievement(string achievementName)
     {
         CloseUIs();
-        transform.Find("Achievements").Find(achievementName).gameObject.SetActive(true);
-        transform.Find("Achievements").gameObject.SetActive(true);
+        GameObject.Find("UI").transform.Find("Achievements").Find(achievementName).gameObject.SetActive(true);
+        GameObject.Find("UI").transform.Find("Achievements").gameObject.SetActive(true);
+        UnlockMouse();
     }
 
     public void CloseUIs()
     {
-        foreach (Transform t in transform)
+        LockMouse();
+        Transform t = GameObject.Find("UI").transform.Find("Achievements");
+        if (t.gameObject.activeSelf)
         {
-            if (t.gameObject.activeSelf)
+            foreach (Transform ct in t)
             {
-                foreach (Transform ct in t)
-                {
-                    if (ct.name != "Close" && ct.gameObject.activeSelf) ct.gameObject.SetActive(false);
-                }
-                t.gameObject.SetActive(false);
+                if (ct.name != "Close" && ct.gameObject.activeSelf) ct.gameObject.SetActive(false);
             }
+            t.gameObject.SetActive(false);
         }
     }
 }

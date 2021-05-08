@@ -14,7 +14,19 @@ public class MainCharacterMap : MonoBehaviour
 
     public void ChangeState()
     {
-        if (map.activeSelf) map.SetActive(false);
-        else map.SetActive(true);
+        if (map.activeSelf) CloseMap();
+        else OpenMap();
+    }
+
+    public void OpenMap()
+    {
+        map.SetActive(true);
+        UI.Instance.UnlockMouse();
+    }
+
+    public void CloseMap()
+    {
+        map.SetActive(false);
+        UI.Instance.LockMouse();
     }
 }

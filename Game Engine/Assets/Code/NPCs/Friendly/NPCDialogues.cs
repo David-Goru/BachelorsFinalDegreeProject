@@ -85,12 +85,15 @@ public class NPCDialogues : MonoBehaviour
         return null;
     }
 
-    private void OnMouseDown()
+    private void OnTriggerStay(Collider other)
     {
-        listener = GameObject.FindGameObjectWithTag("Player").transform;
+        if (other.gameObject.CompareTag("PlayerInteraction") && Input.GetButton("R") && listener == null)
+        {
+            listener = GameObject.FindGameObjectWithTag("Player").transform;
 
-        if (Vector3.Distance(transform.position, listener.position) > 3.5f) return;
+            if (Vector3.Distance(transform.position, listener.position) > 3.5f) return;
 
-        StartTalking();
+            StartTalking();
+        }
     }
 }

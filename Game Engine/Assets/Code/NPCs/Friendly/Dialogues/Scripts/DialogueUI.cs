@@ -32,6 +32,7 @@ public class DialogueUI : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue, NPCDialogues npcDialogues)
     {
+        UI.Instance.UnlockMouse();
         mainCharacterTransform.GetComponent<MainCharacter>().CharacterCamera.ChangeState(false);
         currentDialogueLine = -1;
         currentDialogue = dialogue;
@@ -63,5 +64,6 @@ public class DialogueUI : MonoBehaviour
         dialoguePanel.SetActive(false);
         npcDialogues.StopTalking();
         enabled = false;
+        UI.Instance.LockMouse();
     }
 }

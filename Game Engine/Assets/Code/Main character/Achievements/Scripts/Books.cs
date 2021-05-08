@@ -11,8 +11,8 @@ public class Books : MonoBehaviour
         achievement.UpdateBooksState();
     }
 
-    private void OnMouseDown()
+    private void OnTriggerStay(Collider other)
     {
-        UI.Instance.ReadAchievement(achievement.name);
+        if (other.gameObject.CompareTag("PlayerInteraction") && Input.GetButton("R")) UI.Instance.ReadAchievement(achievement.name);
     }
 }

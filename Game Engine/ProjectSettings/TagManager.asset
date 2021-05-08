@@ -12,6 +12,7 @@ TagManager:
   - WaterResource
   - NPC
   - PlayerNoise
+  - PlayerInteraction
   layers:
   - Default
   - TransparentFX
