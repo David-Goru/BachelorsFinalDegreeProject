@@ -32,6 +32,7 @@ public class MainCharacter : MonoBehaviour, IEntity
     public MainCharacterCamera CharacterCamera { get => characterCamera; }
     public MainCharacterMessages Messages { get => messages; }
     public bool IsFighting { get => enemiesFighting > 0; }
+    public bool Dead { get => dead; }
 
     // Getters and setters
     public int Gold { get => gold; set => gold = value; }
@@ -84,21 +85,24 @@ public class MainCharacter : MonoBehaviour, IEntity
         noise.SetNoise(newState);
     }
 
-    public void ReceiveDamage(int damageAmount)
+    public void ReceiveDamage(int damageAmount, bool finalBattle = false)
     {
         currentHealth -= damageAmount;
+        if (currentHealth < 0) currentHealth = 0;
 
         float barFill = 220.0f / maxHealth * currentHealth;
         healthBar.sizeDelta = new Vector2(barFill, healthBar.sizeDelta.y);
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !dead)
         {
-            if (!dead) StartCoroutine(kill());
+            if (finalBattle) UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+            else StartCoroutine(kill());
         }
     }
 
     public void Heal(int amount)
     {
         currentHealth += amount;
+        if (currentHealth > 100) currentHealth = 100;
 
         float barFill = 220.0f / maxHealth * currentHealth;
         healthBar.sizeDelta = new Vector2(barFill, healthBar.sizeDelta.y);

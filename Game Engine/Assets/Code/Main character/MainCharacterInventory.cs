@@ -28,7 +28,6 @@ public class MainCharacterInventory : MonoBehaviour
         catch (UnityException e) { Debug.Log("MainCharacterInventory references not found. Error: " + e); }
 
         if (!Menu.LoadingGame) mainCharacterItems = new List<MainCharacterItem>();
-        else StartCoroutine(setUpDataLoaded());
     }
 
     private void Update()
@@ -37,10 +36,8 @@ public class MainCharacterInventory : MonoBehaviour
         else if (Input.GetButtonDown("Close UI")) CloseInventory();
     }
 
-    private IEnumerator setUpDataLoaded()
+    public void SetUpDataLoaded()
     {
-        yield return new WaitUntil(() => mainCharacterItems != null);
-
         foreach (MainCharacterItem characterItem in mainCharacterItems)
         {
             AddElementToUI(characterItem.Item);
@@ -111,17 +108,34 @@ public class MainCharacterInventory : MonoBehaviour
         GameObject element = Instantiate(elementUI);
         element.transform.SetParent(inventoryUI, false);
         element.transform.Find("Icon").GetComponent<Image>().sprite = item.ItemIcon;
+        if (item is HealItem)
+        {
+            element.GetComponent<Button>().onClick.AddListener(() => GameObject.FindGameObjectWithTag("Player").GetComponent<MainCharacter>().Heal(((HealItem)item).HealAmount));
+            element.GetComponent<Button>().onClick.AddListener(() => RemoveItem(item, 1));
+        }
         element.name = item.name;
     }
 }
 
+[System.Serializable]
 public class MainCharacterItem
 {
-    private Item item;
+    [System.NonSerialized] private Item item;
+    private string itemName;
     private int amount;
 
     public Item Item { get => item; set => item = value; }
     public int Amount { get => amount; set => amount = value; }
+
+    public void SaveName()
+    {
+        itemName = item.name;
+    }
+
+    public void LoadItem()
+    {
+        item = LoadGame.Instance.Items.Find(x => x.name == itemName);
+    }
 
     public MainCharacterItem(Item item, int amount)
     {

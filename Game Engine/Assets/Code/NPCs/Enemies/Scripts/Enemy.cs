@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour, IEntity
         chase();
     }
 
-    public void ReceiveDamage(int damageAmount)
+    public void ReceiveDamage(int damageAmount, bool finalBattle = false)
     {
         if (currentHealth <= 0) return;
 

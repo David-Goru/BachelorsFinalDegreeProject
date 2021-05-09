@@ -47,7 +47,7 @@ public class NPC : MonoBehaviour, IEntity
         animations.UpdateAnimation();
     }
 
-    public void ReceiveDamage(int damageAmount)
+    public void ReceiveDamage(int damageAmount, bool finalBattle = false)
     {
         // Reduce HP?
     }

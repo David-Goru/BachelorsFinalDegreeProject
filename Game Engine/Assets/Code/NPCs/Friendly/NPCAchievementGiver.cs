@@ -14,12 +14,7 @@ public class NPCAchievementGiver : IEvent
         if (MeetsConditions())
         {
             achievement.UnlockAchievement();
-            Debug.Log("Y");
-            if (eventOnCompleted != null)
-            {
-                Debug.Log("Y??");
-                eventOnCompleted.Run();
-            }
+            if (eventOnCompleted != null) eventOnCompleted.Run();
         }
     }
 

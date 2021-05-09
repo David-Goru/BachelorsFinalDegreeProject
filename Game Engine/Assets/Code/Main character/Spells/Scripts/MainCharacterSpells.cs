@@ -45,6 +45,8 @@ public class MainCharacterSpells : MonoBehaviour
 
     private void Update()
     {
+        if (mainCharacter.Dead) return;
+
         if (!Input.anyKey || Input.GetButton("Crouch") && runningSpells.Count == 0)
         {
             resetSpells();
@@ -149,6 +151,9 @@ public class MainCharacterSpells : MonoBehaviour
 
     private void resetSpells()
     {
+        // Spells list
+        runningSpells.Clear();
+
         if (currentStep == 0 && currentStepTime == 0) return;
 
         // Steps

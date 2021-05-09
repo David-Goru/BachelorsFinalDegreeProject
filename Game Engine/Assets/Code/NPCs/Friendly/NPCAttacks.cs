@@ -73,7 +73,7 @@ public class NPCAttacks : MonoBehaviour, IEntity
         if (onFight && objective.GetComponent<IEntity>() != null) objective.GetComponent<IEntity>().ReceiveDamage(damage);
     }
 
-    public void ReceiveDamage(int damageAmount)
+    public void ReceiveDamage(int damageAmount, bool finalBattle = false)
     {
         if (onFight) Debug.Log(name + " received " + damageAmount);
     }

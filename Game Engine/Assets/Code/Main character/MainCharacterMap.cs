@@ -20,13 +20,15 @@ public class MainCharacterMap : MonoBehaviour
 
     public void OpenMap()
     {
-        map.SetActive(true);
+        transform.GetComponent<MainCharacter>().CharacterCamera.ChangeState(false);
         UI.Instance.UnlockMouse();
+        map.SetActive(true);
     }
 
     public void CloseMap()
     {
         map.SetActive(false);
+        transform.GetComponent<MainCharacter>().CharacterCamera.ChangeState(true);
         UI.Instance.LockMouse();
     }
 }

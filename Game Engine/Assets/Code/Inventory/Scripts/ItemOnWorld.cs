@@ -42,7 +42,7 @@ public class ItemOnWorld : MonoBehaviour, IEntity
         return Vector3.Distance(transform.position, playerPosition) < 1;
     }
 
-    public void ReceiveDamage(int damageAmount)
+    public void ReceiveDamage(int damageAmount, bool finalBattle = false)
     {
         // Nothing
     }

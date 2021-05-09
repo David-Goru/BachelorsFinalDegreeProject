@@ -52,10 +52,12 @@ public class SpellsBook : MonoBehaviour
         setPage(0);
         open = true;
         bookUI.SetActive(true);
+        UI.Instance.UnlockMouse();
     }
 
     public void CloseSpellsBook()
     {
+        UI.Instance.LockMouse();
         GameObject.FindGameObjectWithTag("Player").transform.GetComponent<MainCharacter>().CharacterCamera.ChangeState(true);
         Time.timeScale = 1;
         bookUI.SetActive(false);
