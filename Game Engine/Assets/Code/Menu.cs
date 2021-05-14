@@ -33,6 +33,8 @@ public class Menu : MonoBehaviour
 
     public void GetGames()
     {
+        if (!Directory.Exists(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/The Final Spell/Saves")) return;
+
         DirectoryInfo saves = new DirectoryInfo(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/The Final Spell/Saves");
         FileInfo[] savedGames = saves.GetFiles();
 
