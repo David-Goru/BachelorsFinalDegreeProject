@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UI : MonoBehaviour
 {
+    public bool IsOpen { get => Cursor.visible; }
+
     public static UI Instance;
 
     private void Start()

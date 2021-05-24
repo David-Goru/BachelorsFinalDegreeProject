@@ -94,7 +94,13 @@ public class MainCharacter : MonoBehaviour, IEntity
         healthBar.sizeDelta = new Vector2(barFill, healthBar.sizeDelta.y);
         if (currentHealth <= 0 && !dead)
         {
-            if (finalBattle) UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+            if (finalBattle)
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+
+                UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+            }
             else StartCoroutine(kill());
         }
     }

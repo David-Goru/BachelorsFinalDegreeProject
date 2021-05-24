@@ -45,7 +45,7 @@ public class MainCharacterSpells : MonoBehaviour
 
     private void Update()
     {
-        if (mainCharacter.Dead) return;
+        if (mainCharacter.Dead || UI.Instance.IsOpen) return;
 
         if (!Input.anyKey || Input.GetButton("Crouch") && runningSpells.Count == 0)
         {
