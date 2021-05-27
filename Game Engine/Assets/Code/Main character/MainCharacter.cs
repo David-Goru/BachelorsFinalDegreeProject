@@ -90,7 +90,7 @@ public class MainCharacter : MonoBehaviour, IEntity
         currentHealth -= damageAmount;
         if (currentHealth < 0) currentHealth = 0;
 
-        float barFill = 220.0f / maxHealth * currentHealth;
+        float barFill = 208.0f / maxHealth * currentHealth;
         healthBar.sizeDelta = new Vector2(barFill, healthBar.sizeDelta.y);
         if (currentHealth <= 0 && !dead)
         {
@@ -110,7 +110,7 @@ public class MainCharacter : MonoBehaviour, IEntity
         currentHealth += amount;
         if (currentHealth > 100) currentHealth = 100;
 
-        float barFill = 220.0f / maxHealth * currentHealth;
+        float barFill = 208.0f / maxHealth * currentHealth;
         healthBar.sizeDelta = new Vector2(barFill, healthBar.sizeDelta.y);
     }
 
