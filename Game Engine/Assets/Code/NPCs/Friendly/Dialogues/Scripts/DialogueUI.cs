@@ -16,6 +16,8 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private int currentDialogueLine = 0;
     [SerializeField] private NPCDialogues npcDialogues = null;
 
+    public NPCDialogues NpcDialogues { get => npcDialogues; }
+
     public static DialogueUI Instance;
 
     private void Start()
@@ -63,6 +65,7 @@ public class DialogueUI : MonoBehaviour
         mainCharacterTransform.GetComponent<MainCharacter>().CharacterCamera.ChangeState(true);
         dialoguePanel.SetActive(false);
         npcDialogues.StopTalking();
+        npcDialogues = null;
         enabled = false;
         UI.Instance.LockMouse();
     }

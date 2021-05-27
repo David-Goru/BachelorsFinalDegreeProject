@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12bee26a608252e44bb6cfa247beb9c1, type: 3}
+  m_Name: Cage NPC 1
+  m_EditorClassIdentifier: 
+  lines:
+  - They're monsters. But they didn't choose to be it.
+  - The north made them miserable, and now we use them with the only objective of
+    killing them.
+  - Those poor animals just want to live. Are we really the good ones here?
+  - The north aren't, though. That's pretty obvious.
+  recurrent: 1
+  available: 1

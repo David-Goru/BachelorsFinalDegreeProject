@@ -87,7 +87,7 @@ public class NPCDialogues : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("PlayerInteraction") && Input.GetButton("R") && listener == null)
+        if (other.gameObject.CompareTag("PlayerInteraction") && Input.GetButton("R") && listener == null && DialogueUI.Instance.NpcDialogues == null)
         {
             listener = GameObject.FindGameObjectWithTag("Player").transform;
 
