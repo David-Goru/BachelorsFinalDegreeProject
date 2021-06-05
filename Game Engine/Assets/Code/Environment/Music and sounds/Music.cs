@@ -42,7 +42,6 @@ public class Music : MonoBehaviour
         AudioClip songSelected = type == "default" ? defaultSong : battleSong;
         float fadeInSpeed = type == "default" ? 0.1f : 0.01f;
         float fadeOutSpeed = type == "default" ? 0.005f : 0.01f;
-        float idleTime = type == "default" ? 2.5f : 0.0f;
 
         while (audioSource.volume > 0)
         {
@@ -55,8 +54,6 @@ public class Music : MonoBehaviour
             audioSource.clip = songSelected;
             audioSource.Play();
         }
-
-        yield return new WaitForSeconds(idleTime);
 
         while (audioSource.volume < 1) // 1 should be replaced wwith max music volume by player options
         {
