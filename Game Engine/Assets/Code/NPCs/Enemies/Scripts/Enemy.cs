@@ -58,12 +58,7 @@ public class Enemy : MonoBehaviour, IEntity
 
         currentHealth -= damageAmount;
         if (currentHealth <= 0) StartCoroutine(kill());
-        else
-        {
-            // do something? update ui? sound?
-
-            if (onHitParticles) Instantiate(onHitParticles, transform);
-        }
+        else if (onHitParticles) Instantiate(onHitParticles, transform);
     }
 
     public bool IsOnFight()
