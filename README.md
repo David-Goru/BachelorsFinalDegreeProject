@@ -12,4 +12,4 @@ A few years ago, a spy wizards team managed to penetrate deep into the hot, dang
 # Ohers
 Music has been done by Manel Espinosa.
 
-A playable demo for Windows is available (Last Spell - Playable Demo).
+A playable demo for Windows is available (The Final Spell - Playable Demo).
